@@ -1,3 +1,7 @@
+//	Aleksandr_radchenko: let's try Spring 5 for now...
+def springVersion = '+'
+//def springVersion = '4.3.11.RELEASE'
+
 subprojects {
     group 'EPM-WL'
     version '1.0-SNAPSHOT'
@@ -12,22 +16,16 @@ subprojects {
     }
 
     dependencies {
-        compile 'org.apache.logging.log4j:log4j-api:2.+',
-                'org.apache.logging.log4j:log4j-core:2.+',
+        compile 'org.apache.logging.log4j:log4j-api:+',
+                'org.apache.logging.log4j:log4j-core:+',
 
-//	Aleksandr_radchenko: let's try Spring 5 for now...
-                'org.springframework:spring-context:+',
-                'org.springframework:spring-context-support:+',
-                'org.springframework:spring-tx:+',
-                'org.springframework:spring-jdbc:+'
-
-//		'org.springframework:spring-context:4.+',
-//		'org.springframework:spring-context-support:4.+',
-//		'org.springframework:spring-tx:4.+',
-//		'org.springframework:spring-jdbc:4.+'
+                'org.springframework:spring-context:' + springVersion,
+                'org.springframework:spring-context-support:' + springVersion,
+                'org.springframework:spring-tx:' + springVersion,
+                'org.springframework:spring-jdbc:' + springVersion
 
 //	Aleksandr_radchenko: We are prohibited to use MVC, AFAIK
-//		'org.springframework:spring-mvc:4.+'
+//		'org.springframework:spring-mvc:' + springVersion
 
         compileOnly 'org.projectlombok:lombok:+'
 
