@@ -1,3 +1,4 @@
-rootProject.name = 'EPM-WL'
+rootProject.name = 'WebLibrary'
 
-include 'core'
+include 'core',
+	'util'
