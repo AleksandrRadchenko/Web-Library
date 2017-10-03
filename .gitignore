@@ -7,3 +7,4 @@ docs
 /.gradle/
 build
 ~*
+/epm-wl-docs/gvedit.lnk
