@@ -53,18 +53,18 @@ digraph wl_db {
   user_to_role:u_id -> user:id [weight=1]
   user_to_role:r_id -> role:id [weight=1]
 
-  books
+  book
   [
     shape = none
     label = <<table border="0" cellspacing="0">
-                <tr><td border="1" bgcolor="grey">  <b>books</b>  </td></tr>
+                <tr><td border="1" bgcolor="grey">  <b>book</b>  </td></tr>
                 <tr><td port="id" border="1">id</td></tr>
                 <tr><td port="e_id" border="1">edition_id</td></tr>
                 <tr><td port="u_id" border="1">is_taken_by_user</td></tr>
             </table>>
   ]
 
-books:u_id -> user:id [weight=1]
+book:u_id -> user:id [weight=1]
 
   edition
   [
@@ -79,6 +79,32 @@ books:u_id -> user:id [weight=1]
             </table>>
   ]
 
-  books:e_id -> edition:id [weight=1]
+  book:e_id -> edition:id [weight=1]
+
+  order
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey">  <b>order</b>  </td></tr>
+                <tr><td port="id" border="1">id</td></tr>
+                <tr><td port="e_id" border="1">edition_id</td></tr>
+                <tr><td port="u_id" border="1">user_id</td></tr>
+                <tr><td port="p_id" border="1">place_id</td></tr>
+            </table>>
+  ]
+
+  order:e_id -> edition:id [weight=1]
+  order:u_id -> user:id [weight=1]
+
+  place
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey">  <b>place</b>  </td></tr>
+                <tr><td port="id" border="1">id</td></tr>
+                <tr><td border="1">name</td></tr>
+            </table>>
+  ]
+ order:p_id -> place:id [weight=1]
 
 }
