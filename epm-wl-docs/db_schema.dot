@@ -12,6 +12,7 @@ digraph wl_db {
                 <tr><td border="1">first_name</td></tr>
                 <tr><td border="1">last_name</td></tr>
                 <tr><td border="1">email</td></tr>
+                <tr><td port="r_id" border="1">role_id</td></tr>
             </table>>
   ]
 
@@ -39,19 +40,7 @@ digraph wl_db {
             </table>>
   ]
 
-  user_to_role
-  [
-    shape = none
-    label = <<table border="0" cellspacing="0">
-                <tr><td border="1" bgcolor="grey">  <b>user_to_role</b>  </td></tr>
-                <tr><td port="u_id" border="1">user_id</td></tr>
-                <tr><td port="r_id" border="1">role_id</td></tr>
-            </table>>
-  ]
-
-  user -> user_to_role [style=invis; weight=0]
-  user_to_role:u_id -> user:id [weight=1]
-  user_to_role:r_id -> role:id [weight=1]
+  user:r_id -> role:id[weight=1]
 
   book
   [
@@ -61,10 +50,11 @@ digraph wl_db {
                 <tr><td port="id" border="1">id</td></tr>
                 <tr><td port="e_id" border="1">edition_id</td></tr>
                 <tr><td port="u_id" border="1">is_taken_by_user</td></tr>
+                <tr><td border="1">available_to_taking_home</td></tr>
             </table>>
   ]
 
-book:u_id -> user:id [weight=1]
+  book:u_id -> user:id [weight=1]
 
   edition
   [
@@ -75,7 +65,6 @@ book:u_id -> user:id [weight=1]
                 <tr><td border="1">author</td></tr>
                 <tr><td border="1">title</td></tr>
                 <tr><td border="1">year</td></tr>
-                <tr><td border="1">available_to_taking_home</td></tr>
             </table>>
   ]
 
@@ -90,6 +79,7 @@ book:u_id -> user:id [weight=1]
                 <tr><td port="e_id" border="1">edition_id</td></tr>
                 <tr><td port="u_id" border="1">user_id</td></tr>
                 <tr><td port="p_id" border="1">place_id</td></tr>
+                <tr><td border="1">status</td></tr>
             </table>>
   ]
 
@@ -105,6 +95,23 @@ book:u_id -> user:id [weight=1]
                 <tr><td border="1">name</td></tr>
             </table>>
   ]
- order:p_id -> place:id [weight=1]
+
+  order:p_id -> place:id [weight=1]
+
+  taken_book
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey">  <b>taken_book</b>  </td></tr>
+                <tr><td port="id" border="1">id</td></tr>
+                <tr><td port="b_id"  border="1">book_id</td></tr>
+                <tr><td port="u_id"  border="1">user_id</td></tr>
+                <tr><td port="p_id"  border="1">place_id</td></tr>
+            </table>>
+  ]
+
+  taken_book:b_id -> book:id [weight=1]
+  taken_book:u_id -> user:id [weight=1]
+  taken_book:p_id -> place:id [weight=1]
 
 }
