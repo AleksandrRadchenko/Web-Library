@@ -1,0 +1,84 @@
+digraph wl_db {
+  node [shape=rectangle]
+
+  rankdir=RL
+
+  user
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey"><b>user</b></td></tr>
+                <tr><td port="id" border="1">id</td></tr>
+                <tr><td border="1">first_name</td></tr>
+                <tr><td border="1">last_name</td></tr>
+                <tr><td border="1">email</td></tr>
+            </table>>
+  ]
+
+  credential
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey">  <b>credential</b>  </td></tr>
+                <tr><td border="1">id</td></tr>
+                <tr><td port="u_id" border="1">user_id</td></tr>
+                <tr><td border="1">login_name</td></tr>
+                <tr><td border="1">password_hash</td></tr>
+            </table>>
+  ]
+
+  credential:u_id -> user:id [weight=1]
+
+  role
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey">  <b>role</b>  </td></tr>
+                <tr><td port="id" border="1">id</td></tr>
+                <tr><td border="1">name</td></tr>
+            </table>>
+  ]
+
+  user_to_role
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey">  <b>user_to_role</b>  </td></tr>
+                <tr><td port="u_id" border="1">user_id</td></tr>
+                <tr><td port="r_id" border="1">role_id</td></tr>
+            </table>>
+  ]
+
+  user -> user_to_role [style=invis; weight=0]
+  user_to_role:u_id -> user:id [weight=1]
+  user_to_role:r_id -> role:id [weight=1]
+
+  books
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey">  <b>books</b>  </td></tr>
+                <tr><td port="id" border="1">id</td></tr>
+                <tr><td port="e_id" border="1">edition_id</td></tr>
+                <tr><td port="u_id" border="1">is_taken_by_user</td></tr>
+            </table>>
+  ]
+
+books:u_id -> user:id [weight=1]
+
+  edition
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey">  <b>edition</b>  </td></tr>
+                <tr><td port="id" border="1">id</td></tr>
+                <tr><td border="1">author</td></tr>
+                <tr><td border="1">title</td></tr>
+                <tr><td border="1">year</td></tr>
+                <tr><td border="1">available_to_taking_home</td></tr>
+            </table>>
+  ]
+
+  books:e_id -> edition:id [weight=1]
+
+}
