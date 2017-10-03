@@ -110,6 +110,12 @@ create unique index edition_id_uindex
 	on edition (id)
 ;
 
+alter table "order"
+	add constraint order_edition_id_fk
+		foreign key (editionid) references edition
+			on update cascade on delete cascade
+;
+
 alter table book
 	add constraint book_edition_id_fk
 		foreign key (editionid) references edition

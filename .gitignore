@@ -8,3 +8,4 @@ docs
 build
 ~*
 /epm-wl-docs/gvedit.lnk
+*.lnk
