@@ -26,6 +26,7 @@ digraph wl_db {
                 <tr><td port="op_id"  border="1">option_id</td></tr>
                 <tr><td port="u_id" border="1">user_id</td></tr>
                 <tr><td port="s_id" border="1">status_id</td></tr>
+                <tr><td port="b_id"  border="1">book_exemplar_id</td></tr>
             </table>>
   ]
 
@@ -33,6 +34,7 @@ digraph wl_db {
   order:u_id -> user:id [weight=1]
   order:s_id -> status:id [weight=1]
   order:op_id -> option:id [weight=1]
+  order:b_id -> book_exemplar:id [weight=1]
 
   status
   [
@@ -81,19 +83,6 @@ digraph wl_db {
 
   book_exemplar:e_id -> edition:id [weight=1]
   book_exemplar:op_id -> option:id [weight=1]
-
-  book_order
-  [
-    shape = none
-    label = <<table border="0" cellspacing="0">
-                <tr><td border="1" bgcolor="grey">  <b>book_order</b>  </td></tr>
-                <tr><td port="b_id"  border="1">book_exemplar_id</td></tr>
-                <tr><td port="o_id"  border="1">order_id</td></tr>
-            </table>>
-  ]
-
-  book_order:b_id -> book_exemplar:id [weight=1]
-  book_order:o_id -> order:id [weight=1]
 
   option
   [
