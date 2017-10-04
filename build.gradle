@@ -18,6 +18,8 @@ def springVersion = '+'
         compile 'org.apache.logging.log4j:log4j-api:+',
                 'org.apache.logging.log4j:log4j-core:+',
 
+                'org.postgresql:postgresql:+',
+
                 'org.springframework:spring-context:' + springVersion,
                 'org.springframework:spring-context-support:' + springVersion,
                 'org.springframework:spring-tx:' + springVersion,
