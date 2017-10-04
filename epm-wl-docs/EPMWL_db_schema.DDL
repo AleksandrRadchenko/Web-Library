@@ -48,7 +48,7 @@ create table "order"
 	id serial not null
 		constraint order_pkey
 			primary key,
-	editionid integer not null,
+	bookid integer not null,
 	userid integer not null
 		constraint order_user_id_fk
 			references "user"
@@ -66,7 +66,7 @@ create table book_instance
 	id serial not null
 		constraint book_pkey
 			primary key,
-	editionid integer not null
+	bookid integer not null
 )
 ;
 
@@ -79,7 +79,7 @@ create table book_order
 	id serial not null
 		constraint book_order_pkey
 			primary key,
-	bookid integer not null
+	book_instanceid integer not null
 		constraint book_order_book_id_fk
 			references book_instance
 				on update cascade on delete cascade,
@@ -112,13 +112,13 @@ create unique index edition_id_uindex
 
 alter table "order"
 	add constraint order_edition_id_fk
-		foreign key (editionid) references book
+		foreign key (bookid) references book
 			on update cascade on delete cascade
 ;
 
 alter table book_instance
 	add constraint book_edition_id_fk
-		foreign key (editionid) references book
+		foreign key (bookid) references book
 			on update cascade on delete cascade
 ;
 
