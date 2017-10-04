@@ -1,6 +1,5 @@
 package com.epam.wl.entities;
 
-import com.epam.wl.enums.Options;
 import lombok.Data;
 
 @Data
