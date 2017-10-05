@@ -1,2 +1,2 @@
-# epm-wl
-EPAM java school final project
+# EPAM java school final project
+artifactId: epm-wl

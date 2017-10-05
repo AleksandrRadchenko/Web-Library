@@ -1,0 +1,97 @@
+digraph wl_db {
+  node [shape=rectangle]
+
+  rankdir=RL
+
+  user
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey"><b>user</b></td></tr>
+                <tr><td port="id" border="1">id</td></tr>
+                <tr><td border="1">name</td></tr>
+                <tr><td border="1">email</td></tr>
+                <tr><td border="1">password_hash</td></tr>
+                <tr><td port="r_id" border="1">role_id</td></tr>
+            </table>>
+  ]
+
+  order
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey">  <b>order</b>  </td></tr>
+                <tr><td port="id" border="1">id</td></tr>
+                <tr><td port="e_id" border="1">edition_id</td></tr>
+                <tr><td port="op_id"  border="1">option_id</td></tr>
+                <tr><td port="u_id" border="1">user_id</td></tr>
+                <tr><td port="s_id" border="1">status_id</td></tr>
+                <tr><td port="b_id"  border="1">book_exemplar_id</td></tr>
+            </table>>
+  ]
+
+  order:e_id -> edition:id [weight=1]
+  order:u_id -> user:id [weight=1]
+  order:s_id -> status:id [weight=1]
+  order:op_id -> option:id [weight=1]
+  order:b_id -> book_exemplar:id [weight=1]
+
+  status
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey">  <b>status</b>  </td></tr>
+                <tr><td port="id" border="1">id</td></tr>
+                <tr><td border="1">name</td></tr>
+            </table>>
+  ]
+
+  role
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey">  <b>role</b>  </td></tr>
+                <tr><td port="id" border="1">id</td></tr>
+                <tr><td border="1">role_name</td></tr>
+            </table>>
+  ]
+
+  user:r_id -> role:id[weight=1]
+
+  edition
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey">  <b>edition</b>  </td></tr>
+                <tr><td port="id" border="1">id</td></tr>
+                <tr><td border="1">author</td></tr>
+                <tr><td border="1">title</td></tr>
+                <tr><td border="1">year</td></tr>
+            </table>>
+  ]
+
+  book_exemplar
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey">  <b>book_exemplar</b>  </td></tr>
+                <tr><td port="id" border="1">id</td></tr>
+                <tr><td port="op_id" border="1">option_id</td></tr>
+                <tr><td port="e_id" border="1">edition_id</td></tr>
+            </table>>
+  ]
+
+  book_exemplar:e_id -> edition:id [weight=1]
+  book_exemplar:op_id -> option:id [weight=1]
+
+  option
+  [
+    shape = none
+    label = <<table border="0" cellspacing="0">
+                <tr><td border="1" bgcolor="grey">  <b>option</b>  </td></tr>
+                <tr><td port="id" border="1">id</td></tr>
+                <tr><td port="b_id"  border="1">name</td></tr>
+            </table>>
+  ]
+
+}
