@@ -1,6 +1,8 @@
 package com.epam.wl;
 
-import org.junit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 public class H2ConnectionTest {
     private Connection dbConnection;
 
-    @Before
+    @BeforeEach
     public void setup() throws SQLException {
         this.dbConnection = DriverManager.getConnection("jdbc:h2:./test",
                 "sa", "");
@@ -45,7 +47,7 @@ public class H2ConnectionTest {
         assertIterableEquals(expectedNameList, actualNameList);
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         dbConnection.close();
     }
