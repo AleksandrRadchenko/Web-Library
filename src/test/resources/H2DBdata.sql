@@ -3,17 +3,17 @@ INSERT INTO book (author, title, year) VALUES ('Herbert Schildt', 'Java: A Begin
 INSERT INTO book (author, title, year) VALUES ('Bruce Eckel', '	Thinking in Java (4th Edition)', 2016);
 INSERT INTO book (author, title, year) VALUES ('Лев Толстой', 'Война и мир', 1978);
 
-INSERT INTO book_instance (editionid) VALUES (1);
-INSERT INTO book_instance (editionid) VALUES (1);
-INSERT INTO book_instance (editionid) VALUES (1);
-INSERT INTO book_instance (editionid) VALUES (1);
-INSERT INTO book_instance (editionid) VALUES (2);
-INSERT INTO book_instance (editionid) VALUES (2);
-INSERT INTO book_instance (editionid) VALUES (2);
-INSERT INTO book_instance (editionid) VALUES (2);
-INSERT INTO book_instance (editionid) VALUES (2);
-INSERT INTO book_instance (editionid) VALUES (4);
-INSERT INTO book_instance (editionid) VALUES (3);
+INSERT INTO book_instance (bookid) VALUES (1);
+INSERT INTO book_instance (bookid) VALUES (1);
+INSERT INTO book_instance (bookid) VALUES (1);
+INSERT INTO book_instance (bookid) VALUES (1);
+INSERT INTO book_instance (bookid) VALUES (2);
+INSERT INTO book_instance (bookid) VALUES (2);
+INSERT INTO book_instance (bookid) VALUES (2);
+INSERT INTO book_instance (bookid) VALUES (2);
+INSERT INTO book_instance (bookid) VALUES (2);
+INSERT INTO book_instance (bookid) VALUES (4);
+INSERT INTO book_instance (bookid) VALUES (3);
 
 INSERT INTO user (name, lastname, email, passwordhash, role)
 VALUES ('Иван', 'Иванов', 'ivan@ivan.ru', 'fdfsdcdzc', 'USER');
@@ -24,10 +24,10 @@ VALUES ('Петр', 'Петров', 'petr@ivan.ru', 'fdfsdcdssdfdzc', 'USER');
 INSERT INTO user (name, lastname, email, passwordhash, role)
 VALUES ('Семен', 'Семенов', 'semen@ivan.ru', 'fdfsdcdssdfdzc', 'USER');
 
-INSERT INTO user_order (editionid, userid, status) VALUES (1, 1, 'IN_PROGRESS');
-INSERT INTO user_order (editionid, userid, status) VALUES (2, 2, 'NEW');
-INSERT INTO user_order (editionid, userid, status) VALUES (3, 3, 'NEW');
-INSERT INTO user_order (editionid, userid, status) VALUES (4, 4, 'NEW');
+INSERT INTO user_order (bookid, userid, status) VALUES (1, 1, 'IN_PROGRESS');
+INSERT INTO user_order (bookid, userid, status) VALUES (2, 2, 'NEW');
+INSERT INTO user_order (bookid, userid, status) VALUES (3, 3, 'NEW');
+INSERT INTO user_order (bookid, userid, status) VALUES (4, 4, 'NEW');
 
 INSERT INTO book_order (bookid, orderid, option) VALUES (9, 1, 'SUBSCRIPTION');
 INSERT INTO book_order (bookid, orderid, option) VALUES (1, 2, 'SUBSCRIPTION');

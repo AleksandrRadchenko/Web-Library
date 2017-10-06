@@ -40,7 +40,7 @@ CREATE TABLE user_order
   id        INTEGER AUTO_INCREMENT NOT NULL
     CONSTRAINT order_pkey
     PRIMARY KEY,
-  editionid INTEGER                NOT NULL,
+  bookid INTEGER                NOT NULL,
   userid    INTEGER                NOT NULL
     CONSTRAINT order_user_id_fk
     REFERENCES user
@@ -56,7 +56,7 @@ CREATE TABLE book_instance
   id        INTEGER AUTO_INCREMENT NOT NULL
     CONSTRAINT book_pkey
     PRIMARY KEY,
-  editionid INTEGER                NOT NULL
+  bookid INTEGER                NOT NULL
 );
 
 CREATE UNIQUE INDEX book_id_uindex
@@ -96,11 +96,11 @@ CREATE UNIQUE INDEX edition_id_uindex
 
 ALTER TABLE user_order
   ADD CONSTRAINT order_edition_id_fk
-FOREIGN KEY (editionid) REFERENCES book
+FOREIGN KEY (bookid) REFERENCES book
 ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE book_instance
   ADD CONSTRAINT book_edition_id_fk
-FOREIGN KEY (editionid) REFERENCES book
+FOREIGN KEY (bookid) REFERENCES book
 ON UPDATE CASCADE ON DELETE CASCADE;
 
