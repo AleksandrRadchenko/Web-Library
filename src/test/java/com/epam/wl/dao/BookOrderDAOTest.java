@@ -1,26 +1,40 @@
 package com.epam.wl.dao;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.sql.*;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BookOrderDAOTest {
     private Connection dbConnection;
 
     @BeforeEach
     void setUp() throws SQLException {
-        dbConnection = DriverManager.getConnection("jdbc:h2:mem:testcase");
+        dbConnection = DriverManager.
+                getConnection("jdbc:h2:mem:testDB;" +
+                        "INIT=RUNSCRIPT FROM 'classpath:H2DBinit.sql'\\;" +
+                        "RUNSCRIPT FROM 'classpath:H2DBdata.sql'");
     }
 
     @Test
-    void fillDb() throws SQLException {
+    void getUserById() throws SQLException {
         Statement st = dbConnection.createStatement();
-        st.execute("RUNSCRIPT FROM 'epm-wl-docs/EPMWL_db_schema.DDL'");
-        st.execute("SELECT * FROM user");
+        ResultSet result = st.executeQuery("SELECT id, bookid, orderid, option FROM book_order");
+        //bookid, orderid, option) VALUES (1, 2, 'SUBSCRIPTION');
+        while (result.next()) {
+            int id = result.getInt("id");
+            int bookid = result.getInt("bookid");
+            int orderid = result.getInt("orderid");
+            String option = result.getString("option");
+            System.out.print("ID = " + id);
+            System.out.print(", bookid = " + bookid);
+            System.out.print(", orderid = " + orderid);
+            System.out.println(", option = " + option);
+        }
 
     }
+
     @Test
     void createTest() throws SQLException {
 
