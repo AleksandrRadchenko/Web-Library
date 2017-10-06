@@ -43,7 +43,7 @@ create unique index user_email_uindex
 	on "user" (email)
 ;
 
-create table "order"
+create table user_order
 (
 	id serial not null
 		constraint order_pkey
@@ -58,7 +58,7 @@ create table "order"
 ;
 
 create unique index order_id_uindex
-	on "order" (id)
+	on user_order (id)
 ;
 
 create table book_instance
@@ -83,9 +83,9 @@ create table book_order
 		constraint book_order_book_id_fk
 			references book_instance
 				on update cascade on delete cascade,
-	orderid integer not null
+	user_orderid integer not null
 		constraint book_order_order_id_fk
-			references "order"
+			references user_order
 				on update cascade on delete cascade,
 	option wl.option not null
 )
@@ -102,7 +102,7 @@ create table book
 			primary key,
 	author varchar(45),
 	title varchar(45),
-	year timestamp
+	year integer
 )
 ;
 
@@ -110,7 +110,7 @@ create unique index edition_id_uindex
 	on book (id)
 ;
 
-alter table "order"
+alter table user_order
 	add constraint order_edition_id_fk
 		foreign key (bookid) references book
 			on update cascade on delete cascade
