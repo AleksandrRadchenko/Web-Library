@@ -28,14 +28,16 @@ def springVersion = '+'
 //	Aleksandr_radchenko: We are prohibited to use MVC, AFAIK
 //		'org.springframework:spring-mvc:' + springVersion
 
+        runtime 'com.h2database:h2:+',
+                'mysql:mysql-connector-java:6.0.5'
+
         compileOnly 'org.projectlombok:lombok:+'
 
         testCompile 'org.junit.jupiter:junit-jupiter-api:+',
-                'org.hamcrest:java-hamcrest:+',
-                'com.h2database:h2:+'
+                'org.hamcrest:java-hamcrest:+'
     }
 
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.2'
+    gradleVersion = '4.2.1'
 }
