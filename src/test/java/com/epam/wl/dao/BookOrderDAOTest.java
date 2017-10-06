@@ -15,7 +15,18 @@ class BookOrderDAOTest {
     }
 
     @Test
-    void create() throws SQLException {
+    void fillDb() throws SQLException {
+        Statement st = dbConnection.createStatement();
+        st.execute("RUNSCRIPT FROM 'epm-wl-docs/EPMWL_db_schema.DDL'");
+        st.execute("SELECT * FROM user");
+
+    }
+    @Test
+    void createTest() throws SQLException {
+
+        BookOrderDAO bookOrderDAO = new BookOrderDAO(dbConnection);
+
+//        bookOrderDAO.create();
 
         Statement st = dbConnection.createStatement();
         st.execute("CREATE TABLE TEST(ID INT PRIMARY KEY, NAME VARCHAR(255))");
