@@ -12,16 +12,16 @@ public class Executor {
         this.connection = connection;
     }
 
-    public void execUpdate(String update) throws SQLException {
-        Statement stmt = connection.createStatement();
+    public void executeUpdate(String update) throws SQLException {
+        final Statement stmt = connection.createStatement();
         stmt.execute(update);
         stmt.close();
     }
 
-    public <T> T execQuery(String query, ResultHandler<T> handler) throws SQLException {
-        Statement stmt = connection.createStatement();
+    public <T> T executeQuery(String query, ResultHandler<T> handler) throws SQLException {
+        final Statement stmt = connection.createStatement();
         stmt.execute(query);
-        ResultSet result = stmt.getResultSet();
+        final ResultSet result = stmt.getResultSet();
         T value = handler.handle(result);
         result.close();
         stmt.close();
