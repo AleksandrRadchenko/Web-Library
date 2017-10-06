@@ -22,17 +22,18 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 class OrderDAOTest {
 
-    private static OrderDAO orderDAO;
-    private DataSource dataSource;
+    private OrderDAO orderDAO;
+    private EmbeddedDatabase dataSource;
 
     @BeforeEach
     public void init() {
-        dataSource = getDataSource();
+        dataSource = getEmbeddedDatabase();
         orderDAO = new OrderDAO(dataSource);
     }
 
     @AfterEach
     public void tearDown() throws SQLException {
+        dataSource.shutdown();
     }
 
     @Test
@@ -68,7 +69,7 @@ class OrderDAOTest {
         assertThat(expectedOrderList, is(orderDAO.getAll()));
     }
 
-    private DataSource getDataSource() {
+    private EmbeddedDatabase getEmbeddedDatabase() {
         final EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         final EmbeddedDatabase db = builder
                 .setType(EmbeddedDatabaseType.H2)
