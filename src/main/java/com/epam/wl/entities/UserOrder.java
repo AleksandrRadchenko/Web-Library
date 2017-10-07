@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class UserOrder {
     private int id;
-    private int editionId;
+    private int bookId;
     private int userId;
     private OrderStatus status;
 }
