@@ -1,5 +1,6 @@
 package com.epam.wl.dao;
 
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,18 +22,15 @@ class BookOrderDAOTest {
     void getUserById() throws SQLException {
         Statement st = dbConnection.createStatement();
         ResultSet result = st.executeQuery("SELECT id, bookid, orderid, option FROM book_order");
-        //bookid, orderid, option) VALUES (1, 2, 'SUBSCRIPTION');
-        while (result.next()) {
-            int id = result.getInt("id");
-            int bookid = result.getInt("bookid");
-            int orderid = result.getInt("orderid");
-            String option = result.getString("option");
-            System.out.print("ID = " + id);
-            System.out.print(", bookid = " + bookid);
-            System.out.print(", orderid = " + orderid);
-            System.out.println(", option = " + option);
-        }
+        printResultSet(result);
 
+    }
+
+    @Test
+    void createEnumsInH2() throws SQLException {
+        Statement st = dbConnection.createStatement();
+        st.executeQuery("SELECT id, bookid FROM book_order");
+        printResultSet(st.getResultSet());
     }
 
     @Test
@@ -68,5 +66,20 @@ class BookOrderDAOTest {
     @AfterEach
     void tearDown() throws SQLException {
         dbConnection.close();
+    }
+
+    @SneakyThrows
+    private void printResultSet(ResultSet set) {
+        int row = 1;
+        while (set.next()) {
+            System.out.print(row++ + " : ");
+            ResultSetMetaData metaData = set.getMetaData();
+            for (int i = 1; i < metaData.getColumnCount(); i++) {
+                Object o = set.getObject(i);
+                System.out.print(metaData.getColumnName(i) + " = " + o.toString() + "; ");
+            }
+            int lastColumn = metaData.getColumnCount();
+            System.out.println(metaData.getColumnName(lastColumn) + " = " + set.getObject(lastColumn));
+        }
     }
 }
