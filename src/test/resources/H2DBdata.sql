@@ -29,8 +29,8 @@ INSERT INTO user_order (bookid, userid, status) VALUES (2, 2, 'NEW');
 INSERT INTO user_order (bookid, userid, status) VALUES (3, 3, 'NEW');
 INSERT INTO user_order (bookid, userid, status) VALUES (4, 4, 'NEW');
 
-INSERT INTO book_order (bookid, orderid, option) VALUES (9, 1, 'SUBSCRIPTION');
-INSERT INTO book_order (bookid, orderid, option) VALUES (1, 2, 'SUBSCRIPTION');
-INSERT INTO book_order (bookid, orderid, option) VALUES (2, 3, 'READING_ROOM');
-INSERT INTO book_order (bookid, orderid, option) VALUES (5, 4, 'READING_ROOM');
+INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES (9, 1, 'SUBSCRIPTION');
+INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES (1, 2, 'SUBSCRIPTION');
+INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES (2, 3, 'READING_ROOM');
+INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES (5, 4, 'READING_ROOM');
 
