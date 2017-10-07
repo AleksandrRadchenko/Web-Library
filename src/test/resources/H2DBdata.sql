@@ -25,9 +25,10 @@ INSERT INTO user (name, lastname, email, passwordhash, role)
 VALUES ('Семен', 'Семенов', 'semen@ivan.ru', 'fdfsdcdssdfdzc', 'USER');
 
 INSERT INTO user_order (bookid, userid, status) VALUES (1, 1, 'IN_PROGRESS');
-INSERT INTO user_order (bookid, userid, status) VALUES (2, 2, 'NEW');
-INSERT INTO user_order (bookid, userid, status) VALUES (3, 3, 'NEW');
-INSERT INTO user_order (bookid, userid, status) VALUES (4, 4, 'NEW');
+INSERT INTO user_order (bookid, userid, status) VALUES (2, 2, 'IN_PROGRESS');
+INSERT INTO user_order (bookid, userid, status) VALUES (3, 3, 'IN_PROGRESS');
+INSERT INTO user_order (bookid, userid, status) VALUES (4, 4, 'IN_PROGRESS');
+INSERT INTO user_order (bookid, userid, status) VALUES (3, 1, 'NEW');
 
 INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES (4, 1, 'SUBSCRIPTION');
 INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES (6, 2, 'SUBSCRIPTION');
