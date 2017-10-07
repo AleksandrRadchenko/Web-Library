@@ -1,6 +1,6 @@
 INSERT INTO book (author, title, year) VALUES ('Петр Иванов', 'Азбука', 1954);
 INSERT INTO book (author, title, year) VALUES ('Herbert Schildt', 'Java: A Beginner''s Guide, Sixth Edition', 2014);
-INSERT INTO book (author, title, year) VALUES ('Bruce Eckel', '	Thinking in Java (4th Edition)', 2016);
+INSERT INTO book (author, title, year) VALUES ('Bruce Eckel', 'Thinking in Java (4th Edition)', 2016);
 INSERT INTO book (author, title, year) VALUES ('Лев Толстой', 'Война и мир', 1978);
 
 INSERT INTO book_instance (bookid) VALUES (1);
