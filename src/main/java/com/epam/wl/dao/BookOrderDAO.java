@@ -1,6 +1,9 @@
 package com.epam.wl.dao;
 
-import com.epam.wl.entities.*;
+import com.epam.wl.dao.book_order_handlers.BookOrderHandler;
+import com.epam.wl.entities.BookInstance;
+import com.epam.wl.entities.BookOrder;
+import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.BookOptions;
 import lombok.RequiredArgsConstructor;
 
@@ -8,7 +11,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Statement;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -34,10 +37,13 @@ public class BookOrderDAO {
     }
 
 
-    public List<BookOrder> getAll(){
-        List<BookOrder> all = new ArrayList<>();
-
-        return all;
+    public List<BookOrder> getAll() throws SQLException {
+        try (Connection connection = dataSource.getConnection()) {
+            Statement st = connection.createStatement();
+            st.executeQuery("SELECT id, book_instanceid, user_orderid, option FROM book_order");
+            BookOrderHandler h = new BookOrderHandler();
+            return h.handle(st.getResultSet());
+        }
     }
 
     public BookOrder getById(final int id) {

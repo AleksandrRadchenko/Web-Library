@@ -1,82 +1,74 @@
 package com.epam.wl.dao;
 
+import com.epam.wl.DBHelper;
+import com.epam.wl.entities.BookInstance;
+import com.epam.wl.entities.BookOrder;
+import com.epam.wl.entities.UserOrder;
+import com.epam.wl.enums.BookOptions;
+import com.epam.wl.enums.OrderStatus;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 class BookOrderDAOTest {
-    private Connection dbConnection;
+    private EmbeddedDatabase dataSource;
+    private BookOrderDAO bookOrderDAO;
 
     @BeforeEach
     void setUp() throws SQLException {
-        dbConnection = DriverManager.
-                getConnection("jdbc:h2:mem:testDB;" +
-                        "INIT=RUNSCRIPT FROM 'classpath:H2DBinit.sql'\\;" +
-                        "RUNSCRIPT FROM 'classpath:H2DBdata.sql'");
+        dataSource = DBHelper.getEmbeddedDatabase();
+        bookOrderDAO = new BookOrderDAO(dataSource);
     }
 
     @Test
-    void createTest() throws SQLException {
-        BookOrderDAO bookOrderDAO = new BookOrderDAO(dbConnection);
-
-//        bookOrderDAO.create();
-
-        Statement st = dbConnection.createStatement();
-        st.execute("CREATE TABLE TEST(ID INT PRIMARY KEY, NAME VARCHAR(255))");
-        st.execute("INSERT INTO TEST VALUES(1, 'Hello');");
-        st.execute("INSERT INTO TEST VALUES(2, 'World');");
-        dbConnection.commit();
-        ResultSet result = st.executeQuery("SELECT * FROM TEST");
-        while (result.next()) {
-            int id = result.getInt("ID");
-            String name = result.getString("NAME");
-//            assertEquals()
-            System.out.print("ID = " + id);
-            System.out.println(", Name = " + name);
-        }
+    void createOneRow() throws SQLException {
+        BookInstance bookInstance = new BookInstance(1, 1);
+        UserOrder userOrder = new UserOrder(1,1, 1, OrderStatus.IN_PROGRESS);
+        BookOptions bookOptions = BookOptions.SUBSCRIPTION;
+        int result = bookOrderDAO.create(bookInstance, userOrder, bookOptions);
+        assertThat(result, is(1));
+        //Check if created row is in DB for real
+        Statement st = dataSource.getConnection().createStatement();
+        st.executeQuery("SELECT book_instanceid, user_orderid, option FROM book_order WHERE id=5");
+        ResultSet resultSet = st.getResultSet();
+        resultSet.next();
+        assertThat(resultSet.getInt("book_instanceid"), is(bookInstance.getId()));
+        assertThat(resultSet.getInt("user_orderid"), is(userOrder.getId()));
+        assertThat(resultSet.getString("option"), is(bookOptions.name()));
     }
 
     @Test
-    void getUserById() throws SQLException {
-        Statement st = dbConnection.createStatement();
-        ResultSet result = st.executeQuery("SELECT id, bookid, orderid, option FROM book_order");
-        printResultSet(result);
-
-    }
-
-    @Test
-    void createEnumsInH2() throws SQLException {
-        Statement st = dbConnection.createStatement();
-        st.executeQuery("SELECT id, bookid FROM book_order");
-        printResultSet(st.getResultSet());
-    }
-
-    @Test
-    void getAll() {
-    }
-
-    @Test
-    void getNew() {
+    void getAllFourRows() throws SQLException {
+        List<BookOrder> expected = new ArrayList<>();
+        expected.add(new BookOrder(1, 9, 1, BookOptions.SUBSCRIPTION));
+        expected.add(new BookOrder(2, 1, 2, BookOptions.SUBSCRIPTION));
+        expected.add(new BookOrder(3, 2, 3, BookOptions.READING_ROOM));
+        expected.add(new BookOrder(4, 5, 4, BookOptions.READING_ROOM));
+        List<BookOrder> actual = bookOrderDAO.getAll();
+        assertThat(actual, is(expected));
     }
 
     @AfterEach
     void tearDown() throws SQLException {
-        dbConnection.close();
+        dataSource.shutdown();
     }
 
-    private void printResultSet(ResultSet set) throws SQLException {
-        int row = 1;
-        while (set.next()) {
-            System.out.print(row++ + " : ");
-            ResultSetMetaData metaData = set.getMetaData();
-            for (int i = 1; i < metaData.getColumnCount(); i++) {
-                Object o = set.getObject(i);
-                System.out.print(metaData.getColumnName(i) + " = " + o.toString() + "; ");
-            }
-            int lastColumn = metaData.getColumnCount();
-            System.out.println(metaData.getColumnName(lastColumn) + " = " + set.getObject(lastColumn));
-        }
-    }
+//    @Test
+//    void getAllToSout() throws SQLException {
+//        Statement st = dataSource.getConnection().createStatement();
+//        ResultSet result = st.executeQuery("SELECT id, book_instanceid, user_orderid, option FROM book_order");
+//        BookOrderHandler h = new BookOrderHandler();
+//        h.handle(result);
+//        DBHelper.printResultSet(result);
+//    }
 }
