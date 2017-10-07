@@ -2,11 +2,10 @@ package com.epam.wl.dao;
 
 import com.epam.wl.entities.BookInstance;
 import com.epam.wl.entities.BookOrder;
-import com.epam.wl.entities.Order;
-import com.epam.wl.enums.BookOptions;
 import lombok.RequiredArgsConstructor;
 //import com.epam.wl.executor;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,11 +14,10 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public class BookOrderDAO {
-//    private Executor executor;
-    private final Connection connection;
+    private final DataSource dataSource;
 
     void create(final BookInstance bookInstance, final Order userOrder, final BookOptions bookOption) {
-        try {
+        try (Connection connection = dataSource.getConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES(?, ?, ?);");
             preparedStatement.setInt(1, bookInstance.getId());

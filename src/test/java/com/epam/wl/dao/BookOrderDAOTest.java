@@ -1,6 +1,5 @@
 package com.epam.wl.dao;
 
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -68,8 +67,7 @@ class BookOrderDAOTest {
         dbConnection.close();
     }
 
-    @SneakyThrows
-    private void printResultSet(ResultSet set) {
+    private void printResultSet(ResultSet set) throws SQLException {
         int row = 1;
         while (set.next()) {
             System.out.print(row++ + " : ");
