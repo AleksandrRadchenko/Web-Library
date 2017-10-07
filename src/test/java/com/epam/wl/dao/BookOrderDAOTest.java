@@ -50,10 +50,10 @@ class BookOrderDAOTest {
     @Test
     void getAllFourRows() throws SQLException {
         List<BookOrder> expected = new ArrayList<>();
-        expected.add(new BookOrder(1, 9, 1, BookOptions.SUBSCRIPTION));
-        expected.add(new BookOrder(2, 1, 2, BookOptions.SUBSCRIPTION));
-        expected.add(new BookOrder(3, 2, 3, BookOptions.READING_ROOM));
-        expected.add(new BookOrder(4, 5, 4, BookOptions.READING_ROOM));
+        expected.add(new BookOrder(1, 4, 1, BookOptions.SUBSCRIPTION));
+        expected.add(new BookOrder(2, 6, 2, BookOptions.SUBSCRIPTION));
+        expected.add(new BookOrder(3, 11, 3, BookOptions.READING_ROOM));
+        expected.add(new BookOrder(4, 10, 4, BookOptions.READING_ROOM));
         List<BookOrder> actual = bookOrderDAO.getAll();
         assertThat(actual, is(expected));
     }
