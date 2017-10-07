@@ -67,11 +67,11 @@ CREATE TABLE book_order
   id      INTEGER AUTO_INCREMENT NOT NULL
     CONSTRAINT book_order_pkey
     PRIMARY KEY,
-  bookid  INTEGER                NOT NULL
+  book_instanceid  INTEGER                NOT NULL
     CONSTRAINT book_order_book_id_fk
     REFERENCES book_instance
     ON UPDATE CASCADE ON DELETE CASCADE,
-  orderid INTEGER                NOT NULL
+  user_orderid INTEGER                NOT NULL
     CONSTRAINT book_order_order_id_fk
     REFERENCES user_order
     ON UPDATE CASCADE ON DELETE CASCADE,
