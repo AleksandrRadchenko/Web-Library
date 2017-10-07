@@ -1,6 +1,6 @@
 package com.epam.wl.dao;
 
-import com.epam.wl.entities.Order;
+import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.OrderStatus;
 
 import javax.sql.DataSource;
@@ -39,18 +39,18 @@ public class OrderDAO {
         }
     }
 
-    public List<Order> getAll() {
-        List<Order> ordersList = new ArrayList();
+    public List<UserOrder> getAll() {
+        List<UserOrder> ordersList = new ArrayList();
         try (Connection connection = dataSource.getConnection()) {
             final Statement statement = connection.createStatement();
             final ResultSet result = statement.executeQuery(
                     "SELECT * FROM user_order");
             while (result.next()) {
                 int id = result.getInt("id");
-                int editionID = result.getInt("bookid");
+                int bookID = result.getInt("bookid");
                 int userID = result.getInt("userid");
                 OrderStatus status = OrderStatus.valueOf(result.getString("status"));
-                ordersList.add(new Order(id, editionID, userID, status));
+                ordersList.add(new UserOrder(id, bookID, userID, status));
             }
             return ordersList;
         } catch (SQLException e) {

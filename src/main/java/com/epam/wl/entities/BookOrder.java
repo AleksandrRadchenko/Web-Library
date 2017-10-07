@@ -1,9 +1,10 @@
 package com.epam.wl.entities;
 
 import com.epam.wl.enums.BookOptions;
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Value
+@Data @AllArgsConstructor
 public class BookOrder {
     private int id;
     private int bookInstanceId;
