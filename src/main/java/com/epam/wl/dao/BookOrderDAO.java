@@ -1,9 +1,8 @@
 package com.epam.wl.dao;
 
-import com.epam.wl.entities.BookInstance;
-import com.epam.wl.entities.BookOrder;
+import com.epam.wl.entities.*;
+import com.epam.wl.enums.BookOptions;
 import lombok.RequiredArgsConstructor;
-//import com.epam.wl.executor;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -16,7 +15,10 @@ import java.util.List;
 public class BookOrderDAO {
     private final DataSource dataSource;
 
-    void create(final BookInstance bookInstance, final Order userOrder, final BookOptions bookOption) {
+    /**
+     * Create row and returns 1 (number of rows changed)
+     */
+    int create(final BookInstance bookInstance, final UserOrder userOrder, final BookOptions bookOption) {
         try (Connection connection = dataSource.getConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES(?, ?, ?);");
@@ -24,9 +26,11 @@ public class BookOrderDAO {
             preparedStatement.setInt(2, userOrder.getId());
             preparedStatement.setString(3, bookOption.toString());
             preparedStatement.executeUpdate();
-
+            return 1;
         } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return 0; // In case of exception, no rows was changed
     }
 
 

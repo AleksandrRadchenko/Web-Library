@@ -18,23 +18,7 @@ class BookOrderDAOTest {
     }
 
     @Test
-    void getUserById() throws SQLException {
-        Statement st = dbConnection.createStatement();
-        ResultSet result = st.executeQuery("SELECT id, bookid, orderid, option FROM book_order");
-        printResultSet(result);
-
-    }
-
-    @Test
-    void createEnumsInH2() throws SQLException {
-        Statement st = dbConnection.createStatement();
-        st.executeQuery("SELECT id, bookid FROM book_order");
-        printResultSet(st.getResultSet());
-    }
-
-    @Test
     void createTest() throws SQLException {
-
         BookOrderDAO bookOrderDAO = new BookOrderDAO(dbConnection);
 
 //        bookOrderDAO.create();
@@ -52,6 +36,21 @@ class BookOrderDAOTest {
             System.out.print("ID = " + id);
             System.out.println(", Name = " + name);
         }
+    }
+
+    @Test
+    void getUserById() throws SQLException {
+        Statement st = dbConnection.createStatement();
+        ResultSet result = st.executeQuery("SELECT id, bookid, orderid, option FROM book_order");
+        printResultSet(result);
+
+    }
+
+    @Test
+    void createEnumsInH2() throws SQLException {
+        Statement st = dbConnection.createStatement();
+        st.executeQuery("SELECT id, bookid FROM book_order");
+        printResultSet(st.getResultSet());
     }
 
     @Test
