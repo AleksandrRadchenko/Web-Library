@@ -1,6 +1,7 @@
 package com.epam.wl.dao;
 
 import com.epam.wl.entities.Book;
+import com.epam.wl.entities.BookInstance;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -14,11 +15,16 @@ public class BookDAO {
         this.dataSource = dataSource;
     }
 
-    // test created
     public List<Book> getAllBooks() {
         List<Book> books = new ArrayList<>();
 
         return books;
+    }
+
+    public List<BookInstance> getAllBookInstances() {
+        List<BookInstance> bookInstances = new ArrayList<>();
+
+        return bookInstances;
     }
 
     // tested
@@ -43,12 +49,11 @@ public class BookDAO {
         return id;
     }
 
-    public int getFreeInstanceId(int bookId) {
+    public int getFreeBookInstanceId(int bookId) {
         // TODO look through the book table and if the requested book have at least one free instance return it's id
         return -1;
     }
 
-    // new books coming in library
     public void addNewBook(String title, String author, int year) {
         // TODO add new book in table book_instance and in table book if necessary (with creating unique book_instanceid)
     }
@@ -56,11 +61,4 @@ public class BookDAO {
     public void addNewBookInstance(String title, String author, int year) {
 
     }
-
-    /*// it is necessary then user doesn't give back the book
-    public boolean removeBook(int id, String title, String author, int year) {
-        // TODO remove book from book_instance and from book table if necessary (if there are no one instance anymore)
-        return true;
-    }
-    }*/
 }
