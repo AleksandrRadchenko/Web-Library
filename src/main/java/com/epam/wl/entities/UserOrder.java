@@ -4,13 +4,13 @@ import com.epam.wl.enums.OrderStatus;
 import lombok.Data;
 
 @Data
-public class Order {
+public class UserOrder {
     private int id;
     private int editionId;
     private int userId;
     private OrderStatus status;
 
-    public Order(int id, int editionId, int userId, OrderStatus status) {
+    public UserOrder(int id, int editionId, int userId, OrderStatus status) {
         this.id = id;
         this.editionId = editionId;
         this.userId = userId;
