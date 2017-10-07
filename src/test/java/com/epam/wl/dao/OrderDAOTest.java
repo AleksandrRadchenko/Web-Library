@@ -1,6 +1,6 @@
 package com.epam.wl.dao;
 
-import com.epam.wl.entities.Order;
+import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.OrderStatus;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,8 +38,8 @@ class OrderDAOTest {
 
     @Test
     void testSetOrderStatus() {
-        Order expectedOrder = new Order(2, 2, 2, OrderStatus.IN_PROGRESS);
-        Order actualOrder = null;
+        UserOrder expectedOrder = new UserOrder(2, 2, 2, OrderStatus.IN_PROGRESS);
+        UserOrder actualOrder = null;
         orderDAO.setOrderStatus(2, OrderStatus.IN_PROGRESS);
 
         try (Connection connection = dataSource.getConnection()) {
@@ -51,7 +51,7 @@ class OrderDAOTest {
             int userID = result.getInt("userid");
             int editionid = result.getInt("bookid");
             OrderStatus status = OrderStatus.valueOf(result.getString("status"));
-            actualOrder = new Order(id, editionid, userID, status);
+            actualOrder = new UserOrder(id, editionid, userID, status);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -60,11 +60,11 @@ class OrderDAOTest {
 
     @Test
     void testGetAll() {
-        List<Order> expectedOrderList = new ArrayList<>();
-        expectedOrderList.add(new Order(1, 1, 1, OrderStatus.IN_PROGRESS));
-        expectedOrderList.add(new Order(2, 2, 2, OrderStatus.NEW));
-        expectedOrderList.add(new Order(3, 3, 3, OrderStatus.NEW));
-        expectedOrderList.add(new Order(4, 4, 4, OrderStatus.NEW));
+        List<UserOrder> expectedOrderList = new ArrayList<>();
+        expectedOrderList.add(new UserOrder(1, 1, 1, OrderStatus.IN_PROGRESS));
+        expectedOrderList.add(new UserOrder(2, 2, 2, OrderStatus.NEW));
+        expectedOrderList.add(new UserOrder(3, 3, 3, OrderStatus.NEW));
+        expectedOrderList.add(new UserOrder(4, 4, 4, OrderStatus.NEW));
 
         assertThat(expectedOrderList, is(orderDAO.getAll()));
     }
