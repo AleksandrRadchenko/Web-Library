@@ -14,14 +14,12 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserOrderDAO {
-    private final DataSource dataSource;
     private Executor executor;
     private final ResultHandler<Optional<UserOrder>> userOrderOneHandler;
     private final ResultHandler<List<UserOrder>> userOrderListHandler;
 
     public UserOrderDAO(DataSource dataSource) {
-        this.dataSource = dataSource;
-        executor = new Executor(dataSource);
+        this.executor = new Executor(dataSource);
         this.userOrderListHandler = new UserOrderListHandler();
         this.userOrderOneHandler = new UserOrderOneHandler();
     }
