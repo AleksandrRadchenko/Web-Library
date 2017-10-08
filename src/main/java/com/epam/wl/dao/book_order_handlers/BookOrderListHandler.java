@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookOrderHandler implements ResultHandler<List<BookOrder>> {
+public class BookOrderListHandler implements ResultHandler<List<BookOrder>> {
     @Override
     public List<BookOrder> handle(ResultSet resultSet) throws SQLException {
         List<BookOrder> output = new ArrayList<BookOrder>();
