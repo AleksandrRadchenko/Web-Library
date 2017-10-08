@@ -68,18 +68,18 @@ public class BookDAOTest {
 
     @Test
     void testGetBookId() {
-        int id = 4;
-        String author = "Лев Толстой";
-        String title = "Война и мир";
-        int year = 1978;
+        int id = 2;
+        String author = "Herbert Schildt";
+        String title = "Java: A Beginner's Guide, Sixth Edition";
+        int year = 2014;
 
-        assertThat(id, is(bookDAO.getBookId(title, author, year)));
+        assertThat(id, is(bookDAO.getBookId(author, title, year)));
     }
 
     @Test
     void testGetFreeBookInstanceId() {
-        int bookId = 1;
-        int expectedBookInstanceId = 1;
+        int bookId = 3;
+        int expectedBookInstanceId = -1;
 
         assertThat(expectedBookInstanceId, is(bookDAO.getFreeBookInstanceId(bookId)));
     }
