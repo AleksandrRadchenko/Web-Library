@@ -15,15 +15,12 @@ import java.util.List;
 import java.util.Optional;
 
 public class BookOrderDAO {
-    private final DataSource dataSource;
     private Executor executor;
     private final ResultHandler<Optional<BookOrder>> bookOrderOneHandler = new BookOrderOneHandler();
     private final ResultHandler<List<BookOrder>> bookOrderListHandler = new BookOrderListHandler();
 
     public BookOrderDAO(DataSource dataSource) {
-        this.dataSource = dataSource;
         executor = new Executor(dataSource);
-        ;
     }
 
     /**
@@ -34,6 +31,7 @@ public class BookOrderDAO {
      * @return 1 (number of rows changed) if success, or throws SQLexception
      * @throws SQLException
      */
+    @SuppressWarnings("JavaDoc")
     int create(
             final BookInstance bookInstance,
             final UserOrder userOrder,
@@ -67,6 +65,12 @@ public class BookOrderDAO {
                 newBookOrder.getBookInstanceId(),
                 newBookOrder.getOrderId(),
                 newBookOrder.getBookOption().toString()));
+        return 1;
+    }
+
+    public int deleteById(final int id) throws SQLException {
+        final String deleteQuery = "DELETE FROM book_order WHERE id = " + id;
+        executor.executeUpdate(deleteQuery);
         return 1;
     }
 }
