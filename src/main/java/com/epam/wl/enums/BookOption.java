@@ -1,5 +1,5 @@
 package com.epam.wl.enums;
 
-public enum BookOptions {
+public enum BookOption {
     SUBSCRIPTION, READING_ROOM
 }
