@@ -12,11 +12,12 @@ import com.epam.wl.executor.ResultHandler;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class BookOrderDAO {
     private final DataSource dataSource;
     private Executor executor;
-    private final ResultHandler<BookOrder> bookOrderOneHandler = new BookOrderOneHandler();
+    private final ResultHandler<Optional<BookOrder>> bookOrderOneHandler = new BookOrderOneHandler();
     private final ResultHandler<List<BookOrder>> bookOrderListHandler = new BookOrderListHandler();
 
     public BookOrderDAO(DataSource dataSource) {
@@ -48,7 +49,7 @@ public class BookOrderDAO {
         return executor.executeQuery(query, bookOrderListHandler);
     }
 
-    public BookOrder getById(final int id) throws SQLException {
+    public Optional<BookOrder> getById(final int id) throws SQLException {
         final String query = "SELECT id, book_instanceid, user_orderid, option FROM book_order WHERE id=" + id;
         return executor.executeQuery(query, bookOrderOneHandler);
     }

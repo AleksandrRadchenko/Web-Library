@@ -11,15 +11,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BookOrderDAOTest {
     private EmbeddedDatabase dataSource;
@@ -62,8 +63,18 @@ class BookOrderDAOTest {
     @Test
     void getById() throws SQLException {
         BookOrder expected = new BookOrder(3,11,3,BookOptions.READING_ROOM);
-        BookOrder actual = bookOrderDAO.getById(3);
+        BookOrder actual = bookOrderDAO.getById(3).get();
         assertThat(actual, is(expected));
+    }
+
+    @Test
+    void failToGetByWrongId() throws SQLException {
+        assertThrows(NoSuchElementException.class, () -> bookOrderDAO.getById(98456456).get());
+    }
+
+    @Test
+    void failToGetByNegativeId() throws SQLException {
+        assertThrows(NoSuchElementException.class, () -> bookOrderDAO.getById(-5).get());
     }
 
     @Test
@@ -72,7 +83,7 @@ class BookOrderDAOTest {
         BookOrder newBookOrder = new BookOrder(3, 9, 2, BookOptions.READING_ROOM);
         int actualInt = bookOrderDAO.update(newBookOrder);
         assertThat(actualInt, is(expectedInt));
-        BookOrder actual = bookOrderDAO.getById(newBookOrder.getId());
+        BookOrder actual = bookOrderDAO.getById(newBookOrder.getId()).get();
         assertThat(actual, is(newBookOrder));
     }
 
