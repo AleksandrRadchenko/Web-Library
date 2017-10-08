@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -65,17 +66,28 @@ class BookOrderDAOTest {
         assertThat(actual, is(expected));
     }
 
+    @Test
+    void update() throws SQLException {
+        int expectedInt = 1;
+        BookOrder newBookOrder = new BookOrder(3, 9, 2, BookOptions.READING_ROOM);
+        int actualInt = bookOrderDAO.update(newBookOrder);
+        assertThat(actualInt, is(expectedInt));
+        BookOrder actual = bookOrderDAO.getById(newBookOrder.getId());
+        assertThat(actual, is(newBookOrder));
+    }
+
+//    @Test
+//    void deleteById() throws SQLException {
+//        int expectedInt = 1;
+//        int bookOrderToDeleteId = 3;
+//        int actualInt = bookOrderDAO.delete(bookOrderToDeleteId);
+//        assertThat(actualInt, is(expectedInt));
+//        BookOrder actual = bookOrderDAO.getById(bookOrderToDeleteId);
+//        assertThat(actual, is(newBookOrder));
+//    }
+//
     @AfterEach
     void tearDown() throws SQLException {
         dataSource.shutdown();
     }
-
-//    @Test
-//    void getAllToSout() throws SQLException {
-//        Statement st = dataSource.getConnection().createStatement();
-//        ResultSet result = st.executeQuery("SELECT id, book_instanceid, user_orderid, option FROM book_order");
-//        BookOrderListHandler h = new BookOrderListHandler();
-//        h.handle(result);
-//        DBHelper.printResultSet(result);
-//    }
 }

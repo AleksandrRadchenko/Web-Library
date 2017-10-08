@@ -26,7 +26,12 @@ public class BookOrderDAO {
     }
 
     /**
-     * Create row and returns 1 (number of rows changed) or throws SQLException
+     * Create row in book_order table
+     * @param bookInstance
+     * @param userOrder
+     * @param bookOption
+     * @return 1 (number of rows changed) if success, or throws SQLexception
+     * @throws SQLException
      */
     int create(
             final BookInstance bookInstance,
@@ -38,7 +43,6 @@ public class BookOrderDAO {
         return 1;
     }
 
-
     public List<BookOrder> getAll() throws SQLException {
         final String query = "SELECT id, book_instanceid, user_orderid, option FROM book_order";
         return executor.executeQuery(query, bookOrderListHandler);
@@ -47,5 +51,21 @@ public class BookOrderDAO {
     public BookOrder getById(final int id) throws SQLException {
         final String query = "SELECT id, book_instanceid, user_orderid, option FROM book_order WHERE id=" + id;
         return executor.executeQuery(query, bookOrderOneHandler);
+    }
+
+    /**
+     * Updates BookOrder with id == newBookOrder.getId(), using fields from newBookOrder
+     * @param newBookOrder
+     * @return 1 (number of rows changed) if success, or throws SQLexception
+     * @throws SQLException
+     */
+    @SuppressWarnings("JavaDoc")
+    public int update(BookOrder newBookOrder) throws SQLException {
+        final String updateQuery = "UPDATE book_order SET book_instanceid=%d, user_orderid=%d, option='%s'";
+        executor.executeUpdate(String.format(updateQuery,
+                newBookOrder.getBookInstanceId(),
+                newBookOrder.getOrderId(),
+                newBookOrder.getBookOption().toString()));
+        return 1;
     }
 }
