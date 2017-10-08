@@ -9,7 +9,6 @@ import com.epam.wl.executor.ResultHandler;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,12 +38,12 @@ public class UserOrderDAO {
         return executor.executeQuery(query, userOrderListHandler);
     }
 
-    public Optional<UserOrder> getUserOrderByID(int userOrderID) throws SQLException {
+    public Optional<UserOrder> getUserOrderByID(final int userOrderID) throws SQLException {
         String query = String.format("SELECT * FROM user_order WHERE id = %d", userOrderID);
         return executor.executeQuery(query, userOrderOneHandler);
     }
 
-    public List<UserOrder> getUserOrderByStatus(UserOrderStatus status) throws SQLException {
+    public List<UserOrder> getUserOrderByStatus(final UserOrderStatus status) throws SQLException {
         String query = String.format("SELECT * FROM user_order WHERE status = '%s'", status);
         return executor.executeQuery(query, userOrderListHandler);
     }

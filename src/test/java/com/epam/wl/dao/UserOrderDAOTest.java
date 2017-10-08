@@ -37,6 +37,7 @@ class UserOrderDAOTest {
     void testCreateUserOrder() throws SQLException {
         userOrderDAO.createNewUserOrder(4, 1);
         UserOrder expectedUserOrder = new UserOrder(6, 4, 1, UserOrderStatus.NEW);
+
         assertThat(expectedUserOrder, is(userOrderDAO.getUserOrderByID(6).get()));
     }
 
@@ -45,6 +46,7 @@ class UserOrderDAOTest {
         UserOrder expectedUserOrder = new UserOrder(2, 2, 2, UserOrderStatus.CLOSED);
         userOrderDAO.setUserOrderStatus(2, UserOrderStatus.CLOSED);
         UserOrder actualUserOrder = userOrderDAO.getUserOrderByID(2).get();
+
         assertThat(expectedUserOrder, is(actualUserOrder));
     }
 
