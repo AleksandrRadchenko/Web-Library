@@ -5,7 +5,7 @@ import com.epam.wl.dao.book_order_handlers.BookOrderOneHandler;
 import com.epam.wl.entities.BookInstance;
 import com.epam.wl.entities.BookOrder;
 import com.epam.wl.entities.UserOrder;
-import com.epam.wl.enums.BookOptions;
+import com.epam.wl.enums.BookOption;
 import com.epam.wl.executor.Executor;
 import com.epam.wl.executor.ResultHandler;
 
@@ -35,7 +35,7 @@ public class BookOrderDAO {
     int create(
             final BookInstance bookInstance,
             final UserOrder userOrder,
-            final BookOptions bookOption)
+            final BookOption bookOption)
             throws SQLException {
         String updateQuery = "INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES(%d, %d, '%s');";
         executor.executeUpdate(String.format(updateQuery, bookInstance.getId(), userOrder.getId(), bookOption.toString()));

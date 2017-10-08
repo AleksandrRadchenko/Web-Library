@@ -4,7 +4,7 @@ import com.epam.wl.DBHelper;
 import com.epam.wl.entities.BookInstance;
 import com.epam.wl.entities.BookOrder;
 import com.epam.wl.entities.UserOrder;
-import com.epam.wl.enums.BookOptions;
+import com.epam.wl.enums.BookOption;
 import com.epam.wl.enums.UserOrderStatus;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,10 +31,10 @@ class BookOrderDAOTest {
         dataSource = DBHelper.getEmbeddedDatabase();
         bookOrderDAO = new BookOrderDAO(dataSource);
         entireTable = new ArrayList<>();
-        entireTable.add(new BookOrder(1, 4, 1, BookOptions.SUBSCRIPTION));
-        entireTable.add(new BookOrder(2, 6, 2, BookOptions.SUBSCRIPTION));
-        entireTable.add(new BookOrder(3, 11, 3, BookOptions.READING_ROOM));
-        entireTable.add(new BookOrder(4, 10, 4, BookOptions.READING_ROOM));
+        entireTable.add(new BookOrder(1, 4, 1, BookOption.SUBSCRIPTION));
+        entireTable.add(new BookOrder(2, 6, 2, BookOption.SUBSCRIPTION));
+        entireTable.add(new BookOrder(3, 11, 3, BookOption.READING_ROOM));
+        entireTable.add(new BookOrder(4, 10, 4, BookOption.READING_ROOM));
 
     }
 
@@ -42,11 +42,11 @@ class BookOrderDAOTest {
     void createOneRow() throws SQLException {
         BookInstance bookInstance = new BookInstance(1, 1);
         UserOrder userOrder = new UserOrder(1,1, 1, UserOrderStatus.IN_PROGRESS);
-        BookOptions bookOptions = BookOptions.SUBSCRIPTION;
-        int result = bookOrderDAO.create(bookInstance, userOrder, bookOptions);
+        BookOption bookOption = BookOption.SUBSCRIPTION;
+        int result = bookOrderDAO.create(bookInstance, userOrder, bookOption);
         assertThat(result, is(1));
         //Check if created row is in DB for real
-        assertThat(bookOrderDAO.getById(5).get(), is(new BookOrder(5, bookInstance.getId(), userOrder.getId(), bookOptions)));
+        assertThat(bookOrderDAO.getById(5).get(), is(new BookOrder(5, bookInstance.getId(), userOrder.getId(), bookOption)));
     }
 
     @Test
@@ -76,7 +76,7 @@ class BookOrderDAOTest {
     @Test
     void update() throws SQLException {
         int expectedInt = 1;
-        BookOrder newBookOrder = new BookOrder(3, 9, 2, BookOptions.READING_ROOM);
+        BookOrder newBookOrder = new BookOrder(3, 9, 2, BookOption.READING_ROOM);
         int actualInt = bookOrderDAO.update(newBookOrder);
         assertThat(actualInt, is(expectedInt));
         BookOrder actual = bookOrderDAO.getById(newBookOrder.getId()).get();

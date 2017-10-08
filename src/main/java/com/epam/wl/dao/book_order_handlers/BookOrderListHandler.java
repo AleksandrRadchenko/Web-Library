@@ -1,7 +1,7 @@
 package com.epam.wl.dao.book_order_handlers;
 
 import com.epam.wl.entities.BookOrder;
-import com.epam.wl.enums.BookOptions;
+import com.epam.wl.enums.BookOption;
 import com.epam.wl.executor.ResultHandler;
 
 import java.sql.ResultSet;
@@ -17,7 +17,7 @@ public class BookOrderListHandler implements ResultHandler<List<BookOrder>> {
             int id = resultSet.getInt("id");
             int book_instanceid = resultSet.getInt("book_instanceid");
             int user_orderid = resultSet.getInt("user_orderid");
-            BookOptions option = BookOptions.valueOf(resultSet.getString("option"));
+            BookOption option = BookOption.valueOf(resultSet.getString("option"));
             BookOrder bookOrder = new BookOrder(id, book_instanceid, user_orderid, option);
             output.add(bookOrder);
         }
