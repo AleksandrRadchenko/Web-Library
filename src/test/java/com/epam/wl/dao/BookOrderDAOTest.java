@@ -58,6 +58,13 @@ class BookOrderDAOTest {
         assertThat(actual, is(expected));
     }
 
+    @Test
+    void getById() throws SQLException {
+        BookOrder expected = new BookOrder(3,11,3,BookOptions.READING_ROOM);
+        BookOrder actual = bookOrderDAO.getById(3);
+        assertThat(actual, is(expected));
+    }
+
     @AfterEach
     void tearDown() throws SQLException {
         dataSource.shutdown();
@@ -67,7 +74,7 @@ class BookOrderDAOTest {
 //    void getAllToSout() throws SQLException {
 //        Statement st = dataSource.getConnection().createStatement();
 //        ResultSet result = st.executeQuery("SELECT id, book_instanceid, user_orderid, option FROM book_order");
-//        BookOrderHandler h = new BookOrderHandler();
+//        BookOrderListHandler h = new BookOrderListHandler();
 //        h.handle(result);
 //        DBHelper.printResultSet(result);
 //    }
