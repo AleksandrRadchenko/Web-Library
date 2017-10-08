@@ -9,9 +9,4 @@ public class Book {
     private String author;
     private String title;
     private int year;
-
-    public static void main(String[] args) {
-        Book book = new Book(4, "Лев Толстой", "Война и мир", 1978);
-        System.out.println(book.getAuthor());
-    }
 }
