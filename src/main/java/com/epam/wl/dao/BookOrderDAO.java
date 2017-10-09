@@ -38,13 +38,12 @@ public class BookOrderDAO {
      * @throws SQLException
      */
     @SuppressWarnings("JavaDoc")
-    int create(
+    public void create(
             final BookInstance bookInstance,
             final UserOrder userOrder,
             final BookOption bookOption)
             throws SQLException {
         executor.executeUpdate(String.format(QUERY_CREATE, bookInstance.getId(), userOrder.getId(), bookOption.toString()));
-        return 1;
     }
 
     public List<BookOrder> getAll() throws SQLException {
@@ -62,16 +61,14 @@ public class BookOrderDAO {
      * @throws SQLException
      */
     @SuppressWarnings("JavaDoc")
-    public int update(BookOrder newBookOrder) throws SQLException {
+    public void update(BookOrder newBookOrder) throws SQLException {
         executor.executeUpdate(String.format(QUERY_UPDATE,
                 newBookOrder.getBookInstanceId(),
                 newBookOrder.getOrderId(),
                 newBookOrder.getBookOption().toString()));
-        return 1;
     }
 
-    public int deleteById(final int id) throws SQLException {
+    public void deleteById(final int id) throws SQLException {
         executor.executeUpdate(QUERY_DELETE + id);
-        return 1;
     }
 }
