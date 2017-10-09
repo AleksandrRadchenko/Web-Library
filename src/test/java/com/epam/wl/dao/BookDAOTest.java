@@ -79,31 +79,19 @@ public class BookDAOTest {
 
     @Test
     void testGetFreeBookInstanceId() throws SQLException {
-        int bookId = 1;
-        int expectedBookInstanceId = 1;
+        int bookId = 2;
+        int expectedBookInstanceId = 5;
 
         assertThat(expectedBookInstanceId, is(bookDAO.getFreeBookInstanceId(bookId)));
     }
 
-    /*@Test
-    void testAddNewBook() {
-        List<Book> expectedBooks = bookDAO.getAllBooks();
-        Book book = new Book(expectedBooks.size() + 1, "Jerome David Salinger",
-                "The Catcher in the Rye", 2012);
-        expectedBooks.add(book);
-
-        bookDAO.addNewBook("Jerome David Salinger","The Catcher in the Rye", 2012);
-
-        assertThat(expectedBooks, is(bookDAO.getAllBooks()));
-    }
-
     @Test
-    void testAddNewBookInstance() {
+    void testAddNewBookInstance() throws SQLException {
         List<BookInstance> expectedBookInstances = bookDAO.getAllBookInstances();
         expectedBookInstances.add(new BookInstance(expectedBookInstances.size() + 1, 5));
 
         bookDAO.addNewBookInstance("Jerome David Salinger","The Catcher in the Rye", 2012);
 
         assertThat(expectedBookInstances, is(bookDAO.getAllBookInstances()));
-    }*/
+    }
 }

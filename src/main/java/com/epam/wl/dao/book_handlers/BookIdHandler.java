@@ -1,4 +1,4 @@
-package com.epam.wl.dao.user_order_handlers;
+package com.epam.wl.dao.book_handlers;
 
 import com.epam.wl.executor.ResultHandler;
 
@@ -12,6 +12,6 @@ public class BookIdHandler implements ResultHandler<Integer> {
             return resultSet.getInt("id");
         }
 
-        throw new NullPointerException("No such book in database");
+        throw new SQLException("No such book in database");
     }
 }
