@@ -43,8 +43,7 @@ class BookOrderDAOTest {
         BookInstance bookInstance = new BookInstance(1, 1);
         UserOrder userOrder = new UserOrder(1,1, 1, UserOrderStatus.IN_PROGRESS);
         BookOption bookOption = BookOption.SUBSCRIPTION;
-        int result = bookOrderDAO.create(bookInstance, userOrder, bookOption);
-        assertThat(result, is(1));
+        bookOrderDAO.create(bookInstance, userOrder, bookOption);
         //Check if created row is in DB for real
         assertThat(bookOrderDAO.getById(5).get(), is(new BookOrder(5, bookInstance.getId(), userOrder.getId(), bookOption)));
     }
@@ -77,8 +76,7 @@ class BookOrderDAOTest {
     void update() throws SQLException {
         int expectedInt = 1;
         BookOrder newBookOrder = new BookOrder(3, 9, 2, BookOption.READING_ROOM);
-        int actualInt = bookOrderDAO.update(newBookOrder);
-        assertThat(actualInt, is(expectedInt));
+        bookOrderDAO.update(newBookOrder);
         BookOrder actual = bookOrderDAO.getById(newBookOrder.getId()).get();
         assertThat(actual, is(newBookOrder));
     }
@@ -87,8 +85,7 @@ class BookOrderDAOTest {
     void deleteById() throws SQLException {
         int expectedInt = 1;
         int idToDelete = 3;
-        int actualInt = bookOrderDAO.deleteById(idToDelete);
-        assertThat(actualInt, is(expectedInt));
+        bookOrderDAO.deleteById(idToDelete);
         assertThrows(NoSuchElementException.class, () -> bookOrderDAO.getById(idToDelete).get());
     }
 
