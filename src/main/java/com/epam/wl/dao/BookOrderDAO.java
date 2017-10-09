@@ -19,6 +19,12 @@ public class BookOrderDAO {
     private final ResultHandler<Optional<BookOrder>> bookOrderOneHandler = new BookOrderOneHandler();
     private final ResultHandler<List<BookOrder>> bookOrderListHandler = new BookOrderListHandler();
 
+    private static final String QUERY_CREATE = "INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES(%d, %d, '%s');";
+    private static final String QUERY_GET_ALL = "SELECT id, book_instanceid, user_orderid, option FROM book_order";
+    private static final String QUERY_GET_BY_ID = "SELECT id, book_instanceid, user_orderid, option FROM book_order WHERE id=";
+    private static final String QUERY_UPDATE = "UPDATE book_order SET book_instanceid=%d, user_orderid=%d, option='%s'";
+    private static final String QUERY_DELETE = "DELETE FROM book_order WHERE id = ";
+
     public BookOrderDAO(DataSource dataSource) {
         executor = new Executor(dataSource);
     }
@@ -37,19 +43,16 @@ public class BookOrderDAO {
             final UserOrder userOrder,
             final BookOption bookOption)
             throws SQLException {
-        String updateQuery = "INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES(%d, %d, '%s');";
-        executor.executeUpdate(String.format(updateQuery, bookInstance.getId(), userOrder.getId(), bookOption.toString()));
+        executor.executeUpdate(String.format(QUERY_CREATE, bookInstance.getId(), userOrder.getId(), bookOption.toString()));
         return 1;
     }
 
     public List<BookOrder> getAll() throws SQLException {
-        final String query = "SELECT id, book_instanceid, user_orderid, option FROM book_order";
-        return executor.executeQuery(query, bookOrderListHandler);
+        return executor.executeQuery(QUERY_GET_ALL, bookOrderListHandler);
     }
 
     public Optional<BookOrder> getById(final int id) throws SQLException {
-        final String query = "SELECT id, book_instanceid, user_orderid, option FROM book_order WHERE id=" + id;
-        return executor.executeQuery(query, bookOrderOneHandler);
+        return executor.executeQuery(QUERY_GET_BY_ID + id, bookOrderOneHandler);
     }
 
     /**
@@ -60,8 +63,7 @@ public class BookOrderDAO {
      */
     @SuppressWarnings("JavaDoc")
     public int update(BookOrder newBookOrder) throws SQLException {
-        final String updateQuery = "UPDATE book_order SET book_instanceid=%d, user_orderid=%d, option='%s'";
-        executor.executeUpdate(String.format(updateQuery,
+        executor.executeUpdate(String.format(QUERY_UPDATE,
                 newBookOrder.getBookInstanceId(),
                 newBookOrder.getOrderId(),
                 newBookOrder.getBookOption().toString()));
@@ -69,8 +71,7 @@ public class BookOrderDAO {
     }
 
     public int deleteById(final int id) throws SQLException {
-        final String deleteQuery = "DELETE FROM book_order WHERE id = " + id;
-        executor.executeUpdate(deleteQuery);
+        executor.executeUpdate(QUERY_DELETE + id);
         return 1;
     }
 }
