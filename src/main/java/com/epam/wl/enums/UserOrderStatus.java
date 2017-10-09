@@ -1,5 +1,5 @@
 package com.epam.wl.enums;
 
-public enum OrderStatus {
+public enum UserOrderStatus {
     NEW, IN_PROGRESS, CLOSED
 }
