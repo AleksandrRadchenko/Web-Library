@@ -29,7 +29,7 @@ public class UserOrderDAO {
     }
 
     public void setUserOrderStatus(final int orderID, final UserOrderStatus status) throws SQLException {
-        String update = String.format("UPDATE user_order SET status = '%s' WHERE id = %d", status, orderID);
+        String update = String.format("UPDATE user_order SET status = '%s' WHERE id = %d'=;", status, orderID);
         executor.executeUpdate(update);
     }
 

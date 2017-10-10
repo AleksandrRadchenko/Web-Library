@@ -2,38 +2,42 @@
 def springVersion = '+'
 //def springVersion = '4.3.11.RELEASE'
 
-    group 'EPM-WL'
-    version '1.0-SNAPSHOT'
+group 'EPM-WL'
+version '1.0-SNAPSHOT'
 
-    apply plugin: 'java'
+apply plugin: 'java'
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
-    repositories {
-        mavenCentral()
-    }
+repositories {
+    mavenCentral()
+}
 
-    dependencies {
-        compile 'org.apache.logging.log4j:log4j-api:+',
-                'org.apache.logging.log4j:log4j-core:+',
+dependencies {
+    compile 'org.apache.logging.log4j:log4j-api:+',
+            'org.apache.logging.log4j:log4j-core:+',
 
-                'org.springframework:spring-context:' + springVersion,
-                'org.springframework:spring-context-support:' + springVersion,
-                'org.springframework:spring-tx:' + springVersion,
-                'org.springframework:spring-jdbc:' + springVersion
+            'org.springframework:spring-context:' + springVersion,
+            'org.springframework:spring-context-support:' + springVersion,
+            'org.springframework:spring-tx:' + springVersion,
+            'org.springframework:spring-jdbc:' + springVersion
 
 //	Aleksandr_radchenko: We are prohibited to use MVC, AFAIK
 //		'org.springframework:spring-mvc:' + springVersion
 
-        runtime 'com.h2database:h2:+',
-                'mysql:mysql-connector-java:6.0.5'
+    runtime 'com.h2database:h2:+',
+            'mysql:mysql-connector-java:6.0.5'
 
-        compileOnly 'org.projectlombok:lombok:+'
+    compileOnly 'org.projectlombok:lombok:+'
 
-        testCompile 'org.junit.jupiter:junit-jupiter-api:+',
-                'org.hamcrest:java-hamcrest:+'
-    }
+    testCompile 'org.junit.jupiter:junit-jupiter-api:+',
+            'org.hamcrest:java-hamcrest:+'
+
+   /* testRuntime 'org.junit.platform:junit-platform-launcher:1.1.0-SNAPSHOT',
+            'org.junit.jupiter:junit-jupiter-engine:5.1.0-SNAPSHOT',
+            'org.junit.vintage:junit-vintage-engine:4.12.2-SNAPSHOT'*/
+}
 
 
 task wrapper(type: Wrapper) {
