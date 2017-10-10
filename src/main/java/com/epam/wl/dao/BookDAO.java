@@ -39,17 +39,15 @@ public class BookDAO {
     }
 
     public int getBookId(String author, String title, int year) throws SQLException {
-        final String query = String.format("SELECT * FROM book WHERE author='%s' AND title='%s' AND year=%d",
-                author, title, year);
-        return executor.executeQuery(query, bookIdHandler);
+        final String query = "SELECT * FROM book WHERE author=? AND title=? AND year=?";
+        return executor.executeQuery(query, bookIdHandler, author, title, String.valueOf(year));
     }
 
     public int getFreeBookInstanceId(int bookId) throws SQLException {
-        final String query = String.format("SELECT * FROM book_instance LEFT JOIN book_order " +
+        final String query = "SELECT * FROM book_instance LEFT JOIN book_order " +
                 "ON book_instance.id=book_order.book_instanceid WHERE " +
-                "book_instance.bookid=%d AND book_instanceid IS NULL", bookId);
-
-        return executor.executeQuery(query, bookInstanceIdHandler);
+                "book_instance.bookid=? AND book_instanceid IS NULL";
+        return executor.executeQuery(query, bookInstanceIdHandler,  String.valueOf(bookId));
     }
 
     public void addNewBookInstance(String author, String title, int year) throws SQLException {
@@ -67,8 +65,8 @@ public class BookDAO {
             }
         }
 
-        final String update = String.format("INSERT INTO book_instance(bookid) VALUES (%d)", bookId);
-        executor.executeUpdate(update);
+        final String update = "INSERT INTO book_instance(bookid) VALUES (?)";
+        executor.executeUpdate(update, String.valueOf(bookId));
     }
 
     private void addNewBook(String author, String title, int year) throws SQLException {
