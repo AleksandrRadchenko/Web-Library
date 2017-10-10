@@ -24,13 +24,13 @@ public class UserOrderDAO {
     }
 
     public void createNewUserOrder(final int bookID, final int userID) throws SQLException {
-        String update = String.format("INSERT INTO user_order (userid, bookid, status) VALUES(%d, %d,'NEW');", userID, bookID);
-        executor.executeUpdate(update);
+        String update = "INSERT INTO user_order (userid, bookid, status) VALUES(?, ?,'NEW');";
+        executor.executeUpdate(update, String.valueOf(userID), String.valueOf(bookID));
     }
 
     public void setUserOrderStatus(final int orderID, final UserOrderStatus status) throws SQLException {
-        String update = String.format("UPDATE user_order SET status = '%s' WHERE id = %d'=;", status, orderID);
-        executor.executeUpdate(update);
+        String update = "UPDATE user_order SET status = ? WHERE id = ?";
+        executor.executeUpdate(update, String.valueOf(status), String.valueOf(orderID));
     }
 
     public List<UserOrder> getAllUserOrders() throws SQLException {
@@ -39,12 +39,12 @@ public class UserOrderDAO {
     }
 
     public Optional<UserOrder> getUserOrderByID(final int userOrderID) throws SQLException {
-        String query = String.format("SELECT * FROM user_order WHERE id = %d", userOrderID);
-        return executor.executeQuery(query, userOrderOneHandler);
+        String query = "SELECT * FROM user_order WHERE id = ?";
+        return executor.executeQuery(query, userOrderOneHandler, String.valueOf(userOrderID));
     }
 
     public List<UserOrder> getUserOrderByStatus(final UserOrderStatus status) throws SQLException {
-        String query = String.format("SELECT * FROM user_order WHERE status = '%s'", status);
-        return executor.executeQuery(query, userOrderListHandler);
+        String query = "SELECT * FROM user_order WHERE status = ?";
+        return executor.executeQuery(query, userOrderListHandler, String.valueOf(status));
     }
 }
