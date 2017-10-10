@@ -24,17 +24,19 @@ public class UserDAO {
     }
 
     public void addUser(String name, String lastname, String email, String passwordHash, UserRole userRole) throws SQLException {
-        String sqlScript = "INSERT INTO user(name, lastname, email, passwordhash, role) VALUES(?, ?, ?, ?, ?)";
+        String sqlScript = String.format("INSERT INTO user(name, lastname, email, passwordhash, role) VALUES('%s','%s','%s','%s','%s')",
+                name, lastname, email, passwordHash, userRole);
         executor.executeUpdate(sqlScript);
     }
 
     public void updateUser(int id, String name, String lastname, String email, String passwordHash, UserRole userRole) throws SQLException {
-        String sqlScript = "UPDATE user SET name=?, lastname=?, email=?, passwordhash=? WHERE id=?";
+        String sqlScript = String.format("UPDATE user SET name='%s', lastname='%s', email='%s', passwordhash='%s', role ='%s' WHERE id=%d",
+                name, lastname, email, passwordHash, userRole, id);
         executor.executeUpdate(sqlScript);
     }
 
     public void deleteUserById(int id) throws SQLException {
-        String sqlScript = "DELETE FROM user WHERE id=";
+        String sqlScript = String.format("DELETE FROM user WHERE id=%d", id);
         executor.executeUpdate(sqlScript);
     }
 
@@ -44,17 +46,17 @@ public class UserDAO {
     }
 
     public Optional<User> getUserByID(int id) throws SQLException {
-        String sqlScriptGetById = "SELECT * FROM user WHERE id=?";
+        String sqlScriptGetById = String.format("SELECT * FROM user WHERE id=%d", id);
         return executor.executeQuery(sqlScriptGetById, userOneHandler);
     }
 
     public Optional<User> getUserByEmailAndPassword(String email, String password) throws SQLException {
-        String sqlScriptByLoginAndPassword = "SELECT * FROM user WHERE email=? AND passwordhash=?";
+        String sqlScriptByLoginAndPassword = String.format("SELECT * FROM user WHERE email='%s' AND passwordhash='%s'", email, password);
         return executor.executeQuery(sqlScriptByLoginAndPassword, userOneHandler);
     }
 
     public Optional<User> getUserByNameAndLastName(String name, String lastName) throws SQLException {
-        String sqlScriptByName = "SELECT * FROM user WHERE name=? AND lastname=?";
+        String sqlScriptByName = String.format("SELECT * FROM user WHERE name='%s' AND lastname='%s'", name, lastName);
         return executor.executeQuery(sqlScriptByName, userOneHandler);
     }
 }

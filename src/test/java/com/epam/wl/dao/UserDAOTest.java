@@ -34,12 +34,12 @@ class UserDAOTest {
     @Test
     void testAddUser() throws SQLException {
         userDAO.addUser("Luke", "Skywalker", "1@gmail.com", "passHash", UserRole.USER);
-        User expectedUser = new User(11, "Luke", "Skywalker", "1@gmail.com", "passHash", UserRole.USER);
-        assertThat(expectedUser, is(userDAO.getUserByID(11).get()));
+        User expectedUser = new User(5, "Luke", "Skywalker", "1@gmail.com", "passHash", UserRole.USER);
+        assertThat(expectedUser, is(userDAO.getUserByID(5).get()));
     }
 
     @Test
-    void testIsUpdateUserSucceed() throws SQLException {
+    void testUpdateUser() throws SQLException {
         userDAO.updateUser(2, "Luke", "Skywalker", "1@gmail.com", "passHash", UserRole.USER);
         User expectedUser = new User(2, "Luke", "Skywalker", "1@gmail.com", "passHash", UserRole.USER);
         assertThat(expectedUser, is(userDAO.getUserByID(2).get()));
@@ -47,9 +47,12 @@ class UserDAOTest {
 
     @Test
     void testDeleteUserById() throws SQLException {
+        List<User> expectedUsers = new ArrayList<>();
+        expectedUsers.add(new User(2, "Федор", "Федоров", "fedor@ivan.ru", "fdfsdcdrfdsfzc", UserRole.USER));
+        expectedUsers.add(new User(3, "Петр", "Петров", "petr@ivan.ru", "fdfsdcdssdfdzc", UserRole.USER));
+        expectedUsers.add(new User(4, "Семен", "Семенов", "semen@ivan.ru", "fdfsdcdssdfdzc", UserRole.USER));
         userDAO.deleteUserById(1);
-        User expectedUser = new User(1, "Иван", "Иванов", "ivan@ivan.ru", "fdfsdcdzc", UserRole.USER);
-        assertThat(expectedUser, is(userDAO.getUserByID(1).get()));
+        assertThat(expectedUsers, is(userDAO.getAllUsers()));
     }
 
     @Test
@@ -83,5 +86,4 @@ class UserDAOTest {
         User userEntity = new User(2, "Федор", "Федоров", "fedor@ivan.ru", "fdfsdcdrfdsfzc", UserRole.USER);
         assertThat(userEntity, is(userDAO.getUserByID(2).get()));
     }
-
 }
