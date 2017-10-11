@@ -1,7 +1,5 @@
 //	Aleksandr_radchenko: let's try Spring 5 for now...
 def springVersion = '+'  //def springVersion = '4.3.11.RELEASE'
-def tomcatVersion = '9.0.1'
-def embedTomcatVersion = '+'
 
     group 'EPM-WL'
     version '1.0-SNAPSHOT'
@@ -11,7 +9,6 @@ def embedTomcatVersion = '+'
     compileJava.options.encoding =
             compileTestJava.options.encoding = 'UTF-8'
     apply plugin: 'war'
-    apply plugin: 'com.bmuschko.tomcat' // Embedded tomcat container
 
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
@@ -30,16 +27,6 @@ def embedTomcatVersion = '+'
                 'org.springframework:spring-tx:' + springVersion,
                 'org.springframework:spring-jdbc:' + springVersion,
 
-                // Tomcat
-//                'org.apache.tomcat:tomcat-catalina:' + tomcatVersion,
-//                'org.apache.tomcat:tomcat-servlet-api:' + tomcatVersion,
-//                'org.apache.tomcat:tomcat-jasper:' + tomcatVersion
-
-                // Embedded tomcat
-                'org.apache.tomcat.embed:tomcat-embed-core:' + embedTomcatVersion,
-                'org.apache.tomcat.embed:tomcat-embed-logging-juli:' + embedTomcatVersion,
-                'org.apache.tomcat.embed:tomcat-embed-jasper:' + embedTomcatVersion,
-
                 // Not sure if we need this
                 'javax.servlet:javax.servlet-api:+'
 
@@ -54,16 +41,6 @@ def embedTomcatVersion = '+'
         testCompile 'org.junit.jupiter:junit-jupiter-api:+',
                 'org.hamcrest:java-hamcrest:+'
     }
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.bmuschko:gradle-tomcat-plugin:+'
-    }
-}
-
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.2.1'
