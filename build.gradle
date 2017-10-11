@@ -1,46 +1,47 @@
 //	Aleksandr_radchenko: let's try Spring 5 for now...
 def springVersion = '+'  //def springVersion = '4.3.11.RELEASE'
 
-    group 'EPM-WL'
-    version '1.0-SNAPSHOT'
+group 'EPM-WL'
+version '1.0-SNAPSHOT'
 
-    apply plugin: 'java'
-    // For gradle to understand russian characters in java code
-    compileJava.options.encoding =
-            compileTestJava.options.encoding = 'UTF-8'
-    apply plugin: 'war'
+apply plugin: 'java'
+// For gradle to understand russian characters in java code
+compileJava.options.encoding =
+        compileTestJava.options.encoding = 'UTF-8'
+apply plugin: 'war'
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
-    repositories {
-        mavenCentral()
-    }
+repositories {
+    mavenCentral()
+}
 
-    dependencies {
-//        compile //'org.apache.logging.log4j:log4j-api:+',
-                //'org.apache.logging.log4j:log4j-core:+',
+dependencies {
+    // Spring
+    compile 'org.springframework:spring-jdbc:' + springVersion
+//    'org.springframework:spring-context:' + springVersion,
+//    'org.springframework:spring-context-support:' + springVersion,
+//    'org.springframework:spring-tx:' + springVersion,
+//    Aleksandr_radchenko: We are prohibited to use MVC, AFAIK
+//    'org.springframework:spring-mvc:' + springVersion
 
-                // Spring
-//                'org.springframework:spring-context:' + springVersion,
-//                'org.springframework:spring-context-support:' + springVersion,
-//                'org.springframework:spring-tx:' + springVersion,
-               compile  'org.springframework:spring-jdbc:' + springVersion
+    // Logging
+    //'org.apache.logging.log4j:log4j-api:+',
+    //'org.apache.logging.log4j:log4j-core:+',
 
-                // Not sure if we need this
-                //'javax.servlet:javax.servlet-api:+'
+    // Not sure if we need this
+    //'javax.servlet:javax.servlet-api:+'
 
-//	Aleksandr_radchenko: We are prohibited to use MVC, AFAIK
-//		'org.springframework:spring-mvc:' + springVersion
 
-        runtime 'com.h2database:h2:+'
+    testRuntime 'com.h2database:h2:+'
 //                'mysql:mysql-connector-java:6.0.5'
 
-        compileOnly 'org.projectlombok:lombok:+'
+    compileOnly 'org.projectlombok:lombok:+'
 
-        testCompile 'org.junit.jupiter:junit-jupiter-api:+',
-                'org.hamcrest:java-hamcrest:+'
-    }
+    testCompile 'org.junit.jupiter:junit-jupiter-api:+',
+            'org.hamcrest:java-hamcrest:+'
+}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.2.1'
