@@ -13,9 +13,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserOrderDAO {
+
     private Executor executor;
     private final ResultHandler<Optional<UserOrder>> userOrderOneHandler;
     private final ResultHandler<List<UserOrder>> userOrderListHandler;
+
+    public static final String UPDATE_NEW = "INSERT INTO user_order (userid, bookid, status) VALUES(?, ?,'NEW');";
+    public static final String UPDATE_STATUS = "UPDATE user_order SET status = ? WHERE id = ?";
+    public static final String QUERY_ALL = "SELECT * FROM user_order";
+    public static final String QUERY_BY_ID = "SELECT * FROM user_order WHERE id = ?";
+    public static final String QUERY_BY_STATUS = "SELECT * FROM user_order WHERE status = ?";
 
     public UserOrderDAO(DataSource dataSource) {
         this.executor = new Executor(dataSource);
@@ -24,27 +31,22 @@ public class UserOrderDAO {
     }
 
     public void createNewUserOrder(final int bookID, final int userID) throws SQLException {
-        String update = String.format("INSERT INTO user_order (userid, bookid, status) VALUES(%d, %d,'NEW');", userID, bookID);
-        executor.executeUpdate(update);
+        executor.executeUpdate(UPDATE_NEW, String.valueOf(userID), String.valueOf(bookID));
     }
 
     public void setUserOrderStatus(final int orderID, final UserOrderStatus status) throws SQLException {
-        String update = String.format("UPDATE user_order SET status = '%s' WHERE id = %d'=;", status, orderID);
-        executor.executeUpdate(update);
+        executor.executeUpdate(UPDATE_STATUS, String.valueOf(status), String.valueOf(orderID));
     }
 
     public List<UserOrder> getAllUserOrders() throws SQLException {
-        String query = "SELECT * FROM user_order";
-        return executor.executeQuery(query, userOrderListHandler);
+        return executor.executeQuery(QUERY_ALL, userOrderListHandler);
     }
 
     public Optional<UserOrder> getUserOrderByID(final int userOrderID) throws SQLException {
-        String query = String.format("SELECT * FROM user_order WHERE id = %d", userOrderID);
-        return executor.executeQuery(query, userOrderOneHandler);
+        return executor.executeQuery(QUERY_BY_ID, userOrderOneHandler, String.valueOf(userOrderID));
     }
 
     public List<UserOrder> getUserOrderByStatus(final UserOrderStatus status) throws SQLException {
-        String query = String.format("SELECT * FROM user_order WHERE status = '%s'", status);
-        return executor.executeQuery(query, userOrderListHandler);
+        return executor.executeQuery(QUERY_BY_STATUS, userOrderListHandler, String.valueOf(status));
     }
 }

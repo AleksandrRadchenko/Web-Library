@@ -71,7 +71,7 @@ public class BookDAOTest {
     void testGetBookId() throws SQLException {
         int id = 2;
         String author = "Herbert Schildt";
-        String title = "Java: A Beginner''s Guide, Sixth Edition";
+        String title = "Java: A Beginner's Guide, Sixth Edition";
         int year = 2014;
 
         assertThat(id, is(bookDAO.getBookId(author, title, year)));
