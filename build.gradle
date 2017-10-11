@@ -19,25 +19,23 @@ repositories {
 
 dependencies {
     // Spring
-    compile 'org.springframework:spring-jdbc:' + springVersion
+    compile 'org.springframework:spring-jdbc:' + springVersion,
 //    'org.springframework:spring-context:' + springVersion,
 //    'org.springframework:spring-context-support:' + springVersion,
 //    'org.springframework:spring-tx:' + springVersion,
 //    Aleksandr_radchenko: We are prohibited to use MVC, AFAIK
 //    'org.springframework:spring-mvc:' + springVersion
 
-    // Logging
-    //'org.apache.logging.log4j:log4j-api:+',
-    //'org.apache.logging.log4j:log4j-core:+',
+            //'org.apache.logging.log4j:log4j-api:+',
+            //'org.apache.logging.log4j:log4j-core:+',
 
-    // Not sure if we need this
-    //'javax.servlet:javax.servlet-api:+'
+            'javax.servlet:javax.servlet-api:+',
+            'javax.servlet:jstl:1.2'
 
+    compileOnly 'org.projectlombok:lombok:+'
 
     testRuntime 'com.h2database:h2:+'
 //                'mysql:mysql-connector-java:6.0.5'
-
-    compileOnly 'org.projectlombok:lombok:+'
 
     testCompile 'org.junit.jupiter:junit-jupiter-api:+',
             'org.hamcrest:java-hamcrest:+'
