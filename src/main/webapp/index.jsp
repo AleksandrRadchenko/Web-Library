@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.epam.wl.services.BookOrderService" %><%--
   Created by IntelliJ IDEA.
   User: ara
   Date: 11.10.2017
@@ -11,6 +11,6 @@
     <title>Hello webapp</title>
 </head>
 <body>
-Hello there!
+Number of BookOrders: <%String.valueOf(BookOrderService.getAll().size());%>!
 </body>
 </html>
