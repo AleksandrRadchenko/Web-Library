@@ -17,6 +17,22 @@ public class UserDAO {
     private final ResultHandler<Optional<User>> userOneHandler;
     private final ResultHandler<List<User>> userListHandler;
 
+    private static final String ADD_USER_SCRIPT =
+            "INSERT INTO user(name, lastname, email, passwordhash, role) VALUES(?,?,?,?,?)";
+    private static final String UPDATE_USER_SCRIPT =
+            "UPDATE user SET name=?, lastname=?, email=?, passwordhash=?, role =? WHERE id=?";
+    private static final String DELETE_USER_BYID_SCRIPT =
+            "DELETE FROM user WHERE id=?";
+    private static final String GETALL_USERS_SCRIPT =
+            "SELECT * FROM user";
+    private static final String GET_USER_BYID_SCRIPT =
+            "SELECT * FROM user WHERE id=?";
+    private static final String GET_USER_BY_EMAIL_PASS_SCRIPT =
+            "SELECT * FROM user WHERE email=? AND passwordhash=?";
+    private static final String GET_USER_SCRIPT_By_NAME_LASTRNAME_SCRIPT =
+            "SELECT * FROM user WHERE name=? AND lastname=?";
+
+
     public UserDAO(DataSource dataSource) {
         this.executor = new Executor(dataSource);
         this.userListHandler = new UserListHandler();
@@ -24,38 +40,31 @@ public class UserDAO {
     }
 
     public void addUser(String name, String lastname, String email, String passwordHash, UserRole userRole) throws SQLException {
-        String sqlScript = "INSERT INTO user(name, lastname, email, passwordhash, role) VALUES(?,?,?,?,?)";
-        executor.executeUpdate(sqlScript, name, lastname, email, passwordHash, userRole.toString());
+        executor.executeUpdate(ADD_USER_SCRIPT, name, lastname, email, passwordHash, userRole.toString());
     }
 
     public void updateUser(int id, String name, String lastname, String email, String passwordHash, UserRole userRole) throws SQLException {
-        String sqlScript = "UPDATE user SET name=?, lastname=?, email=?, passwordhash=?, role =? WHERE id=?";
-        executor.executeUpdate(sqlScript, name, lastname, email, passwordHash, userRole.toString(), String.valueOf(id));
+        executor.executeUpdate(UPDATE_USER_SCRIPT, name, lastname, email, passwordHash, userRole.toString(), String.valueOf(id));
     }
 
     public void deleteUserById(int id) throws SQLException {
-        String sqlScript = "DELETE FROM user WHERE id=?";
-        executor.executeUpdate(sqlScript, String.valueOf(id));
+        executor.executeUpdate(DELETE_USER_BYID_SCRIPT, String.valueOf(id));
     }
 
     public List<User> getAllUsers() throws SQLException {
-        String sqlScript = "SELECT * FROM user";
-        return executor.executeQuery(sqlScript, userListHandler);
+        return executor.executeQuery(GETALL_USERS_SCRIPT, userListHandler);
     }
 
     public Optional<User> getUserByID(int id) throws SQLException {
-        String sqlScriptGetById = "SELECT * FROM user WHERE id=?";
-        return executor.executeQuery(sqlScriptGetById, userOneHandler, String.valueOf(id));
+        return executor.executeQuery(GET_USER_BYID_SCRIPT, userOneHandler, String.valueOf(id));
     }
 
     public Optional<User> getUserByEmailAndPassword(String email, String password) throws SQLException {
-        String sqlScriptByLoginAndPassword = "SELECT * FROM user WHERE email=? AND passwordhash=?";
-        return executor.executeQuery(sqlScriptByLoginAndPassword, userOneHandler, email, password);
+        return executor.executeQuery(GET_USER_BY_EMAIL_PASS_SCRIPT, userOneHandler, email, password);
     }
 
     public Optional<User> getUserByNameAndLastName(String name, String lastName) throws SQLException {
-        String sqlScriptByName = "SELECT * FROM user WHERE name=? AND lastname=?";
-        return executor.executeQuery(sqlScriptByName, userOneHandler, name, lastName);
+        return executor.executeQuery(GET_USER_SCRIPT_By_NAME_LASTRNAME_SCRIPT, userOneHandler, name, lastName);
     }
 }
 
