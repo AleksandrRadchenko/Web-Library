@@ -28,7 +28,9 @@ def springVersion = '+'  //def springVersion = '4.3.11.RELEASE'
                 'org.springframework:spring-jdbc:' + springVersion,
 
                 // Not sure if we need this
-                'javax.servlet:javax.servlet-api:+'
+                'javax.servlet:javax.servlet-api:+',
+
+                'javax.servlet:jstl:1.2'
 
 //	Aleksandr_radchenko: We are prohibited to use MVC, AFAIK
 //		'org.springframework:spring-mvc:' + springVersion
