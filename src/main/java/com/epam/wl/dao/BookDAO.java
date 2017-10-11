@@ -20,6 +20,15 @@ public class BookDAO {
     private final ResultHandler<Integer> bookIdHandler;
     private final ResultHandler<Integer> bookInstanceIdHandler;
 
+    private static final String GET_ALL_BOOKS_QUERY = "SELECT * FROM book";
+    private static final String GET_ALL_BOOKS_INSTANCES_QUERY = "SELECT * FROM book_instance";
+    private static final String GET_BOOK_ID_QUERY = "SELECT * FROM book WHERE author=? AND title=? AND year=?";
+    private static final String GET_FREE_BOOK_INSTANCE_ID_QUERY = "SELECT * FROM book_instance LEFT JOIN book_order "
+             + "ON book_instance.id=book_order.book_instanceid WHERE "
+             + "book_instance.bookid=? AND book_instanceid IS NULL";
+    private static final String ADD_NEW_BOOK_INSTANCE_QUERY = "INSERT INTO book_instance(bookid) VALUES (?)";
+    private static final String ADD_NEW_BOOK_QUERY = "INSERT INTO book(author, title, year) VALUES (?, ?, ?)";
+
     public BookDAO(DataSource dataSource) {
         this.executor = new Executor(dataSource);
         this.bookListHandler = new BookListHandler();
@@ -29,25 +38,19 @@ public class BookDAO {
     }
 
     public List<Book> getAllBooks() throws SQLException {
-        final String query = "SELECT * FROM book";
-        return executor.executeQuery(query, bookListHandler);
+        return executor.executeQuery(GET_ALL_BOOKS_QUERY, bookListHandler);
     }
 
     public List<BookInstance> getAllBookInstances() throws SQLException {
-        final String query = "SELECT * FROM book_instance";
-        return executor.executeQuery(query, bookInstanceListHandler);
+        return executor.executeQuery(GET_ALL_BOOKS_INSTANCES_QUERY, bookInstanceListHandler);
     }
 
     public int getBookId(String author, String title, int year) throws SQLException {
-        final String query = "SELECT * FROM book WHERE author=? AND title=? AND year=?";
-        return executor.executeQuery(query, bookIdHandler, author, title, String.valueOf(year));
+        return executor.executeQuery(GET_BOOK_ID_QUERY, bookIdHandler, author, title, String.valueOf(year));
     }
 
     public int getFreeBookInstanceId(int bookId) throws SQLException {
-        final String query = "SELECT * FROM book_instance LEFT JOIN book_order " +
-                "ON book_instance.id=book_order.book_instanceid WHERE " +
-                "book_instance.bookid=? AND book_instanceid IS NULL";
-        return executor.executeQuery(query, bookInstanceIdHandler,  String.valueOf(bookId));
+        return executor.executeQuery(GET_FREE_BOOK_INSTANCE_ID_QUERY, bookInstanceIdHandler,  String.valueOf(bookId));
     }
 
     public void addNewBookInstance(String author, String title, int year) throws SQLException {
@@ -65,13 +68,10 @@ public class BookDAO {
             }
         }
 
-        final String update = "INSERT INTO book_instance(bookid) VALUES (?)";
-        executor.executeUpdate(update, String.valueOf(bookId));
+        executor.executeUpdate(ADD_NEW_BOOK_INSTANCE_QUERY, String.valueOf(bookId));
     }
 
     private void addNewBook(String author, String title, int year) throws SQLException {
-        final String update = String.format("INSERT INTO book(author, title, year) VALUES ('%s', '%s', %d)",
-                author, title, year);
-        executor.executeUpdate(update);
+        executor.executeUpdate(ADD_NEW_BOOK_QUERY, author, title, String.valueOf(year));
     }
 }
