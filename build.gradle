@@ -19,18 +19,20 @@ repositories {
 
 dependencies {
     // Spring
-    compile 'org.springframework:spring-jdbc:' + springVersion,
+    compile 'org.springframework:spring-jdbc:' + springVersion
 //    'org.springframework:spring-context:' + springVersion,
 //    'org.springframework:spring-context-support:' + springVersion,
 //    'org.springframework:spring-tx:' + springVersion,
 //    Aleksandr_radchenko: We are prohibited to use MVC, AFAIK
 //    'org.springframework:spring-mvc:' + springVersion
 
-            //'org.apache.logging.log4j:log4j-api:+',
-            //'org.apache.logging.log4j:log4j-core:+',
+    //'org.apache.logging.log4j:log4j-api:+',
+    //'org.apache.logging.log4j:log4j-core:+',
 
-            'javax.servlet:javax.servlet-api:+',
-            'javax.servlet:jstl:1.2'
+    compile 'javax.servlet:jstl:1.2'
+
+    // Tomcat include javax.servlet lib
+    providedCompile 'javax.servlet:javax.servlet-api:+'
 
     compileOnly 'org.projectlombok:lombok:+'
 
