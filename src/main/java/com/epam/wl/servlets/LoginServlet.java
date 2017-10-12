@@ -33,6 +33,13 @@ public class LoginServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        /*if ("1".equals(request.getParameter("email"))
+                && "1".equals(request.getParameter("password"))) {
+            response.sendRedirect("user_from_login.jsp");
+        } else {
+            response.sendRedirect("login_error.jsp");
+        }*/
     }
 
 

@@ -21,17 +21,21 @@
     </form>
 </table>-->
 
-    <form action="LoginServlet" method="get">
+<form action="/login" method="get">
 
-        Please enter your email:
-        <input type="text" name="email"/><br>
+    Please enter your email:
+    <input type="text" name="email"/><br>
 
-        Please enter your password:
-        <input type="text" name="password"/>
+    Please enter your password:
+    <input type="text" name="password"/>
 
-        <input type="submit" value="Sign in">
+    <input type="submit" value="Sign in">
 
-    </form>
+</form>
+
+<form action="/sign_up" method="get">
+    <input type="submit" value="Sign up">
+</form>
 
 </body>
 </html>
