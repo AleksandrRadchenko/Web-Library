@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Hello webapp</title>
+    <title>Error</title>
 </head>
 <body>
 Smth went wrong =(
 Incorrect password or/and email.
-Or you didn't registered yet.
+Or you aren't registered yet.
 So go back and try again or sign up.
 </body>
 </html>

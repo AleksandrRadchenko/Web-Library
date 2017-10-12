@@ -27,25 +27,23 @@ public class LoginServlet extends HttpServlet {
         try {
             Optional<User> userOptional = userDAO.getUserByEmailAndPassword(request.getParameter("email"),
                     request.getParameter("password"));
+
             if (userOptional.isPresent()) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("currentSessionUser", userOptional.get());
-                response.sendRedirect("user_from_login.jsp");
+
+                if ("on".equals(request.getParameter("is_librarian"))) {
+                    response.sendRedirect("librarian_from_login.jsp");
+                } else {
+                    response.sendRedirect("user_from_login.jsp");
+                }
             } else {
                 response.sendRedirect("login_error.jsp");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        /*if ("1".equals(request.getParameter("email"))
-                && "1".equals(request.getParameter("password"))) {
-            response.sendRedirect("user_from_login.jsp");
-        } else {
-            response.sendRedirect("login_error.jsp");
-        }*/
     }
-
 
     static EmbeddedDatabase getEmbeddedDatabase() {
         final EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
