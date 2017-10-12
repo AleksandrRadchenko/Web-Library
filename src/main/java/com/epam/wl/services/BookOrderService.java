@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookOrderService {
-    private static EmbeddedDatabase dataSource = DBHelper.getEmbeddedDatabase();;
-    private static BookOrderDAO bookOrderDAO = new BookOrderDAO(dataSource);
+    private EmbeddedDatabase dataSource = DBHelper.getEmbeddedDatabase();;
+    private BookOrderDAO bookOrderDAO = new BookOrderDAO(dataSource);
 
-    public static List<BookOrder> getAll() {
+    public List<BookOrder> getAll() {
         List<BookOrder> result = new ArrayList<>();
         try {
             result = bookOrderDAO.getAll();
@@ -23,10 +23,10 @@ public class BookOrderService {
         return result;
     }
 
-    public static List<BookOrder> getByUserId(String userid) {
+    public List<BookOrder> getByUserId(int userId) {
         List<BookOrder> result = new ArrayList<>();
         try {
-            throw new SQLException();
+            result = bookOrderDAO.getByUserId(userId);
         } catch (SQLException e) {
             e.printStackTrace();
         }

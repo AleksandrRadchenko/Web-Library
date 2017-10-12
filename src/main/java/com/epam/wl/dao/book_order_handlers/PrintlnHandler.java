@@ -9,10 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomHandler implements ResultHandler<List<BookOrder>> {
+public class PrintlnHandler implements ResultHandler<List<BookOrder>> {
     @Override
     public List<BookOrder> handle(ResultSet resultSet) throws SQLException {
-//        if (!resultSet.next()) return Optional.empty();
         DBHelper.printResultSet(resultSet);
         return new ArrayList<BookOrder>();
     }

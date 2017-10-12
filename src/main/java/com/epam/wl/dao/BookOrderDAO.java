@@ -2,7 +2,7 @@ package com.epam.wl.dao;
 
 import com.epam.wl.dao.book_order_handlers.BookOrderListHandler;
 import com.epam.wl.dao.book_order_handlers.BookOrderOneHandler;
-import com.epam.wl.dao.book_order_handlers.CustomHandler;
+import com.epam.wl.dao.book_order_handlers.PrintlnHandler;
 import com.epam.wl.entities.BookInstance;
 import com.epam.wl.entities.BookOrder;
 import com.epam.wl.entities.UserOrder;
@@ -22,18 +22,13 @@ public class BookOrderDAO {
 
     // language=H2
     private final static String QUERY_CREATE = "INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES(?, ?, ?);";
-    // language=H2
     private final static String QUERY_GET_ALL = "SELECT id, book_instanceid, user_orderid, option FROM book_order";
-    // language=H2
     private final static String QUERY_GET_BY_USER_ID =
             "SELECT book_order.id, book.author, book.title, book.year, user_order.status, user.name, user.lastname " +
             "FROM book_order INNER JOIN user_order ON user_order.id=book_order.user_orderid " +
             "INNER JOIN book ON book.id=user_order.bookId INNER JOIN user ON user.id=user_order.userid WHERE user.id=?";
-    // language=H2
     private final static String QUERY_GET_BY_ID = "SELECT id, book_instanceid, user_orderid, option FROM book_order WHERE id=?";
-    // language=H2
     private final static String QUERY_UPDATE = "UPDATE book_order SET book_instanceid=?, user_orderid=?, option=?";
-    // language=H2
     private final static String QUERY_DELETE = "DELETE FROM book_order WHERE id = ?";
 
     public BookOrderDAO(DataSource dataSource) {
@@ -63,8 +58,7 @@ public class BookOrderDAO {
     }
 
     public List<BookOrder> getByUserId(int id) throws SQLException {
-
-        return executor.executeQuery(QUERY_GET_BY_USER_ID, new CustomHandler(), String.valueOf(id));
+        return executor.executeQuery(QUERY_GET_BY_USER_ID, new PrintlnHandler(), String.valueOf(id));
     }
 
     public Optional<BookOrder> getById(final int id) throws SQLException {
