@@ -18,14 +18,15 @@ public class BookOrderDAO {
     private final ResultHandler<Optional<BookOrder>> bookOrderOneHandler = new BookOrderOneHandler();
     private final ResultHandler<List<BookOrder>> bookOrderListHandler = new BookOrderListHandler();
 
+    private final static String ALL_FIELDS = "book_order.id, book_instanceid, bookid, author, title, " +
+            "year, user_orderid, userid, status, name, lastname, email, option";
+    private final static String JOIN_4_TABLES = "book_order INNER JOIN user_order ON user_order.id=book_order.user_orderid " +
+            "INNER JOIN book ON book.id=user_order.bookId INNER JOIN user ON user.id=user_order.userid";
     // language=H2
     private final static String QUERY_CREATE = "INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES(?, ?, ?);";
-    private final static String QUERY_GET_ALL = "SELECT id, book_instanceid, user_orderid, option FROM book_order";
-    private final static String QUERY_GET_BY_USER_ID =
-            "SELECT book_order.id, book.author, book.title, book.year, user_order.status, user.name, user.lastname " +
-            "FROM book_order INNER JOIN user_order ON user_order.id=book_order.user_orderid " +
-            "INNER JOIN book ON book.id=user_order.bookId INNER JOIN user ON user.id=user_order.userid WHERE user.id=?";
-    private final static String QUERY_GET_BY_ID = "SELECT id, book_instanceid, user_orderid, option FROM book_order WHERE id=?";
+    private final static String QUERY_GET_ALL = "SELECT " + ALL_FIELDS + " FROM " + JOIN_4_TABLES;
+    private final static String QUERY_GET_BY_USER_ID = "SELECT " + ALL_FIELDS + " FROM " + JOIN_4_TABLES + " WHERE user.id=?";
+    private final static String QUERY_GET_BY_ID = "SELECT " + ALL_FIELDS + " FROM " + JOIN_4_TABLES + " WHERE book_order.id=?";
     private final static String QUERY_UPDATE = "UPDATE book_order SET book_instanceid=?, user_orderid=?, option=?";
     private final static String QUERY_DELETE = "DELETE FROM book_order WHERE id = ?";
 

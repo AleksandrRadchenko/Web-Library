@@ -41,22 +41,26 @@ class BookOrderDAOTest {
         int userOrderId = 1;
         BookOption bookOption = BookOption.SUBSCRIPTION;
         bookOrderDAO.create(bookInstanceId, userOrderId, bookOption);
+        BookOrder expected = new BookOrder(5, bookInstanceId, userOrderId, bookOption);
         //Check if created row is in DB for real
-        assertThat(bookOrderDAO.getById(5).get(), is(new BookOrder(5, bookInstanceId, userOrderId, bookOption)));
+        assertRequiredFields(bookOrderDAO.getById(5).get(), expected);
+//        assertThat(bookOrderDAO.getById(5).get().getId(), is(expected.getId()));
     }
 
     @Test
     void getAllFourRows() throws SQLException {
         List<BookOrder> expected = entireTable;
         List<BookOrder> actual = bookOrderDAO.getAll();
-        assertThat(actual, is(expected));
+        for (int i = 0; i < actual.size(); i++) {
+            assertRequiredFields(actual.get(i), expected.get(i));
+        }
     }
 
     @Test
     void getById() throws SQLException {
         BookOrder expected = entireTable.get(2);
         BookOrder actual = bookOrderDAO.getById(3).get();
-        assertThat(actual, is(expected));
+        assertRequiredFields(actual, expected);
     }
 
     @Test
@@ -82,7 +86,7 @@ class BookOrderDAOTest {
         BookOrder newBookOrder = new BookOrder(3, 9, 2, BookOption.READING_ROOM);
         bookOrderDAO.update(newBookOrder);
         BookOrder actual = bookOrderDAO.getById(newBookOrder.getId()).get();
-        assertThat(actual, is(newBookOrder));
+        assertRequiredFields(actual, newBookOrder);
     }
 
     @Test
@@ -96,5 +100,12 @@ class BookOrderDAOTest {
     @AfterEach
     void tearDown() throws SQLException {
         dataSource.shutdown();
+    }
+
+    private void assertRequiredFields(BookOrder actual, BookOrder expected) {
+        assertThat(actual.getId(), is(expected.getId()));
+        assertThat(actual.getBookInstanceId(), is(expected.getBookInstanceId()));
+        assertThat(actual.getUserOrderId(), is(expected.getUserOrderId()));
+        assertThat(actual.getBookOption(), is(expected.getBookOption()));
     }
 }
