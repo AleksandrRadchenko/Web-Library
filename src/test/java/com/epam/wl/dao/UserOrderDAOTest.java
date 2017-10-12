@@ -15,6 +15,7 @@ import java.util.NoSuchElementException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class UserOrderDAOTest {
@@ -36,14 +37,17 @@ class UserOrderDAOTest {
     @Test
     void testCreateUserOrder() throws SQLException {
         userOrderDAO.createNewUserOrder(4, 1);
-        UserOrder expectedUserOrder = new UserOrder(6, 4, 1, UserOrderStatus.NEW);
-
+        UserOrder expectedUserOrder = new UserOrder(
+                6, 1, "Иван", "Иванов", "ivan@ivan.ru",
+                "Война и мир", "Лев Толстой", 1978, UserOrderStatus.NEW);
         assertThat(expectedUserOrder, is(userOrderDAO.getUserOrderByID(6).get()));
     }
-
     @Test
     void testSetOrderStatus() throws SQLException {
-        UserOrder expectedUserOrder = new UserOrder(2, 2, 2, UserOrderStatus.CLOSED);
+        UserOrder expectedUserOrder = new UserOrder(
+                2, 2, "Федор", "Федоров", "fedor@ivan.ru",
+                "Java: A Beginner's Guide, Sixth Edition", "Herbert Schildt",
+                2014, UserOrderStatus.CLOSED);
         userOrderDAO.setUserOrderStatus(2, UserOrderStatus.CLOSED);
         UserOrder actualUserOrder = userOrderDAO.getUserOrderByID(2).get();
 
@@ -53,18 +57,30 @@ class UserOrderDAOTest {
     @Test
     void testGetAllUserOrders() throws SQLException {
         List<UserOrder> expectedOrderList = new ArrayList<>();
-        expectedOrderList.add(new UserOrder(1, 1, 1, UserOrderStatus.IN_PROGRESS));
-        expectedOrderList.add(new UserOrder(2, 2, 2, UserOrderStatus.IN_PROGRESS));
-        expectedOrderList.add(new UserOrder(3, 3, 3, UserOrderStatus.IN_PROGRESS));
-        expectedOrderList.add(new UserOrder(4, 4, 4, UserOrderStatus.IN_PROGRESS));
-        expectedOrderList.add(new UserOrder(5, 3, 1, UserOrderStatus.NEW));
+        expectedOrderList.add(new UserOrder(
+                1, 1, "Иван", "Иванов", "ivan@ivan.ru", "Азбука",
+                "Петр Иванов", 1954, UserOrderStatus.IN_PROGRESS));
+        expectedOrderList.add(new UserOrder(
+                2, 2, "Федор", "Федоров", "fedor@ivan.ru", "Java: A Beginner's Guide, Sixth Edition",
+                "Herbert Schildt", 2014, UserOrderStatus.IN_PROGRESS));
+        expectedOrderList.add(new UserOrder(
+                3, 3, "Петр", "Петров", "petr@ivan.ru", "Thinking in Java (4th Edition)",
+                "Bruce Eckel", 2016, UserOrderStatus.IN_PROGRESS));
+        expectedOrderList.add(new UserOrder(
+                4, 4, "Семен", "Семенов", "semen@ivan.ru", "Война и мир",
+                "Лев Толстой", 1978, UserOrderStatus.IN_PROGRESS));
+        expectedOrderList.add(new UserOrder(
+                5, 1, "Иван", "Иванов", "ivan@ivan.ru", "Thinking in Java (4th Edition)",
+                "Bruce Eckel", 2016, UserOrderStatus.NEW));
 
         assertThat(expectedOrderList, is(userOrderDAO.getAllUserOrders()));
     }
 
     @Test
     void testGetUserOrderByID() throws SQLException {
-        UserOrder expectedUserOrder = new UserOrder(2, 2, 2, UserOrderStatus.IN_PROGRESS);
+        UserOrder expectedUserOrder = new UserOrder(
+                2, 2, "Федор", "Федоров", "fedor@ivan.ru", "Java: A Beginner's Guide, Sixth Edition",
+                "Herbert Schildt", 2014, UserOrderStatus.IN_PROGRESS);
         UserOrder actualUserOrder = userOrderDAO.getUserOrderByID(2).get();
 
         assertThat(expectedUserOrder, is(actualUserOrder));
@@ -73,10 +89,18 @@ class UserOrderDAOTest {
     @Test
     void testGetUserByStatus() throws SQLException {
         List<UserOrder> expectedOrderList = new ArrayList<>();
-        expectedOrderList.add(new UserOrder(1, 1, 1, UserOrderStatus.IN_PROGRESS));
-        expectedOrderList.add(new UserOrder(2, 2, 2, UserOrderStatus.IN_PROGRESS));
-        expectedOrderList.add(new UserOrder(3, 3, 3, UserOrderStatus.IN_PROGRESS));
-        expectedOrderList.add(new UserOrder(4, 4, 4, UserOrderStatus.IN_PROGRESS));
+        expectedOrderList.add(new UserOrder(
+                1, 1, "Иван", "Иванов", "ivan@ivan.ru", "Азбука",
+                "Петр Иванов", 1954, UserOrderStatus.IN_PROGRESS));
+        expectedOrderList.add(new UserOrder(
+                2, 2, "Федор", "Федоров", "fedor@ivan.ru", "Java: A Beginner's Guide, Sixth Edition",
+                "Herbert Schildt", 2014, UserOrderStatus.IN_PROGRESS));
+        expectedOrderList.add(new UserOrder(
+                3, 3, "Петр", "Петров", "petr@ivan.ru", "Thinking in Java (4th Edition)",
+                "Bruce Eckel", 2016, UserOrderStatus.IN_PROGRESS));
+        expectedOrderList.add(new UserOrder(
+                4, 4, "Семен", "Семенов", "semen@ivan.ru", "Война и мир",
+                "Лев Толстой", 1978, UserOrderStatus.IN_PROGRESS));
 
         assertThat(expectedOrderList, is(userOrderDAO.getUserOrderByStatus(UserOrderStatus.IN_PROGRESS)));
     }

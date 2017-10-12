@@ -41,7 +41,9 @@ class BookOrderDAOTest {
     @Test
     void createOneRow() throws SQLException {
         BookInstance bookInstance = new BookInstance(1, 1);
-        UserOrder userOrder = new UserOrder(1,1, 1, UserOrderStatus.IN_PROGRESS);
+        UserOrder userOrder = new UserOrder(
+                1, 1, "Иван", "Иванов", "ivan@ivan.ru", "Азбука",
+                "Петр Иванов", 1954, UserOrderStatus.IN_PROGRESS);
         BookOption bookOption = BookOption.SUBSCRIPTION;
         bookOrderDAO.create(bookInstance, userOrder, bookOption);
         //Check if created row is in DB for real

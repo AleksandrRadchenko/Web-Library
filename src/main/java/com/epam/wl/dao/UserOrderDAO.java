@@ -20,9 +20,15 @@ public class UserOrderDAO {
 
     public static final String UPDATE_NEW = "INSERT INTO user_order (userid, bookid, status) VALUES(?, ?,'NEW');";
     public static final String UPDATE_STATUS = "UPDATE user_order SET status = ? WHERE id = ?";
-    public static final String QUERY_ALL = "SELECT * FROM user_order";
-    public static final String QUERY_BY_ID = "SELECT * FROM user_order WHERE id = ?";
-    public static final String QUERY_BY_STATUS = "SELECT * FROM user_order WHERE status = ?";
+    public static final String QUERY_ALL = "select user_order.id, user.id, user.name, user.lastname, user.email, " +
+            "book.title, book.author, book.year, user_order.status from user_order " +
+            "INNER JOIN user ON user.id=user_order.userId INNER JOIN book ON book.id=user_order.bookId";
+    public static final String QUERY_BY_ID = "select user_order.id, user.id, user.name, user.lastname, user.email, " +
+            "book.title, book.author, book.year, user_order.status from user_order " +
+            "INNER JOIN user ON user.id=user_order.userId INNER JOIN book ON book.id=user_order.bookId WHERE user_order.id=?";
+    public static final String QUERY_BY_STATUS = "select user_order.id, user.id, user.name, user.lastname, user.email," +
+            " book.title, book.author, book.year, user_order.status from user_order " +
+            "INNER JOIN user ON user.id=user_order.userId INNER JOIN book ON book.id=user_order.bookId WHERE status = ?";
 
     public UserOrderDAO(DataSource dataSource) {
         this.executor = new Executor(dataSource);
