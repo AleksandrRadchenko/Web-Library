@@ -36,7 +36,7 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok:+'
 
-    testRuntime 'com.h2database:h2:+'
+    runtime 'com.h2database:h2:+'
 //                'mysql:mysql-connector-java:6.0.5'
 
     testCompile 'org.junit.jupiter:junit-jupiter-api:+',

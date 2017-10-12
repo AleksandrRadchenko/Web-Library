@@ -4,7 +4,9 @@
     <title>Hello webapp</title>
 </head>
 <body>
+Hello there!<br>
 <a href="http://localhost:8080/uo">User orders request</a><br>
-Hello there!
+<a href="http://localhost:8080/book_order">Show all ordered books</a><br>
+<a href="http://localhost:8080/book_order?userid=1">Show all books, ordered by user 1</a><br>
 </body>
 </html>

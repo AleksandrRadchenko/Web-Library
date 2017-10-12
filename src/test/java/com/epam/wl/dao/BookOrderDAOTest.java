@@ -63,6 +63,13 @@ class BookOrderDAOTest {
     }
 
     @Test
+    void getBgetByUserIdyId() throws SQLException {
+        Object expected = entireTable.get(2);
+        Object actual = bookOrderDAO.getByUserId(1); // TODO: 12.10.2017 Optional here
+//        assertThat(actual, is(expected));
+    }
+
+    @Test
     void failToGetByWrongId() throws SQLException {
         assertThrows(NoSuchElementException.class, bookOrderDAO.getById(98456456)::get);
     }

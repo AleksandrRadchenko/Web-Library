@@ -23,4 +23,13 @@ public class BookOrderService {
         return result;
     }
 
+    public static List<BookOrder> getByUserId(String userid) {
+        List<BookOrder> result = new ArrayList<>();
+        try {
+            throw new SQLException();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
