@@ -76,7 +76,7 @@ public class BookOrderDAO {
     public void update(BookOrder newBookOrder) throws SQLException {
         executor.executeUpdate(QUERY_UPDATE,
                 String.valueOf(newBookOrder.getBookInstanceId()),
-                String.valueOf(newBookOrder.getOrderId()),
+                String.valueOf(newBookOrder.getUserOrderId()),
                 String.valueOf(newBookOrder.getBookOption().toString()));
     }
 
