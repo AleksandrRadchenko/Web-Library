@@ -11,10 +11,21 @@ import java.util.List;
 public class TestUserOrderService {
     public static List<UserOrder> getOrders(){
         List<UserOrder> list = new ArrayList<>();
-        list.add(new UserOrder(1, 1, 1, UserOrderStatus.IN_PROGRESS));
-        list.add(new UserOrder(2, 2, 2, UserOrderStatus.IN_PROGRESS));
-        list.add(new UserOrder(3, 3, 3, UserOrderStatus.IN_PROGRESS));
-        list.add(new UserOrder(4, 4, 4, UserOrderStatus.IN_PROGRESS));
+        list.add(new UserOrder(
+                1, 1, "Иван", "Иванов", "ivan@ivan.ru", "Азбука",
+                "Петр Иванов", 1954, UserOrderStatus.IN_PROGRESS));
+        list.add(new UserOrder(
+                2, 2, "Федор", "Федоров", "fedor@ivan.ru", "Java: A Beginner's Guide, Sixth Edition",
+                "Herbert Schildt", 2014, UserOrderStatus.IN_PROGRESS));
+        list.add(new UserOrder(
+                3, 3, "Петр", "Петров", "petr@ivan.ru", "Thinking in Java (4th Edition)",
+                "Bruce Eckel", 2016, UserOrderStatus.IN_PROGRESS));
+        list.add(new UserOrder(
+                4, 4, "Семен", "Семенов", "semen@ivan.ru", "Война и мир",
+                "Лев Толстой", 1978, UserOrderStatus.IN_PROGRESS));
+        list.add(new UserOrder(
+                5, 1, "Иван", "Иванов", "ivan@ivan.ru", "Thinking in Java (4th Edition)",
+                "Bruce Eckel", 2016, UserOrderStatus.NEW));
         return list;
     }
 }
