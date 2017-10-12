@@ -4,7 +4,8 @@ import com.epam.wl.enums.UserOrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data @AllArgsConstructor
+@Data
+@AllArgsConstructor
 public class UserOrder {
     private int id;
     private int userId;
