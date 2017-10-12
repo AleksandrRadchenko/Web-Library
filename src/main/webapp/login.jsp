@@ -21,13 +21,15 @@
     </form>
 </table>-->
 
-<form action="/login" method="get">
+<form action="/login" method="post">
 
     Please enter your email:
     <input type="text" name="email"/><br>
 
     Please enter your password:
     <input type="text" name="password"/>
+
+    <input type="checkbox" name="is_librarian"/>
 
     <input type="submit" value="Sign in">
 
