@@ -3,9 +3,7 @@ package com.epam.wl.dao;
 import com.epam.wl.dao.book_order_handlers.BookOrderListHandler;
 import com.epam.wl.dao.book_order_handlers.BookOrderOneHandler;
 import com.epam.wl.dao.book_order_handlers.PrintlnHandler;
-import com.epam.wl.entities.BookInstance;
 import com.epam.wl.entities.BookOrder;
-import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.BookOption;
 import com.epam.wl.executor.Executor;
 import com.epam.wl.executor.ResultHandler;
@@ -37,20 +35,19 @@ public class BookOrderDAO {
 
     /**
      * Create row in book_order table
-     *
-     * @param bookInstance
-     * @param userOrder
-     * @param bookOption
+     * @param bookInstanceId int
+     * @param userOrderId int
+     * @param bookOption enum
      * @return 1 (number of rows changed) if success, or throws SQLexception
      * @throws SQLException
      */
     @SuppressWarnings("JavaDoc")
     public void create(
-            final BookInstance bookInstance,
-            final UserOrder userOrder,
+            final int bookInstanceId,
+            final int userOrderId,
             final BookOption bookOption)
             throws SQLException {
-        executor.executeUpdate(QUERY_CREATE, String.valueOf(bookInstance.getId()), String.valueOf(userOrder.getId()), String.valueOf(bookOption.toString()));
+        executor.executeUpdate(QUERY_CREATE, String.valueOf(bookInstanceId), String.valueOf(userOrderId), String.valueOf(bookOption.toString()));
     }
 
     public List<BookOrder> getAll() throws SQLException {
@@ -67,7 +64,6 @@ public class BookOrderDAO {
 
     /**
      * Updates BookOrder with id == newBookOrder.getId(), using fields from newBookOrder
-     *
      * @param newBookOrder
      * @return 1 (number of rows changed) if success, or throws SQLexception
      * @throws SQLException
