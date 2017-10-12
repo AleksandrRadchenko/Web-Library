@@ -21,4 +21,11 @@ public class BookOrder {
     private String lastName;
     private String email;
     private BookOption bookOption;
+
+    public BookOrder(int id, int bookInstanceId, int userOrderId, BookOption bookOption) {
+        this.id = id;
+        this.bookInstanceId = bookInstanceId;
+        this.userOrderId = userOrderId;
+        this.bookOption = bookOption;
+    }
 }
