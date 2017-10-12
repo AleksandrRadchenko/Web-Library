@@ -1,11 +1,8 @@
 package com.epam.wl.dao;
 
 import com.epam.wl.DBHelper;
-import com.epam.wl.entities.BookInstance;
 import com.epam.wl.entities.BookOrder;
-import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.BookOption;
-import com.epam.wl.enums.UserOrderStatus;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,14 +37,12 @@ class BookOrderDAOTest {
 
     @Test
     void createOneRow() throws SQLException {
-        BookInstance bookInstance = new BookInstance(1, 1);
-        UserOrder userOrder = new UserOrder(
-                1, 1, "Иван", "Иванов", "ivan@ivan.ru", "Азбука",
-                "Петр Иванов", 1954, UserOrderStatus.IN_PROGRESS);
+        int bookInstanceId = 1;
+        int userOrderId = 1;
         BookOption bookOption = BookOption.SUBSCRIPTION;
-        bookOrderDAO.create(bookInstance, userOrder, bookOption);
+        bookOrderDAO.create(bookInstanceId, userOrderId, bookOption);
         //Check if created row is in DB for real
-        assertThat(bookOrderDAO.getById(5).get(), is(new BookOrder(5, bookInstance.getId(), userOrder.getId(), bookOption)));
+        assertThat(bookOrderDAO.getById(5).get(), is(new BookOrder(5, bookInstanceId, userOrderId, bookOption)));
     }
 
     @Test
