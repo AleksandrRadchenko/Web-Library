@@ -14,6 +14,7 @@ public interface DBHelper {
         final EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         final EmbeddedDatabase db = builder
                 .setType(EmbeddedDatabaseType.H2)
+                .setScriptEncoding("UTF-8")
                 .addScript("H2DBinit.sql")
                 .addScript("H2DBdata.sql")
                 .build();
