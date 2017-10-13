@@ -9,20 +9,21 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public interface DBHelper {
-
-    static EmbeddedDatabase getEmbeddedDatabase() {
-        final EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        final EmbeddedDatabase db = builder
-                .setType(EmbeddedDatabaseType.H2)
-                .setScriptEncoding("UTF-8")
+    EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+    EmbeddedDatabase db = builder
+            .setType(EmbeddedDatabaseType.H2)
+            .setScriptEncoding("UTF-8")
                 .addScript("H2DBinit.sql")
                 .addScript("H2DBdata.sql")
                 .build();
+
+    static EmbeddedDatabase getEmbeddedDatabase() {
         return db;
     }
 
     /**
      * Prints to stOut result set as a table
+     *
      * @param set ResultSet to be printed
      * @throws SQLException
      */
