@@ -28,10 +28,10 @@ public class BookOrderListHandler implements ResultHandler<List<BookOrder>> {
             String name = resultSet.getString("name");
             String lastName = resultSet.getString("lastname");
             String email = resultSet.getString("email");
-            BookOption option = BookOption.valueOf(resultSet.getString("option"));
+            BookOption bookOption = BookOption.valueOf(resultSet.getString("option"));
 
             BookOrder bookOrder = new BookOrder(id, bookInstanceId, bookId, author, title,
-                    year, userOrderId, userId, status, name, lastName, email, option);
+                    year, userOrderId, userId, status, name, lastName, email, bookOption);
             output.add(bookOrder);
         }
 

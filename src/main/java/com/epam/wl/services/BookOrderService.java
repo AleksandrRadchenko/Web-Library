@@ -10,8 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookOrderService {
+    private static BookOrderService instance;
     private EmbeddedDatabase dataSource = DBHelper.getEmbeddedDatabase();;
-    private BookOrderDAO bookOrderDAO = new BookOrderDAO(dataSource);
+    private BookOrderDAO bookOrderDAO = BookOrderDAO.getInstance(dataSource);
+
+    private BookOrderService(){}
+
+    public static synchronized BookOrderService getInstance(){
+        if (instance == null)
+            instance = new BookOrderService();
+        return instance;
+    }
 
     public List<BookOrder> getAll() {
         List<BookOrder> result = new ArrayList<>();

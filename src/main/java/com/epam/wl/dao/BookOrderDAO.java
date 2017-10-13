@@ -2,7 +2,6 @@ package com.epam.wl.dao;
 
 import com.epam.wl.dao.book_order_handlers.BookOrderListHandler;
 import com.epam.wl.dao.book_order_handlers.BookOrderOneHandler;
-import com.epam.wl.dao.book_order_handlers.PrintlnHandler;
 import com.epam.wl.entities.BookOrder;
 import com.epam.wl.enums.BookOption;
 import com.epam.wl.executor.Executor;
@@ -14,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class BookOrderDAO {
+    private static BookOrderDAO instance;
     private Executor executor;
     private final ResultHandler<Optional<BookOrder>> bookOrderOneHandler = new BookOrderOneHandler();
     private final ResultHandler<List<BookOrder>> bookOrderListHandler = new BookOrderListHandler();
@@ -30,8 +30,13 @@ public class BookOrderDAO {
     private final static String QUERY_UPDATE = "UPDATE book_order SET book_instanceid=?, user_orderid=?, option=?";
     private final static String QUERY_DELETE = "DELETE FROM book_order WHERE id = ?";
 
-    public BookOrderDAO(DataSource dataSource) {
-        executor = new Executor(dataSource);
+    private BookOrderDAO(){}
+
+    public static synchronized BookOrderDAO getInstance(DataSource dataSource) {
+        if (instance == null)
+            instance = new BookOrderDAO();
+        instance.executor = new Executor(dataSource);
+        return instance;
     }
 
     /**
@@ -56,7 +61,7 @@ public class BookOrderDAO {
     }
 
     public List<BookOrder> getByUserId(int id) throws SQLException {
-        return executor.executeQuery(QUERY_GET_BY_USER_ID, new PrintlnHandler(), String.valueOf(id));
+        return executor.executeQuery(QUERY_GET_BY_USER_ID, bookOrderListHandler, String.valueOf(id));
     }
 
     public Optional<BookOrder> getById(final int id) throws SQLException {

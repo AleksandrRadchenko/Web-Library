@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @WebServlet(name = "BookOrderServlet", urlPatterns = "/book_order")
 public class BookOrderServlet extends HttpServlet {
-    private final BookOrderService bookOrderService = new BookOrderService();
+    private final BookOrderService bookOrderService = BookOrderService.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -23,6 +23,6 @@ public class BookOrderServlet extends HttpServlet {
         } else {
             request.setAttribute("bookorders", bookOrderService.getAll());
         }
-        request.getRequestDispatcher("bookOrders.jsp").forward(request, response);
+        request.getRequestDispatcher("BookOrders.jsp").forward(request, response);
     }
 }
