@@ -36,8 +36,11 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok:+'
 
-    compile 'com.h2database:h2:+'
+    compile 'com.h2database:h2:+',
 //                'mysql:mysql-connector-java:6.0.5'
+// https://mvnrepository.com/artifact/org.postgresql/postgresql
+            'org.postgresql:postgresql:42.1.4'
+
 
     testCompile 'org.junit.jupiter:junit-jupiter-api:+',
             'org.hamcrest:java-hamcrest:+'

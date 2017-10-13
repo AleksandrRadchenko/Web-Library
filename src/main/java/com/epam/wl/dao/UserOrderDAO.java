@@ -20,9 +20,14 @@ public class UserOrderDAO {
 
     public static final String UPDATE_NEW = "INSERT INTO user_order (userid, bookid, status) VALUES (?, ?, 'NEW');";
     public static final String UPDATE_STATUS = "UPDATE user_order SET status = ? WHERE id = ?;";
-    public static final String QUERY_ALL = "SELECT user_order.id, user.id, user.name, user.lastname, user.email," +
+    public static final String QUERY_ALL = "SELECT user_order.id, \"user\".id, \"user\".name, \"user\".lastname, \"user\".email," +
             "book.title, book.author, book.year, user_order.status FROM user_order " +
-            "INNER JOIN USER ON USER.id=user_order.userId INNER JOIN book ON book.id=user_order.bookId;";
+            "INNER JOIN \"USER\" ON \"USER\".id=user_order.userId INNER JOIN book ON book.id=user_order.bookId;";
+
+
+    public static final String QUERY_ALL_POST = "SELECT user_order.id, \"user\".id, \"user\".name, \"user\".lastname, \"user\".email,\n" +
+            "book.title, book.author, book.year, user_order.status FROM user_order\n" +
+            "INNER JOIN \"user\" ON \"user\".id=user_order.userId INNER JOIN book ON book.id=user_order.bookId;";
     public static final String QUERY_BY_ID = "SELECT user_order.id, user.id, user.name, user.lastname, user.email, " +
             "book.title, book.author, book.year, user_order.status FROM user_order " +
             "INNER JOIN user ON user.id=user_order.userId INNER JOIN book ON book.id=user_order.bookId WHERE user_order.id=?";
@@ -48,7 +53,7 @@ public class UserOrderDAO {
     }
 
     public List<UserOrder> getAllUserOrders() throws SQLException {
-        return executor.executeQuery(QUERY_ALL, userOrderListHandler);
+        return executor.executeQuery(QUERY_ALL_POST, userOrderListHandler);
     }
 
     public Optional<UserOrder> getUserOrderByID(final int userOrderID) throws SQLException {
