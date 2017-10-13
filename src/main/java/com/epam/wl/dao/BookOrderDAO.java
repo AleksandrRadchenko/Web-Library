@@ -27,7 +27,7 @@ public class BookOrderDAO {
     private final static String QUERY_GET_ALL = "SELECT " + ALL_FIELDS + " FROM " + JOIN_4_TABLES;
     private final static String QUERY_GET_BY_USER_ID = "SELECT " + ALL_FIELDS + " FROM " + JOIN_4_TABLES + " WHERE user.id=?";
     private final static String QUERY_GET_BY_ID = "SELECT " + ALL_FIELDS + " FROM " + JOIN_4_TABLES + " WHERE book_order.id=?";
-    private final static String QUERY_UPDATE = "UPDATE book_order SET book_instanceid=?, user_orderid=?, option=?";
+    private final static String QUERY_UPDATE = "UPDATE book_order SET book_instanceid=?, user_orderid=?, option=? WHERE id=?";
     private final static String QUERY_DELETE = "DELETE FROM book_order WHERE id = ?";
 
     private BookOrderDAO(){}
@@ -79,7 +79,8 @@ public class BookOrderDAO {
         executor.executeUpdate(QUERY_UPDATE,
                 String.valueOf(newBookOrder.getBookInstanceId()),
                 String.valueOf(newBookOrder.getUserOrderId()),
-                String.valueOf(newBookOrder.getBookOption().toString()));
+                String.valueOf(newBookOrder.getBookOption()),
+                String.valueOf(newBookOrder.getId()));
     }
 
     public void deleteById(final int id) throws SQLException {
