@@ -97,10 +97,10 @@ FOREIGN KEY (bookid) REFERENCES book
 ON UPDATE CASCADE ON DELETE CASCADE;
 
 
-INSERT INTO book (author, title, year) VALUES ('Петр Иванов', 'Азбука', 1954);
+INSERT INTO book (author, title, year) VALUES ('РџРµС‚СЂ РРІР°РЅРѕРІ', 'РђР·Р±СѓРєР°', 1954);
 INSERT INTO book (author, title, year) VALUES ('Herbert Schildt', 'Java: A Beginner''s Guide, Sixth Edition', 2014);
 INSERT INTO book (author, title, year) VALUES ('Bruce Eckel', 'Thinking in Java (4th Edition)', 2016);
-INSERT INTO book (author, title, year) VALUES ('Лев Толстой', 'Война и мир', 1978);
+INSERT INTO book (author, title, year) VALUES ('Р›РµРІ РўРѕР»СЃС‚РѕР№', 'Р’РѕР№РЅР° Рё РјРёСЂ', 1978);
 
 INSERT INTO book_instance (bookid) VALUES (1);
 INSERT INTO book_instance (bookid) VALUES (1);
@@ -115,13 +115,13 @@ INSERT INTO book_instance (bookid) VALUES (4);
 INSERT INTO book_instance (bookid) VALUES (3);
 
 INSERT INTO "user" (name, lastname, email, passwordhash, role)
-VALUES ('Иван', 'Иванов', 'ivan@ivan.ru', 'fdfsdcdzc', 'USER');
+VALUES ('РРІР°РЅ', 'РРІР°РЅРѕРІ', 'ivan@ivan.ru', 'fdfsdcdzc', 'USER');
 INSERT INTO "user" (name, lastname, email, passwordhash, role)
-VALUES ('Федор', 'Федоров', 'fedor@ivan.ru', 'fdfsdcdrfdsfzc', 'USER');
+VALUES ('Р¤РµРґРѕСЂ', 'Р¤РµРґРѕСЂРѕРІ', 'fedor@ivan.ru', 'fdfsdcdrfdsfzc', 'USER');
 INSERT INTO "user" (name, lastname, email, passwordhash, role)
-VALUES ('Петр', 'Петров', 'petr@ivan.ru', 'fdfsdcdssdfdzc', 'USER');
+VALUES ('РџРµС‚СЂ', 'РџРµС‚СЂРѕРІ', 'petr@ivan.ru', 'fdfsdcdssdfdzc', 'USER');
 INSERT INTO "user" (name, lastname, email, passwordhash, role)
-VALUES ('Семен', 'Семенов', 'semen@ivan.ru', 'fdfsdcdssdfdzc', 'USER');
+VALUES ('РЎРµРјРµРЅ', 'РЎРµРјРµРЅРѕРІ', 'semen@ivan.ru', 'fdfsdcdssdfdzc', 'USER');
 
 INSERT INTO user_order (bookid, userid, status) VALUES (1, 1, 'IN_PROGRESS');
 INSERT INTO user_order (bookid, userid, status) VALUES (2, 2, 'IN_PROGRESS');
