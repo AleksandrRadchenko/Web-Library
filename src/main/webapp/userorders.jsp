@@ -6,13 +6,15 @@
     <title>User Orders</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
+<body link=#4483e2 vlink=#09607c alink=#f20e56>
 <div class="header">
     <img src="img/logo.jpg" alt="logo">
     <hr>
 </div>
 <div align="center">
-    <h3>User order table</h3>
+    <a href="http://localhost:8080/book_order"><h2>Current book orders>></h2></a>
+    <hr>
+    <h2>Current user orders</h2>
     <table>
         <tr>
             <td><b>
@@ -47,26 +49,25 @@
             </b></td>
             <td></td>
         </tr>
-        <jsp:useBean id="userorders" scope="request" type="java.util.List"/>
-        <c:forEach items="${userorders}" var="userorder">
+        <jsp:useBean id="userOrderMap" scope="request" type="java.util.Map"/>
+        <c:forEach items="${userOrderMap}" var="order">
             <tr>
-                <td>${userorder.id}</td>
-                <td>${userorder.userId}</td>
-                <td>${userorder.userName} ${userorder.userLastname}</td>
-                <td>${userorder.userEmail}</td>
-                <td>${userorder.bookTitle}</td>
-                <td>${userorder.bookAuthor}</td>
-                <td>${userorder.bookYear}</td>
-                <td>${userorder.status}</td>
+                <td>${order.key.id}</td>
+                <td>${order.key.userId}</td>
+                <td>${order.key.userName} ${order.key.userLastname}</td>
+                <td>${order.key.userEmail}</td>
+                <td>${order.key.bookTitle}</td>
+                <td>${order.key.bookAuthor}</td>
+                <td>${order.key.bookYear}</td>
+                <td>${order.key.status}</td>
                 <form action="${pageContext.request.contextPath}/makebookorder" method="GET">
                     <td>
-                        <input type="hidden" value="${userorder.userId}" name="userId">
-                        <div class="select"><select name="exemlarNum">
+                        <input type="hidden" value="${order.key.userId}" name="userId">
+                        <div class="select"><select name="bookInstanceId">
                             <option disabled selected>select exemplar</option>
-                            <option value="1"># 1</option>
-                            <option value="2"># 2</option>
-                            <option value="3"># 3</option>
-                            <option value="4"># 4</option>
+                            <c:forEach items="${order.value}" var="bookInstance">
+                                <option value="${bookInstance}">${bookInstance}</option>
+                            </c:forEach>
                         </select></div>
                     </td>
                     <td>

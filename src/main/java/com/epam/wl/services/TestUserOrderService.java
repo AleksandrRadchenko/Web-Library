@@ -3,13 +3,12 @@ package com.epam.wl.services;
 import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.UserOrderStatus;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 //Instead of DB connection. Just for example
 
 public class TestUserOrderService {
-    public static List<UserOrder> getOrders(){
+    public static List<UserOrder> getOrders() {
         List<UserOrder> list = new ArrayList<>();
         list.add(new UserOrder(
                 1, 1, "Иван", "Иванов", "ivan@ivan.ru", "Азбука",
@@ -28,4 +27,15 @@ public class TestUserOrderService {
                 "Bruce Eckel", 2016, UserOrderStatus.NEW));
         return list;
     }
+
+    public static List<Integer> getFreeBookInstancesForThisBook(int bookID) {
+        Random random = new Random();
+        Set<Integer> set = new TreeSet<>();
+        int bound = random.nextInt(15);
+        for (int i = 0; i < bound; i++) {
+            set.add(random.nextInt(27));
+        }
+        return new ArrayList<>(set);
+    }
 }
+
