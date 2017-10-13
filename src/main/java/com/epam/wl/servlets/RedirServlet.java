@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@javax.servlet.annotation.WebServlet(name = "SignUpServlet", urlPatterns = "/redir")
+@javax.servlet.annotation.WebServlet(name = "RedirServlet", urlPatterns = "/redir")
 public class RedirServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
