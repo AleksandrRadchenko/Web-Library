@@ -64,7 +64,7 @@ class BookOrderDAOTest {
     }
 
     @Test
-    void getBgetByUserIdyId() throws SQLException {
+    void getByUserId() throws SQLException {
         Object expected = entireTable.get(2);
         Object actual = bookOrderDAO.getByUserId(1); // TODO: 12.10.2017 Optional here
 //        assertThat(actual, is(expected));
@@ -82,16 +82,17 @@ class BookOrderDAOTest {
 
     @Test
     void update() throws SQLException {
-        int expectedInt = 1;
-        BookOrder newBookOrder = new BookOrder(3, 9, 2, BookOption.READING_ROOM);
+        BookOrder newBookOrder = new BookOrder(2, 9, 2, BookOption.READING_ROOM);
+        BookOrder anotherExpected = bookOrderDAO.getById(1).get();
         bookOrderDAO.update(newBookOrder);
         BookOrder actual = bookOrderDAO.getById(newBookOrder.getId()).get();
+        BookOrder anotherActual = bookOrderDAO.getById(1).get();
         assertRequiredFields(actual, newBookOrder);
+        assertThat(anotherActual, is(anotherExpected));
     }
 
     @Test
     void deleteById() throws SQLException {
-        int expectedInt = 1;
         int idToDelete = 3;
         bookOrderDAO.deleteById(idToDelete);
         assertThrows(NoSuchElementException.class, () -> bookOrderDAO.getById(idToDelete).get());
