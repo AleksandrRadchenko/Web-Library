@@ -6,6 +6,7 @@ import com.epam.wl.enums.UserRole;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.omg.CORBA.UnknownUserException;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
 import java.sql.SQLException;
@@ -85,5 +86,14 @@ class UserDAOTest {
     void testGetUserByID() throws SQLException {
         User userEntity = new User(2, "Федор", "Федоров", "fedor@ivan.ru", "fdfsdcdrfdsfzc", UserRole.USER);
         assertThat(userEntity, is(userDAO.getUserByID(2).get()));
+    }
+
+    @Test
+    void testIsLibrarian() throws SQLException {
+        boolean isLibrarian = true;
+        String email = "semen@ivan.ru";
+        String password = "fdfsdcdssdfdzc";
+
+        assertThat(isLibrarian, is(userDAO.isLibrarian(email, password)));
     }
 }
