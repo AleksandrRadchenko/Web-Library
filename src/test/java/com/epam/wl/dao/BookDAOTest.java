@@ -94,4 +94,16 @@ public class BookDAOTest {
 
         assertThat(expectedBookInstances, is(bookDAO.getAllBookInstances()));
     }
+
+    @Test
+    void testGetFreeBookInstancesForThisBook() throws SQLException {
+        int bookId = 2;
+        List<Integer> expectedBookInstancesIdList = new ArrayList<>();
+        expectedBookInstancesIdList.add(5);
+        expectedBookInstancesIdList.add(7);
+        expectedBookInstancesIdList.add(8);
+        expectedBookInstancesIdList.add(9);
+
+        assertThat(expectedBookInstancesIdList, is(bookDAO.getFreeBookInstancesForThisBook(bookId)));
+    }
 }
