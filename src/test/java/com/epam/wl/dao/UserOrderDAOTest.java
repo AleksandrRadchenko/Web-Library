@@ -24,7 +24,7 @@ class UserOrderDAOTest {
 
     @BeforeEach
     public void initDatabase() {
-        dataSource = DBHelper.getEmbeddedDatabase();
+        dataSource = DBHelper.getNewEmbeddedDatabase();
         userOrderDAO = new UserOrderDAO(dataSource);
     }
 

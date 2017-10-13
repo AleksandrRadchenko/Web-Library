@@ -21,6 +21,16 @@ public interface DBHelper {
         return db;
     }
 
+    static EmbeddedDatabase getNewEmbeddedDatabase() {
+        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+        return builder
+                .setType(EmbeddedDatabaseType.H2)
+                .setScriptEncoding("UTF-8")
+                .addScript("H2DBinit.sql")
+                .addScript("H2DBdata.sql")
+                .build();
+    }
+
     /**
      * Prints to stOut result set as a table
      *

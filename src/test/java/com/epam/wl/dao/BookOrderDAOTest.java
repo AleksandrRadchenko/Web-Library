@@ -25,7 +25,7 @@ class BookOrderDAOTest {
 
     @BeforeEach
     void setUp() throws SQLException {
-        dataSource = DBHelper.getEmbeddedDatabase();
+        dataSource = DBHelper.getNewEmbeddedDatabase();
         bookOrderDAO = BookOrderDAO.getInstance(dataSource);
         entireTable = new ArrayList<>();
         entireTable.add(new BookOrder(1, 4, 1, BookOption.SUBSCRIPTION));

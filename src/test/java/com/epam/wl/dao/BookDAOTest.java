@@ -7,8 +7,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,7 +24,7 @@ public class BookDAOTest {
      */
     @BeforeEach
     void initDatabase() {
-        dataSource = DBHelper.getEmbeddedDatabase();
+        dataSource = DBHelper.getNewEmbeddedDatabase();
         bookDAO = new BookDAO(dataSource);
     }
 
