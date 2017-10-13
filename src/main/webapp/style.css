@@ -19,14 +19,12 @@ body {
 }
 
 .select{
-	text-align: center;
-	color: #f20e56;
+	text-align: left;
 	border: 0;
 }
 
 .button{
-	text-align: center;
-	color: #f20e56;
+	text-align: left;
 	border: 0;
 }
 

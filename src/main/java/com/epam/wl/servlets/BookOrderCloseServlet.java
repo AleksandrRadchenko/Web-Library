@@ -23,6 +23,5 @@ public class BookOrderCloseServlet extends HttpServlet {
             userOrderService.setUserOrderStatus(Integer.parseInt(request.getParameter("book_orderid")), UserOrderStatus.CLOSED);
         }
         response.sendRedirect("/book_order");
-//        request.getRequestDispatcher("BookOrders.jsp").forward(request, response);
     }
 }

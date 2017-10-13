@@ -22,6 +22,7 @@ public interface DBHelper {
     }
 
     static EmbeddedDatabase getNewEmbeddedDatabase() {
+        db.shutdown();
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         return builder
                 .setType(EmbeddedDatabaseType.H2)

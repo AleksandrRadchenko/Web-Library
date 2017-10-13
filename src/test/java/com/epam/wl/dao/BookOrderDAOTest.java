@@ -32,7 +32,11 @@ class BookOrderDAOTest {
         entireTable.add(new BookOrder(2, 6, 2, BookOption.SUBSCRIPTION));
         entireTable.add(new BookOrder(3, 11, 3, BookOption.READING_ROOM));
         entireTable.add(new BookOrder(4, 10, 4, BookOption.READING_ROOM));
+    }
 
+    @AfterEach
+    void tearDown() throws SQLException {
+        dataSource.shutdown();
     }
 
     @Test
@@ -96,11 +100,6 @@ class BookOrderDAOTest {
         int idToDelete = 3;
         bookOrderDAO.deleteById(idToDelete);
         assertThrows(NoSuchElementException.class, () -> bookOrderDAO.getById(idToDelete).get());
-    }
-
-    @AfterEach
-    void tearDown() throws SQLException {
-        dataSource.shutdown();
     }
 
     private void assertRequiredFields(BookOrder actual, BookOrder expected) {

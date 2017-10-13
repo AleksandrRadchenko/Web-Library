@@ -18,6 +18,7 @@ public class UserOrderService {
         }
         return instance;
     }
+
     public void setUserOrderStatus(int book_orderid, UserOrderStatus closed) {
         DataSource dataSource = DBHelper.getEmbeddedDatabase();
         Executor executor = new Executor(dataSource);
