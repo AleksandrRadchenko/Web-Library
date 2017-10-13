@@ -3,15 +3,15 @@ package com.epam.wl.services;
 import com.epam.wl.DBHelper;
 import com.epam.wl.dao.BookOrderDAO;
 import com.epam.wl.entities.BookOrder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookOrderService {
     private static BookOrderService instance;
-    private EmbeddedDatabase dataSource = DBHelper.getEmbeddedDatabase();;
+    private DataSource dataSource = DBHelper.getEmbeddedDatabase();;
     private BookOrderDAO bookOrderDAO = BookOrderDAO.getInstance(dataSource);
 
     private BookOrderService(){}
