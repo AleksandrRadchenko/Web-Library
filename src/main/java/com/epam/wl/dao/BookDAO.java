@@ -1,9 +1,6 @@
 package com.epam.wl.dao;
 
-import com.epam.wl.dao.book_handlers.BookIdHandler;
-import com.epam.wl.dao.book_handlers.BookInstanceIdHandler;
-import com.epam.wl.dao.book_handlers.BookInstanceListHandler;
-import com.epam.wl.dao.book_handlers.BookListHandler;
+import com.epam.wl.dao.book_handlers.*;
 import com.epam.wl.entities.Book;
 import com.epam.wl.entities.BookInstance;
 import com.epam.wl.executor.Executor;
@@ -11,6 +8,7 @@ import com.epam.wl.executor.ResultHandler;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookDAO {
@@ -19,6 +17,7 @@ public class BookDAO {
     private final ResultHandler<List<BookInstance>> bookInstanceListHandler;
     private final ResultHandler<Integer> bookIdHandler;
     private final ResultHandler<Integer> bookInstanceIdHandler;
+    private final ResultHandler<List<Integer>> bookInstancesIdListHandler;
 
     private static final String GET_ALL_BOOKS_QUERY = "SELECT * FROM book";
     private static final String GET_ALL_BOOKS_INSTANCES_QUERY = "SELECT * FROM book_instance";
@@ -35,6 +34,7 @@ public class BookDAO {
         this.bookInstanceListHandler = new BookInstanceListHandler();
         this.bookIdHandler = new BookIdHandler();
         this.bookInstanceIdHandler = new BookInstanceIdHandler();
+        this.bookInstancesIdListHandler = new BookInstancesIdListHandler();
     }
 
     public List<Book> getAllBooks() throws SQLException {
@@ -50,7 +50,7 @@ public class BookDAO {
     }
 
     public int getFreeBookInstanceId(int bookId) throws SQLException {
-        return executor.executeQuery(GET_FREE_BOOK_INSTANCE_ID_QUERY, bookInstanceIdHandler,  String.valueOf(bookId));
+        return executor.executeQuery(GET_FREE_BOOK_INSTANCE_ID_QUERY, bookInstanceIdHandler, String.valueOf(bookId));
     }
 
     public void addNewBookInstance(String author, String title, int year) throws SQLException {
@@ -73,5 +73,9 @@ public class BookDAO {
 
     private void addNewBook(String author, String title, int year) throws SQLException {
         executor.executeUpdate(ADD_NEW_BOOK_QUERY, author, title, String.valueOf(year));
+    }
+
+    public List<Integer> getFreeBookInstancesForThisBook(int bookId) throws SQLException {
+        return executor.executeQuery(GET_FREE_BOOK_INSTANCE_ID_QUERY, bookInstancesIdListHandler, String.valueOf(bookId));
     }
 }
