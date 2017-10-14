@@ -29,10 +29,10 @@
         <input type='email' name='email' placeholder='Email' required><span></span>
         <br>
         <label>Password</label>
-        <input type='password' name='password' placeholder='Password' required><span></span>
+        <input type='password' name='password' placeholder='Password' minlength="6" required><span></span>
         <br>
         <label>Repeat</label>
-        <input type='password' name='password_repeat' placeholder='Repeat' required><span></span>
+        <input type='password' name='password_repeat' placeholder='Repeat' minlength="6" required><span></span>
         <br>
     </fieldset>
     <fieldset>
