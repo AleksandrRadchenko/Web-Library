@@ -3,10 +3,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Catalog of books</title>
+    <title>User Orders</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
+<body link=#4483e2 vlink=#09607c alink=#f20e56>
+<div class="header">
+    <img src="img/logo.jpg" alt="logo">
+    <hr>
+</div>
 <form>
     <input type="button" value="!Make an order!" onClick='location.href="http://localhost:8080/u"'>
 </form>
@@ -18,13 +22,15 @@
         <td colspan="1">
             <input type="submit">
         </td>
+        <hr>
     </form>
 
     <tr>
-        <td>id </td>
-        <td>author</td>
-        <td>title</td>
-        <td>year</td>
+        <td>Book ID </td>
+        <td>Author</td>
+        <td>Title</td>
+        <td>Year</td>
+        <td></td>
     </tr>
     <jsp:useBean id="books" scope="request" type="java.util.List"/>
     <c:forEach items="${books}" var="book">

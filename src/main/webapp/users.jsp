@@ -3,10 +3,15 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>User</title>
+    <title>User Profile</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
-<h1>Welcome to your table, User</h1>
+<body link=#4483e2 vlink=#09607c alink=#f20e56>
+<div class="header">
+    <img src="img/logo.jpg" alt="logo">
+    <hr>
+</div>
+<h1>Welcome to your profile, User</h1>
 <table border="1">
     <tr>
         <td>id </td>
@@ -26,6 +31,7 @@
         </tr>
     </c:forEach>
 </table>
+<hr>
 <form action="${pageContext.request.contextPath}/useredit" method="POST">
     <tr>
         <td colspan="1">
@@ -41,13 +47,23 @@
             <input name="passwordhash" type="text">
         </td>
         <td colspan="1">
-            <input name="userrole" type="text">
-        </td>
-        <td colspan="1">
             <input type="submit">
         </td>
     </tr>
 </form>
-<a href="http://localhost:8080/b">Welcome to out catalog of books!</a><br>
+<hr>
+<a href="http://localhost:8080/catalog">Welcome to out catalog of books!</a><br>
+<table border="1">
+    <jsp:useBean id="books" scope="request" type="java.util.List"/>
+    <c:forEach items="${books}" var="book">
+        <tr>
+            <td>${book.id}</td>
+            <td>${book.book.author}</td>
+            <td> ${book.book.title}</td>
+            <td> ${book.book.year}</td>
+            <td> ${book.status}</td>
+        </tr>
+    </c:forEach>
+</table>
 </body>
 </html>

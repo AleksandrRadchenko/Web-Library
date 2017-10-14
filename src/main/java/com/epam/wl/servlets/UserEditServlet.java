@@ -21,10 +21,10 @@ public class UserEditServlet extends HttpServlet {
         String lastName = request.getParameter("lastname");
         String email = request.getParameter("email");
         String passwordHash = request.getParameter("passwordhash");
-        UserRole role = UserRole.valueOf(request.getParameter("userrole"));
+        //UserRole role = UserRole.valueOf(request.getParameter("userrole"));
 
-        TestUserService.editUser(name, lastName, email, passwordHash, role);
-        response.sendRedirect("/u");
+        TestUserService.editUser(name, lastName, email, passwordHash);//, role
+        response.sendRedirect("/userprofile");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

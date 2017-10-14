@@ -2,6 +2,7 @@ package com.epam.wl.services;
 
 import com.epam.wl.dao.UserDAO;
 import com.epam.wl.dao.UserOrderDAO;
+import com.epam.wl.entities.Book;
 import com.epam.wl.entities.User;
 import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.UserRole;
@@ -39,13 +40,13 @@ public class TestUserService {
         return users;
     }
 
-    public static void editUser(String name, String lastName, String email, String passwordHash, UserRole userRole) {
+    public static void editUser(String name, String lastName, String email, String passwordHash) {//, UserRole userRole
         Optional<User> user = Optional.of(users.get(0));
         user.get().setName(name);
         user.get().setLastname(lastName);
         user.get().setEmail(email);
         user.get().setPasswordHash(passwordHash);
-        user.get().setRole(userRole);
+        user.get().setRole(UserRole.USER);//users.get(0).getRole()
         if (user != null) {
             users.clear();
             users.add(0, user.get());
@@ -53,21 +54,23 @@ public class TestUserService {
     }
 
     public static List<UserOrder> getUserOrderBooks() {
-        List<UserOrder> allBooksList = new ArrayList<>(5);//very bad!
-        List<UserOrder> userBooksList = null;
+        List<UserOrder> booksList = new ArrayList<>(5);//very bad!
         try {
-            allBooksList = userOrderDAO.getUserOrderByStatus(IN_PROGRESS);
+            booksList = userOrderDAO.getUserOrderByUserId(users.get(0).getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (allBooksList.size() > 0) {
-            for (int i = 0; i < allBooksList.size(); i++) {
-                if (allBooksList.get(i).getUserId() == users.get(0).getId()) {
-                    userBooksList.add(allBooksList.get(i));
-                }
-            }
-        }
-        return userBooksList;
+        booksList.add(new UserOrder(1 , new User(1, "Ivan", "Sid",
+                "dede", "spsps", UserRole.USER),
+                new Book(1, "T", "a", 1899),
+                IN_PROGRESS ));
+        return booksList;
+    }
+//                <td>${book.author}</td>
+//            <td> ${book.title}</td>
+//            <td> ${book.year}</td>
+
+
         /*
         <table border="1">
     <jsp:useBean id="books" scope="request" type="java.util.List"/>
@@ -81,5 +84,5 @@ public class TestUserService {
     </c:forEach>
 </table>
          */
-    }
+
 }

@@ -23,7 +23,7 @@ public class MakeNewBookOrderServlet extends HttpServlet {
         BookOption bookOption = BookOption.valueOf(request.getParameter("bookOption"));
 
         BookOrderService bookOrderService = BookOrderService.getInstance();
-        bookOrderService.create(bookInstanceId, userOrderId, bookOption);
+        //bookOrderService.create(bookInstanceId, userOrderId, bookOption);
 
         UserOrderService userOrderService = UserOrderService.getInstance();
         userOrderService.setUserOrderStatus(userOrderId, UserOrderStatus.IN_PROGRESS);

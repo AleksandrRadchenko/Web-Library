@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet(name = "BookServlet", urlPatterns = "/b")
+@WebServlet(name = "BookServlet", urlPatterns = "/catalog")
 public class BookServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
@@ -21,5 +21,6 @@ public class BookServlet extends HttpServlet {
         request.setAttribute("books", TestBookService.getBooks());//bookList
         request.getRequestDispatcher("catalog.jsp").forward(request, response);
         //HttpSession session = request.getSession(true);
+        //
     }
 }

@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "UserServlet", urlPatterns = "/u")
+@WebServlet(name = "UserServlet", urlPatterns = "/userprofile")
 public class UserServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("users", TestUserService.getUser());
+        request.setAttribute("books", TestUserService.getUserOrderBooks());
         request.getRequestDispatcher("users.jsp").forward(request, response);
     }
 }
