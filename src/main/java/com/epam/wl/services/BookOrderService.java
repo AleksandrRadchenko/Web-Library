@@ -4,6 +4,7 @@ import com.epam.wl.DBHelper;
 import com.epam.wl.dao.BookOrderDAO;
 import com.epam.wl.entities.BookOrder;
 import com.epam.wl.entities.User;
+import com.epam.wl.enums.BookOption;
 import com.epam.wl.enums.UserRole;
 
 import javax.sql.DataSource;
@@ -24,6 +25,15 @@ public class BookOrderService {
         if (instance == null)
             instance = new BookOrderService();
         return instance;
+    }
+
+
+    public void create(int bookInstanceId, int userOrderId, BookOption bookOption) {
+        try {
+            bookOrderDAO.create(bookInstanceId, userOrderId, bookOption);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<BookOrder> getAll() {
