@@ -1,9 +1,6 @@
 package com.epam.wl.servlets;
 
-import com.epam.wl.dao.UserOrderDAO;
-import com.epam.wl.entities.User;
 import com.epam.wl.entities.UserOrder;
-import com.epam.wl.services.TestUserOrderService;
 import com.epam.wl.services.UserOrderService;
 
 import javax.servlet.ServletException;
@@ -24,7 +21,6 @@ public class UserOrderServlet extends HttpServlet {
 
         UserOrderService service = UserOrderService.getInstance();
         List<UserOrder> userOrderList = service.getNewUserOrders();
-
         Map<UserOrder, List<Integer>> userOrderListMap = service.getUserOrderAndFreeBookInstanceMap(userOrderList);
 
         request.setAttribute("userOrderMap", userOrderListMap);

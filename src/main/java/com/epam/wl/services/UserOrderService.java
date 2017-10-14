@@ -5,7 +5,6 @@ import com.epam.wl.dao.UserOrderDAO;
 import com.epam.wl.db.JdbcConnector;
 import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.UserOrderStatus;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -14,7 +13,6 @@ import java.util.*;
 public class UserOrderService {
 
     private static UserOrderService instance;
-//    private static DataSource dataSource = MockDBHelper.getEmbeddedDatabase();
     private static DataSource dataSource = JdbcConnector.getDataSource();
 
     private UserOrderDAO userOrderDAO;
@@ -42,18 +40,18 @@ public class UserOrderService {
         return resultList;
     }
 
-    public List<Integer> getFreeBookInstancesForThisBook(int bookId) {
-        //TODO Remove this awful mock
-        return TestUserOrderService.getFreeBookInstancesForThisBook(bookId);
+    public List<Integer> getFreeBookInstancesForThisBook(final int bookId) {
+        //TODO
+        return null;
     }
 
-    public Map<UserOrder, List<Integer>> getUserOrderAndFreeBookInstanceMap(List<UserOrder> userOrderList) {
+    public Map<UserOrder, List<Integer>> getUserOrderAndFreeBookInstanceMap(final List<UserOrder> userOrderList) {
         Map<UserOrder, List<Integer>> resultMap = new TreeMap<>(Comparator.comparingInt(UserOrder::getId));
         userOrderList.forEach(userOrder -> resultMap.put(userOrder, getFreeBookInstancesForThisBook(userOrder.getId())));
         return resultMap;
     }
 
-    public void setUserOrderStatus(int userOrderId, UserOrderStatus newStatus) {
+    public void setUserOrderStatus(final int userOrderId, final UserOrderStatus newStatus) {
         //TODO
     }
 }

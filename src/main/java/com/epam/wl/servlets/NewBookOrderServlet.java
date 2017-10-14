@@ -14,9 +14,5 @@ public class NewBookOrderServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getRequestDispatcher("bookOption"));
-        System.out.println(request.getRequestDispatcher("exemlarNum"));
-//        request.setAttribute("userorders", TestUserOrderService.getOrders());
-//        request.getRequestDispatcher("userorders.jsp").forward(request, response);
     }
 }
