@@ -90,10 +90,17 @@ class UserDAOTest {
 
     @Test
     void testIsLibrarian() throws SQLException {
-        boolean isLibrarian = true;
-        String email = "semen@ivan.ru";
-        String password = "fdfsdcdssdfdzc";
+        final boolean isLibrarian = true;
+        final String email = "semen@ivan.ru";
 
-        assertThat(isLibrarian, is(userDAO.isLibrarian(email, password)));
+        assertThat(isLibrarian, is(userDAO.isLibrarian(email)));
+    }
+
+    @Test
+    void testGetUserByEmail() throws SQLException {
+        final String email = "fedor@ivan.ru";
+        final User userEntity = new User(2, "Федор", "Федоров", "fedor@ivan.ru", "fdfsdcdrfdsfzc", UserRole.USER);
+
+        assertThat(userEntity, is(userDAO.getUserByEmail(email).get()));
     }
 }

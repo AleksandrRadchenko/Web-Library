@@ -33,7 +33,7 @@ public class UserDAO {
             "SELECT * FROM user WHERE email=? AND passwordhash=?";
     private static final String GET_USER_SCRIPT_By_NAME_LASTRNAME_SCRIPT =
             "SELECT * FROM user WHERE name=? AND lastname=?";
-    private static final String IS_LIBRARIAN_QUERY = "SELECT * FROM user WHERE email=? AND passwordhash=?";
+    private static final String GET_USER_BY_EMAIL_QUERY = "SELECT * FROM user WHERE email=?";
 
 
     public UserDAO(DataSource dataSource) {
@@ -71,8 +71,12 @@ public class UserDAO {
         return executor.executeQuery(GET_USER_SCRIPT_By_NAME_LASTRNAME_SCRIPT, userOneHandler, name, lastName);
     }
 
-    public boolean isLibrarian(String email, String password) throws SQLException {
-        return executor.executeQuery(IS_LIBRARIAN_QUERY, userIsLibrarianHandler, email, password);
+    public boolean isLibrarian(String email) throws SQLException {
+        return executor.executeQuery(GET_USER_BY_EMAIL_QUERY, userIsLibrarianHandler, email);
+    }
+
+    public Optional<User> getUserByEmail(String email) throws SQLException {
+        return executor.executeQuery(GET_USER_BY_EMAIL_QUERY, userOneHandler, email);
     }
 }
 
