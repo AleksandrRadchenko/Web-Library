@@ -19,7 +19,16 @@ public class TestLoginService {
         return "user_from_login.jsp";
     }
 
-    public static String addNewUser(String name, String lastname, String email, String passwordHash, UserRole userRole) {
+    public static String addNewUser(String name, String lastname, String email, String passwordHash, UserRole userRole,
+                                    String password, String passwordRepeat, String captcha) {
+        if (!password.equals(passwordRepeat)) {
+            return "passwords_error.jsp";
+        }
+
+        if (!"W68HP".equals(captcha)) {
+            return "captcha_error.jsp";
+        }
+
         Optional<User> user = null;
 
         try {
