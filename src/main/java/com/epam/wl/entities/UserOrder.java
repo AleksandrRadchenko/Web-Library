@@ -8,12 +8,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserOrder {
     private int id;
-    private int userId;
-    private String userName;
-    private String userLastname;
-    private String userEmail;
-    private String bookTitle;
-    private String bookAuthor;
-    private int bookYear;
+    private User user;
+    private Book book;
     private UserOrderStatus status;
 }

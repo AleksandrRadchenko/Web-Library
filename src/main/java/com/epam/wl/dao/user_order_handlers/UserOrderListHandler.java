@@ -1,7 +1,10 @@
 package com.epam.wl.dao.user_order_handlers;
 
+import com.epam.wl.entities.Book;
+import com.epam.wl.entities.User;
 import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.UserOrderStatus;
+import com.epam.wl.enums.UserRole;
 import com.epam.wl.executor.ResultHandler;
 
 import java.sql.ResultSet;
@@ -19,11 +22,14 @@ public class UserOrderListHandler implements ResultHandler<List<UserOrder>> {
             String userName = resultSet.getString("user_name");
             String userLastname = resultSet.getString("user_lastname");
             String userEmail = resultSet.getString("user_email");
+            int bookId = resultSet.getInt("book_id");
             String bookTitle = resultSet.getString("title");
             String bookAuthor = resultSet.getString("author");
             int bookYear = resultSet.getInt("year");
             UserOrderStatus status = UserOrderStatus.valueOf(resultSet.getString("status"));
-            resultUserOrderList.add(new UserOrder(userOrderID, userID, userName, userLastname, userEmail, bookTitle, bookAuthor, bookYear, status));
+            User user = new User(userID, userName, userLastname, userEmail, "", UserRole.USER);
+            Book book = new Book(bookId, bookTitle, bookAuthor, bookYear);
+            resultUserOrderList.add(new UserOrder(userOrderID, user, book, status));
         }
         return resultUserOrderList;
     }
