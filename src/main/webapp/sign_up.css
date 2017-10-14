@@ -66,3 +66,19 @@ form input:invalid + span {
 .option input {
     margin: 3px 0 0 -30px;
 }
+
+.sumsum {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #E3E3E3;
+    border-radius: 3px;
+}
+
+.sumsum input {
+    padding: 2px 15px;
+    margin-left: 95px;
+    border-radius: 15px;
+    border: 2px solid #5F9EA0;
+    background: linear-gradient(#20B2AA, #008B8B);
+    color: white;
+}

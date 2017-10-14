@@ -3,18 +3,30 @@
 <head>
     <title>Login</title>
 </head>
+<style>
+    <%@include file='sign_up.css' %>
+</style>
+
 <body>
 
 <form action="/login" method="post">
-    Please enter your email:
-    <input type="text" name="email"/><br>
-    Please enter your password:
-    <input type="text" name="password"/><br>
-    <input type="submit" value="Sign in">
+    <fieldset>
+        <label>E-mail</label>
+        <input type="email" name="email" required/><span></span>
+        <br>
+        <label>Password</label>
+        <input type="text" name="password" required/><span></span>
+        <br>
+        <div class="sumsum">
+            <input type="submit" value="Sign in">
+        </div>
+    </fieldset>
 </form>
 
 <form action="/redir" method="post">
-    <input type="submit" value="Sign up">
+    <div class="sum">
+        <input type="submit" value="Sign up">
+    </div>
 </form>
 
 </body>

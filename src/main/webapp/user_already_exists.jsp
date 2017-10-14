@@ -4,6 +4,6 @@
     <title>Title</title>
 </head>
 <body>
-User with this name and password already exists
+User with this e-mail already exists
 </body>
 </html>
