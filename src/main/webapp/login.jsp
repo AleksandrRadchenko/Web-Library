@@ -15,7 +15,7 @@
         <input type="email" name="email" required/><span></span>
         <br>
         <label>Password</label>
-        <input type="text" name="password" required/><span></span>
+        <input type="password" name="password" required/><span></span>
         <br>
         <div class="sumsum">
             <input type="submit" value="Sign in">
