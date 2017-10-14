@@ -1,13 +1,5 @@
-CREATE SEQUENCE user_id_seq;
-
-CREATE SEQUENCE order_id_seq;
-
-CREATE SEQUENCE book_id_seq;
-
-CREATE SEQUENCE book_order_id_seq;
-
-CREATE SEQUENCE edition_id_seq;
-
+DROP SCHEMA IF EXISTS public CASCADE;
+CREATE SCHEMA public;
 
 CREATE TABLE "user"
 (
