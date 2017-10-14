@@ -5,7 +5,6 @@ import com.epam.wl.dao.UserOrderDAO;
 import com.epam.wl.db.JdbcConnector;
 import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.UserOrderStatus;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -14,7 +13,6 @@ import java.util.*;
 public class UserOrderService {
 
     private static UserOrderService instance;
-//    private static DataSource dataSource = MockDBHelper.getEmbeddedDatabase();
     private static DataSource dataSource = JdbcConnector.getDataSource();
 
     private UserOrderDAO userOrderDAO;
@@ -35,25 +33,42 @@ public class UserOrderService {
     public List<UserOrder> getNewUserOrders() {
         List<UserOrder> resultList = new ArrayList<>();
         try {
-            resultList = userOrderDAO.getAllUserOrders();
+            resultList = userOrderDAO.getUserOrderByStatus(UserOrderStatus.NEW);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return resultList;
     }
 
-    public List<Integer> getFreeBookInstancesForThisBook(int bookId) {
-        //TODO Remove this awful mock
-        return TestUserOrderService.getFreeBookInstancesForThisBook(bookId);
+    private List<Integer> getFreeBookInstancesForThisBook(int bookId) {
+        List<Integer> resultList = new ArrayList<>();
+        try {
+            resultList = bookDAO.getFreeBookInstancesForThisBook(bookId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultList;
     }
 
     public Map<UserOrder, List<Integer>> getUserOrderAndFreeBookInstanceMap(List<UserOrder> userOrderList) {
         Map<UserOrder, List<Integer>> resultMap = new TreeMap<>(Comparator.comparingInt(UserOrder::getId));
-        userOrderList.forEach(userOrder -> resultMap.put(userOrder, getFreeBookInstancesForThisBook(userOrder.getId())));
+        userOrderList.forEach(userOrder -> resultMap.put(userOrder, getFreeBookInstancesForThisBook(userOrder.getBook().getId())));
         return resultMap;
     }
 
     public void setUserOrderStatus(int userOrderId, UserOrderStatus newStatus) {
-        //TODO
+        try {
+            userOrderDAO.setUserOrderStatus(userOrderId, newStatus);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createNewUserOrder(final int bookID, final int userID) {
+        try {
+            userOrderDAO.createNewUserOrder(bookID, userID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
