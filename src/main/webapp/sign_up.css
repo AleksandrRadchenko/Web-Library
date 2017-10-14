@@ -46,12 +46,14 @@ form input:invalid + span {
     vertical-align: middle;
     margin-left: -3px;
 }
+
 .sum {
     margin-top: 10px;
     padding: 10px;
     background-color: #E3E3E3;
     border-radius: 3px;
 }
+
 .sum input {
     padding: 2px 15px;
     margin-left: 95px;
@@ -59,4 +61,8 @@ form input:invalid + span {
     border: 2px solid #008F00;
     background: linear-gradient(#00E000, #008F00);
     color: white;
+}
+
+.option input {
+    margin: 3px 0 0 -30px;
 }

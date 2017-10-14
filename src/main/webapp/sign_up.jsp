@@ -17,13 +17,12 @@
         <input type='text' name='last_name' placeholder='Last name' required><span></span>
         <br>
         <label>Role</label>
-        <!--<select name="role">
-        <option value="user">User</option>
-        <option value="librarian">Librarian</option>
-        </select><br>-->
-        <input type="radio" name="role" value="user" checked>User<br><span></span>
-        <input type="radio" name="role" value="librarian">Librarian<br><span></span>
-        <br>
+        <div class="option">
+        <input type="radio" name="role" value="user" checked>User<br>
+        </div>
+        <div class="option">
+        <input type="radio" name="role" value="librarian">Librarian
+        </div>
     </fieldset>
     <fieldset>
         <label>E-mail</label>
