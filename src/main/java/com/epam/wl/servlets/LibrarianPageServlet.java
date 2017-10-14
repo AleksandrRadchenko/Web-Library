@@ -1,9 +1,6 @@
 package com.epam.wl.servlets;
 
-import com.epam.wl.dao.UserOrderDAO;
-import com.epam.wl.entities.User;
 import com.epam.wl.entities.UserOrder;
-import com.epam.wl.services.TestUserOrderService;
 import com.epam.wl.services.UserOrderService;
 
 import javax.servlet.ServletException;
@@ -15,19 +12,17 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "UserOrderServlet", urlPatterns = "/uo")
-public class UserOrderServlet extends HttpServlet {
+@WebServlet(name = "LibrarianPageServlet", urlPatterns = "/librarian")
+public class LibrarianPageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         UserOrderService service = UserOrderService.getInstance();
         List<UserOrder> userOrderList = service.getNewUserOrders();
-
         Map<UserOrder, List<Integer>> userOrderListMap = service.getUserOrderAndFreeBookInstanceMap(userOrderList);
 
         request.setAttribute("userOrderMap", userOrderListMap);
-        request.getRequestDispatcher("userorders.jsp").forward(request, response);
+        request.getRequestDispatcher("librarian.jsp").forward(request, response);
     }
 }

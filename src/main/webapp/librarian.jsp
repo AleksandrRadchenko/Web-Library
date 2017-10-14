@@ -60,9 +60,9 @@
                 <td>${order.key.bookAuthor}</td>
                 <td>${order.key.bookYear}</td>
                 <td>${order.key.status}</td>
-                <form action="${pageContext.request.contextPath}/makebookorder" method="GET">
+                <form action="${pageContext.request.contextPath}/makeBookOrder" method="GET">
                     <td>
-                        <input type="hidden" value="${order.key.userId}" name="userId">
+                        <input type="hidden" value="${order.key.id}" name="userOrderId">
                         <div class="select"><select name="bookInstanceId">
                             <option disabled selected>select exemplar</option>
                             <c:forEach items="${order.value}" var="bookInstance">
@@ -72,8 +72,8 @@
                     </td>
                     <td>
                         <div class="select"><select name="bookOption">
-                            <option value="reading">Reading room</option>
-                            <option value="subscription">Subcription</option>
+                            <option value="READING_ROOM">Reading room</option>
+                            <option value="SUBSCRIPTION">Subcription</option>
                         </select></div>
                     </td>
                     <td>

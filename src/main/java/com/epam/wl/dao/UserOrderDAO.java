@@ -24,15 +24,23 @@ public class UserOrderDAO {
             "book.title, book.author, book.year, user_order.status FROM user_order " +
             "INNER JOIN \"USER\" ON \"USER\".id=user_order.userId INNER JOIN book ON book.id=user_order.bookId;";
 
-    public static final String QUERY_ALL_POST = "SELECT user_order.id AS user_order_id, \"user\".id AS user_id, \"user\".name AS user_name, \"user\".lastname AS user_lastname, \"user\".email AS user_email, " +
+    public static final String QUERY_ALL_POST = "SELECT user_order.id AS user_order_id, \"user\".id AS user_id, \"user\".name AS user_name, " +
+            "\"user\".lastname AS user_lastname, \"user\".email AS user_email, " +
             "book.title AS title, book.author AS author, book.year AS year, user_order.status AS status FROM user_order\n" +
             "INNER JOIN \"user\" ON \"user\".id=user_order.userId INNER JOIN book ON book.id=user_order.bookId;";
+
     public static final String QUERY_BY_ID = "SELECT user_order.id, user.id, user.name, user.lastname, user.email, " +
             "book.title, book.author, book.year, user_order.status FROM user_order " +
             "INNER JOIN user ON user.id=user_order.userId INNER JOIN book ON book.id=user_order.bookId WHERE user_order.id=?";
     public static final String QUERY_BY_STATUS = "SELECT user_order.id, user.id, user.name, user.lastname, user.email," +
             "book.title, book.author, book.year, user_order.status FROM user_order " +
             "INNER JOIN user ON user.id=user_order.userId INNER JOIN book ON book.id=user_order.bookId WHERE status = ?";
+
+    public static final String QUERY_BY_STATUS_POST = "SELECT user_order.id AS user_order_id, \"user\".id AS user_id, " +
+            "\"user\".name AS user_name, \"user\".lastname AS user_lastname, \"user\".email AS user_email, book.title AS title, " +
+            "book.author AS author, book.year AS year, user_order.status AS status FROM user_order INNER JOIN \"user\" ON \"user\".id=user_order.userId " +
+            "INNER JOIN book ON book.id=user_order.bookId  WHERE status = ?;";
+
     public static final String QUERY_BY_USER_ID = "SELECT user_order.id, user.id, user.name, user.lastname, user.email," +
             "book.title, book.author, book.year, user_order.status FROM user_order " +
             "INNER JOIN user ON user.id=user_order.userId INNER JOIN book ON book.id=user_order.bookId WHERE user.id = ?";
@@ -60,7 +68,7 @@ public class UserOrderDAO {
     }
 
     public List<UserOrder> getUserOrderByStatus(final UserOrderStatus status) throws SQLException {
-        return executor.executeQuery(QUERY_BY_STATUS, userOrderListHandler, String.valueOf(status));
+        return executor.executeQuery(QUERY_BY_STATUS_POST, userOrderListHandler, String.valueOf(status));
     }
 
     public List<UserOrder> getUserOrderByUserId(final int userId) throws SQLException {
