@@ -40,7 +40,7 @@ public class UserOrderService {
         return resultList;
     }
 
-    public List<Integer> getFreeBookInstancesForThisBook(int bookId) {
+    private List<Integer> getFreeBookInstancesForThisBook(int bookId) {
         List<Integer> resultList = new ArrayList<>();
         try {
             resultList = bookDAO.getFreeBookInstancesForThisBook(bookId);
@@ -59,6 +59,14 @@ public class UserOrderService {
     public void setUserOrderStatus(int userOrderId, UserOrderStatus newStatus) {
         try {
             userOrderDAO.setUserOrderStatus(userOrderId, newStatus);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createNewUserOrder(final int bookID, final int userID) {
+        try {
+            userOrderDAO.createNewUserOrder(bookID, userID);
         } catch (SQLException e) {
             e.printStackTrace();
         }
