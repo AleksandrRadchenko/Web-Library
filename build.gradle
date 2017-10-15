@@ -29,8 +29,8 @@ dependencies {
     //'org.apache.logging.log4j:log4j-api:+',
     //'org.apache.logging.log4j:log4j-core:+',
 
-    compile 'javax.servlet:jstl:1.2'
-    runtime 'org.postgresql:postgresql:+'
+    compile 'javax.servlet:jstl:1.2',
+    'org.postgresql:postgresql:+'
 
     // Tomcat include javax.servlet lib
     providedCompile 'javax.servlet:javax.servlet-api:+'

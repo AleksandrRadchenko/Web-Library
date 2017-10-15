@@ -12,16 +12,22 @@
     <hr>
 </div>
 <form>
-    <input type="button" value="!Make an order!" onClick='location.href="http://localhost:8080/u"'>
+    <input type="button" value="!Make an order!" onClick='location.href="http://localhost:8080/userprofile"'>
 </form>
 <table border="1">
     <form action="${pageContext.request.contextPath}/book_order" method="POST">
         <td colspan="1">
-            <input name="userrole" type="text">
+            <input name="userid" type="text">
+        </td>
+        <td colspan="1">
+            <input name="bookid" type="text">
         </td>
         <td colspan="1">
             <input type="submit">
         </td>
+        <td></td>
+        <td></td>
+        <td></td>
         <hr>
     </form>
 

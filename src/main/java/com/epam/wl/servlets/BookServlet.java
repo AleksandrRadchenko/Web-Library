@@ -18,7 +18,8 @@ public class BookServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        request.setAttribute("books", TestBookService.getBooks());//bookList
+        TestBookService service = TestBookService.getInstance();
+        request.setAttribute("books", service.getBooks());//bookList TestBookService.getBooks(
         request.getRequestDispatcher("catalog.jsp").forward(request, response);
         //HttpSession session = request.getSession(true);
         //

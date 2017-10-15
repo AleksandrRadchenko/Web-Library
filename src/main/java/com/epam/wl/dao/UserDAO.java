@@ -25,12 +25,18 @@ public class UserDAO {
             "DELETE FROM user WHERE id=?";
     private static final String GETALL_USERS_SCRIPT =
             "SELECT * FROM user";
-    private static final String GET_USER_BYID_SCRIPT =
-            "SELECT * FROM user WHERE id=?";
+    private static final String GET_USER_BYID_SCRIPT = "SELECT * FROM \"user\" WHERE id=?";
+//            "SELECT user.id, user.name, user.lastname, " +
+//            "user.email, user.passwordhash, user.role FROM user WHERE user.id = ?";
+    //"SELECT * FROM \"user\" WHERE id=?";
+//            "SELECT \"user\".id, \"user\".name, \"user\".lastname, \"user\".email, \"user\".passwordhash, \"user\".role" +
+//                    "FROM \"user\" WHERE \"user\".id = ?";//"SELECT * FROM user WHERE id=?";
     private static final String GET_USER_BY_EMAIL_PASS_SCRIPT =
             "SELECT * FROM user WHERE email=? AND passwordhash=?";
     private static final String GET_USER_SCRIPT_By_NAME_LASTRNAME_SCRIPT =
             "SELECT * FROM user WHERE name=? AND lastname=?";
+
+//    "SELECT user.name, user.lastname, user.email, user.passwordhash, user.role WHERE user.id = ?";
 
 
     public UserDAO(DataSource dataSource) {

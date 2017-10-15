@@ -15,8 +15,9 @@ import java.sql.SQLException;
 public class UserServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("users", TestUserService.getUser());
-        request.setAttribute("books", TestUserService.getUserOrderBooks());
+        TestUserService service = TestUserService.getInstance();
+        request.setAttribute("users", service.getUser());//request.setAttribute("users", TestUserService.getUser());
+        request.setAttribute("books", service.getUserOrderBooks());
         request.getRequestDispatcher("users.jsp").forward(request, response);
     }
 }
