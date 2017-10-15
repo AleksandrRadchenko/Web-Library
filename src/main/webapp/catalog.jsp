@@ -11,11 +11,15 @@
     <img src="img/logo.jpg" alt="logo">
     <hr>
 </div>
-<form>
-    <input type="button" value="!Make an order!" onClick='location.href="http://localhost:8080/userprofile"'>
-</form>
+<div align="center">
 <table border="1">
-    <form action="${pageContext.request.contextPath}/book_order" method="POST">
+    <form action="${pageContext.request.contextPath}/userorderfromcatalog" method="GET">
+        <tr>
+            <td><b>User ID </b></td>
+            <td><b>Book ID</b></td>
+            <td><b></b></td>
+            <td><b></b></td>
+        </tr>
         <td colspan="1">
             <input name="userid" type="text">
         </td>
@@ -26,17 +30,13 @@
             <input type="submit">
         </td>
         <td></td>
-        <td></td>
-        <td></td>
         <hr>
     </form>
-
     <tr>
-        <td>Book ID </td>
-        <td>Author</td>
-        <td>Title</td>
-        <td>Year</td>
-        <td></td>
+        <td><b>Book ID </b></td>
+        <td><b>Author</b></td>
+        <td><b>Title</b></td>
+        <td><b>Year</b></td>
     </tr>
     <jsp:useBean id="books" scope="request" type="java.util.List"/>
     <c:forEach items="${books}" var="book">
@@ -45,13 +45,9 @@
             <td>${book.author}</td>
             <td>${book.title}</td>
             <td>${book.year}</td>
-            <td>
-                <form>
-                <input type="button" value="!Make an order!" onClick='location.href="http://localhost:8080/u"'>
-                </form>
-            </td>
         </tr>
     </c:forEach>
 </table>
+</div>
 </body>
 </html>

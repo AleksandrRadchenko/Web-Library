@@ -23,9 +23,9 @@ public class UserOrderListHandler implements ResultHandler<List<UserOrder>> {
             String userLastname = resultSet.getString("user_lastname");
             String userEmail = resultSet.getString("user_email");
             int bookId = resultSet.getInt("book_id");
-            String bookTitle = resultSet.getString("title");
-            String bookAuthor = resultSet.getString("author");
-            int bookYear = resultSet.getInt("year");
+            String bookTitle = resultSet.getString("book_title");//без book_
+            String bookAuthor = resultSet.getString("book_author");//без book_
+            int bookYear = resultSet.getInt("book_year");//без book_
             UserOrderStatus status = UserOrderStatus.valueOf(resultSet.getString("status"));
             User user = new User(userID, userName, userLastname, userEmail, "", UserRole.USER);
             Book book = new Book(bookId, bookTitle, bookAuthor, bookYear);

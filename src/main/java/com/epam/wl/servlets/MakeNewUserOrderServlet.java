@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "MakeNewUserOrderServlet")
+@WebServlet(name = "MakeNewUserOrderServlet", urlPatterns = "/userorderfromcatalog")
 public class MakeNewUserOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userId = Integer.valueOf(request.getParameter("userId"));
-        int bookId = Integer.valueOf(request.getParameter("bookId"));
+        int userId = Integer.valueOf(request.getParameter("userid"));
+        int bookId = Integer.valueOf(request.getParameter("bookid"));
 
         UserOrderService userOrderService = UserOrderService.getInstance();
         userOrderService.createNewUserOrder(bookId, userId);
 
-        request.getRequestDispatcher("/catalog").forward(request, response);
+        request.getRequestDispatcher("/userprofile").forward(request, response);
 
     }
 }

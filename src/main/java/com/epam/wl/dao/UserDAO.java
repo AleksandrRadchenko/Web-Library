@@ -18,13 +18,13 @@ public class UserDAO {
     private final ResultHandler<List<User>> userListHandler;
 
     private static final String ADD_USER_SCRIPT =
-            "INSERT INTO user(name, lastname, email, passwordhash, role) VALUES(?,?,?,?,?)";
+            "INSERT INTO \"user\"(name, lastname, email, passwordhash, role) VALUES(?,?,?,?,?)";
     private static final String UPDATE_USER_SCRIPT =
-            "UPDATE user SET name=?, lastname=?, email=?, passwordhash=?, role =? WHERE id=?";
+            "UPDATE \"user\" SET name=?, lastname=?, email=?, passwordhash=?, role =? WHERE id=?";
     private static final String DELETE_USER_BYID_SCRIPT =
-            "DELETE FROM user WHERE id=?";
+            "DELETE FROM \"user\" WHERE id=?";
     private static final String GETALL_USERS_SCRIPT =
-            "SELECT * FROM user";
+            "SELECT * FROM \"user\"";
     private static final String GET_USER_BYID_SCRIPT = "SELECT * FROM \"user\" WHERE id=?";
 //            "SELECT user.id, user.name, user.lastname, " +
 //            "user.email, user.passwordhash, user.role FROM user WHERE user.id = ?";
@@ -32,9 +32,9 @@ public class UserDAO {
 //            "SELECT \"user\".id, \"user\".name, \"user\".lastname, \"user\".email, \"user\".passwordhash, \"user\".role" +
 //                    "FROM \"user\" WHERE \"user\".id = ?";//"SELECT * FROM user WHERE id=?";
     private static final String GET_USER_BY_EMAIL_PASS_SCRIPT =
-            "SELECT * FROM user WHERE email=? AND passwordhash=?";
+            "SELECT * FROM \"user\" WHERE email=? AND passwordhash=?";
     private static final String GET_USER_SCRIPT_By_NAME_LASTRNAME_SCRIPT =
-            "SELECT * FROM user WHERE name=? AND lastname=?";
+            "SELECT * FROM \"user\" WHERE name=? AND lastname=?";
 
 //    "SELECT user.name, user.lastname, user.email, user.passwordhash, user.role WHERE user.id = ?";
 

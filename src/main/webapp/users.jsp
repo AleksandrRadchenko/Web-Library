@@ -11,14 +11,15 @@
     <img src="img/logo.jpg" alt="logo">
     <hr>
 </div>
+<div align="center">
 <h1>Welcome to your profile, User</h1>
 <table border="1">
     <tr>
-        <td>id </td>
-        <td>name</td>
-        <td>lastname </td>
-        <td>email</td>
-        <td>user role</td>
+        <td><b>id</b> </td>
+        <td><b>name</b></td>
+        <td><b>lastname</b> </td>
+        <td><b>email</b></td>
+        <td><b>role</b></td>
     </tr>
     <jsp:useBean id="users" scope="request" type="java.util.List"/>
     <c:forEach items="${users}" var="user">
@@ -65,5 +66,6 @@
         </tr>
     </c:forEach>
 </table>
+</div>
 </body>
 </html>
