@@ -2,11 +2,15 @@ package com.epam.wl.services;
 
 import com.epam.wl.dao.BookOrderDAO;
 import com.epam.wl.entities.BookOrder;
+import com.epam.wl.entities.User;
 import com.epam.wl.enums.BookOption;
+import com.epam.wl.enums.UserRole;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class BookOrderService {
     private static BookOrderService instance;
@@ -48,12 +52,14 @@ public class BookOrderService {
         return result;
     }
 
-//    public List<User> getAllUsers() {
-//        List<BookOrder> bookOrders = getAll();
-//        Set<User> result = new HashSet<>();
-//        for (BookOrder bookorder : bookOrders) {
-//            result.add(new User(bookorder.getUserId(), bookorder.getName(), bookorder.getLastName(), bookorder.getEmail(), "", UserRole.USER));
-//        }
-//        return new ArrayList<>(result);
-//    }
+    public List<User> getAllUsers() {
+        List<BookOrder> bookOrders = getAll();
+        Set<User> result = new HashSet<>();
+        for (BookOrder bookorder : bookOrders) {
+            result.add(new User(bookorder.getUserOrder().getUser().getId(), bookorder.getUserOrder().getUser().getName(),
+                    bookorder.getUserOrder().getUser().getLastname(), bookorder.getUserOrder().getUser().getEmail(),
+                    "", UserRole.USER));
+        }
+        return new ArrayList<>(result);
+    }
 }

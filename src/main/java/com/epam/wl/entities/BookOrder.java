@@ -7,7 +7,7 @@ import lombok.Data;
 @Data @AllArgsConstructor
 public class BookOrder {
     private int id;
-    private int bookInstanceId;
-    private int orderId;
+    private BookInstance bookInstance;
+    private UserOrder userOrder;
     private BookOption bookOption;
 }

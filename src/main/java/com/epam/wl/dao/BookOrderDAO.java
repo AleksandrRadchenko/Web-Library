@@ -73,13 +73,13 @@ public class BookOrderDAO {
      * @throws SQLException
      */
     @SuppressWarnings("JavaDoc")
-//    public void update(BookOrder newBookOrder) throws SQLException {
-//        executor.executeUpdate(QUERY_UPDATE,
-//                String.valueOf(newBookOrder.getBookInstanceId()),
-//                String.valueOf(newBookOrder.getUserOrderId()),
-//                String.valueOf(newBookOrder.getBookOption()),
-//                String.valueOf(newBookOrder.getId()));
-//    }
+    public void update(BookOrder newBookOrder) throws SQLException {
+        executor.executeUpdate(QUERY_UPDATE,
+                newBookOrder.getBookInstance().getId(),
+                newBookOrder.getUserOrder().getId(),
+                newBookOrder.getBookOption().toString(),
+                newBookOrder.getId());
+    }
 
     public void deleteById(final int id) throws SQLException {
         executor.executeUpdate(QUERY_DELETE, String.valueOf(id));
