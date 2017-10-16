@@ -21,7 +21,7 @@ class UserDAOTest implements TestData {
 
     @BeforeEach
     public void initDatabase() {
-        dataSource = DBHelper.getEmbeddedDatabase();
+        dataSource = DBHelper.getNewEmbeddedDatabase();
         userDAO = new UserDAO(dataSource);
     }
 
