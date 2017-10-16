@@ -35,12 +35,13 @@ public class TestUserService {
     }
 
     public List<User> getUser() {
-        Optional<User> user = null;        try {
+        Optional<User> user = null;
+        try {
             user = userDAO.getUserByID(1);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (user != null) {
+        if (user.isPresent()) {
             users.add(user.get());
             if (users.size() > 1) {
                 users.remove(1);

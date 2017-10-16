@@ -6,6 +6,7 @@
 <body>
 <a href="http://localhost:8080/uo">User orders request</a><br>
 <a href="http://localhost:8080/login.jsp">Login</a><br>
+<a href="http://localhost:8080/userprofile">Users</a><br>
 Hello there!
 </body>
 </html>

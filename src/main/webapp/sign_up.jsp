@@ -1,12 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <style>
     <%@include file='sign_up.css' %>
 </style>
-<body>
+
+<body link=#4483e2 vlink=#09607c alink=#f20e56>
+<div class="header">
+    <img src="img/logo.jpg" alt="logo">
+    <hr>
+</div>
+<div align="center">
 
 <form action="/sign_up" id='send' method='POST'>
     <fieldset>
@@ -18,10 +26,10 @@
         <br>
         <label>Role</label>
         <div class="option">
-        <input type="radio" name="role" value="user" checked>User<br>
+        <input type="radio" name="role" value="user" checked>Lib. User<br>
         </div>
         <div class="option">
-        <input type="radio" name="role" value="librarian">Librarian
+        <input type="radio" name="role" value="librarian"> Librarian
         </div>
     </fieldset>
     <fieldset>
@@ -44,6 +52,6 @@
 <div class="sum">
     <input type="submit" value="Sign up" form='send'>
 </div>
-
 </body>
+</div>
 </html>

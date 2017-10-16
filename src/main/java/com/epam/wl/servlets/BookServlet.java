@@ -1,5 +1,6 @@
 package com.epam.wl.servlets;
 
+import com.epam.wl.entities.User;
 import com.epam.wl.services.TestBookService;
 
 import javax.servlet.ServletException;
@@ -19,8 +20,8 @@ public class BookServlet extends HttpServlet {
         TestBookService service = TestBookService.getInstance();
 
         HttpSession session = request.getSession(false);
-        List<String> list = new ArrayList<>();
-        list.add(session.getAttribute("userID").toString());
+        List<User> list = new ArrayList<>();//currentSessionUser String
+        list.add((User) session.getAttribute("currentSessionUser"));//userID
 
         request.setAttribute("identification", list);
         request.setAttribute("books", service.getBooks());

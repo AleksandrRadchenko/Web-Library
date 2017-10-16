@@ -88,6 +88,6 @@ public class UserOrderDAO {
     }
 
     public List<UserOrder> getUserOrderByUserId(final int userId) throws SQLException {
-        return executor.executeQuery(QUERY_BY_USER_ID, userOrderListHandler, String.valueOf(userId));
+        return executor.executeQuery(QUERY_BY_USER_ID, userOrderListHandler, userId);
     }
 }

@@ -23,7 +23,7 @@
 <jsp:useBean id="identification" scope="request" type="java.util.List"/>
 <c:forEach items="${identification}" var="usersid">
         <td>
-                ${usersid}
+                ${usersid.id}
         </td>
 </c:forEach>
         <td colspan="1">

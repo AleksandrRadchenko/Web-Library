@@ -2,23 +2,44 @@ package com.epam.wl.services;
 
 import com.epam.wl.DBHelper;
 import com.epam.wl.dao.UserDAO;
+import com.epam.wl.dao.UserOrderDAO;
+import com.epam.wl.db.JdbcConnector;
 import com.epam.wl.entities.User;
 import com.epam.wl.enums.UserRole;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Optional;
 
 public class TestLoginService {
-    public static UserDAO userDAO = new UserDAO(DBHelper.getEmbeddedDatabase());
+    //public static UserDAO userDAO = new UserDAO(DBHelper.getEmbeddedDatabase());
+
+    private static TestLoginService instance;
+    private static DataSource dataSource = JdbcConnector.getDataSource();
+
+    private UserOrderDAO userOrderDAO;
+    private UserDAO userDAO;
+
+    public TestLoginService() {
+    }
+
+    public static synchronized TestLoginService getInstance() {
+        if (instance == null) {
+            instance = new TestLoginService();
+            instance.userDAO = new UserDAO(dataSource);
+            instance.userOrderDAO = new UserOrderDAO(dataSource);
+        }
+        return instance;
+    }
 
     public String getRolePage(String email) throws SQLException {
         if (userDAO.isLibrarian(email)) {
             return "librarian_from_login.jsp";
         }
 
-        return "user_from_login.jsp";
+        return "users.jsp";
     }
 
     public String addNewUser(String name, String lastName, String email, String password, UserRole userRole,
