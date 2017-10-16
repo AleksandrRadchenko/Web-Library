@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>User Orders</title>
+    <title>Book catalog</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body link=#4483e2 vlink=#09607c alink=#f20e56>
@@ -14,27 +14,6 @@
 <div align="center">
     <h2>Book catalog</h2>
     <table border="1">
-        <%--<tr>--%>
-            <%--<td><b>User ID </b></td>--%>
-            <%--<td><b>Book ID</b></td>--%>
-            <%--<td><b></b></td>--%>
-            <%--<td><b></b></td>--%>
-        <%--</tr>--%>
-        <%--<jsp:useBean id="identification" scope="request" type="java.util.List"/>--%>
-
-        <%--ddd${identification.get(0).id}ddd--%>
-        <%--<c:forEach items="${identification}" var="userID">--%>
-            <%--<td>--%>
-                    <%--${userID.id}--%>
-            <%--</td>--%>
-        <%--</c:forEach>--%>
-        <%--<td colspan="1">--%>
-            <%--<input name="bookid" type="text">--%>
-        <%--</td>--%>
-        <%--<td colspan="1">--%>
-            <%--<input type="submit">--%>
-        <%--</td>--%>
-        <%--<td></td>--%>
         <tr>
             <td><b>Author</b></td>
             <td><b>Title</b></td>
@@ -50,8 +29,6 @@
                 <td>${book.year}</td>
                 <td>
                     <form action="${pageContext.request.contextPath}/userorderfromcatalog" method="GET">
-                        <%--<jsp:useBean id="identification" scope="request" type="java.util.List"/>--%>
-                        <%--<input type="hidden" value="${identification.get(0).id}" name="userId">--%>
                         <input type="hidden" value="${book.id}" name="bookId">
                         <div class="button">
                             <input type="submit" value="Order">
