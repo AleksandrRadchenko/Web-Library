@@ -41,7 +41,7 @@ public class TestUserService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (user.isPresent()) {
+        if (user.isPresent()) {//nullpoint
             users.add(user.get());
             if (users.size() > 1) {
                 users.remove(1);

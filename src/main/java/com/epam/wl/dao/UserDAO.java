@@ -20,20 +20,20 @@ public class UserDAO {
     private final ResultHandler<Boolean> userIsLibrarianHandler;
 
     private static final String ADD_USER_SCRIPT =
-            "INSERT INTO user(name, lastname, email, passwordhash, role) VALUES(?,?,?,?,?)";
+            "INSERT INTO users(name, lastname, email, passwordhash, role) VALUES(?,?,?,?,?)";
     private static final String UPDATE_USER_SCRIPT =
-            "UPDATE user SET name=?, lastname=?, email=?, passwordhash=?, role =? WHERE id=?";
+            "UPDATE users SET name=?, lastname=?, email=?, passwordhash=?, role =? WHERE id=?";
     private static final String DELETE_USER_BYID_SCRIPT =
-            "DELETE FROM user WHERE id=?";
+            "DELETE FROM users WHERE id=?";
     private static final String GETALL_USERS_SCRIPT =
-            "SELECT * FROM user";
+            "SELECT * FROM users";
     private static final String GET_USER_BYID_SCRIPT =
-            "SELECT * FROM \"user\" WHERE id=?";
+            "SELECT * FROM users WHERE id=?;";
     private static final String GET_USER_BY_EMAIL_PASS_SCRIPT =
-            "SELECT * FROM \"user\" WHERE email=? AND passwordhash=?";
+            "SELECT * FROM users WHERE email=? AND passwordhash=?";
     private static final String GET_USER_SCRIPT_By_NAME_LASTRNAME_SCRIPT =
-            "SELECT * FROM user WHERE name=? AND lastname=?";
-    private static final String GET_USER_BY_EMAIL_QUERY = "SELECT * FROM user WHERE email=?";
+            "SELECT * FROM users WHERE name=? AND lastname=?";
+    private static final String GET_USER_BY_EMAIL_QUERY = "SELECT * FROM users WHERE email=?";
 
 
     public UserDAO(DataSource dataSource) {

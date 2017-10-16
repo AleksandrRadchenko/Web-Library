@@ -21,7 +21,7 @@ public class UserServlet extends HttpServlet {
         request.setAttribute("books", service.getUserOrderBooks());
 
         HttpSession session = request.getSession(true);//false
-        //session.setAttribute("userID", service.getUser().get(0).getId());
+        session.setAttribute("userID", service.getUser().get(0).getId());
         request.getRequestDispatcher("users.jsp").forward(request, response);
     }
 }
