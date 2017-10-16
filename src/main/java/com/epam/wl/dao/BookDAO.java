@@ -6,8 +6,9 @@ import com.epam.wl.entities.BookInstance;
 import com.epam.wl.executor.Executor;
 import com.epam.wl.executor.ResultHandler;
 
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class BookDAO {
 
@@ -18,6 +19,7 @@ public class BookDAO {
     private final ResultHandler<Integer> bookIdHandler = BookIdHandler.getInstance();
     private final ResultHandler<Integer> bookInstanceIdHandler = BookInstanceIdHandler.getInstance();
     private final ResultHandler<List<Integer>> bookInstancesIdListHandler = BookInstancesIdListHandler.getInstance();
+    private final ResultHandler<Optional<Book>> bookOneHandler = BookOneHandler.getInstance();
 
     private static final String GET_ALL_BOOKS_QUERY = "SELECT * FROM book";
     private static final String GET_ALL_BOOKS_INSTANCES_QUERY = "SELECT * FROM book_instance";
@@ -27,6 +29,7 @@ public class BookDAO {
              + "book_instance.bookid=? AND book_instanceid IS NULL";
     private static final String ADD_NEW_BOOK_INSTANCE_QUERY = "INSERT INTO book_instance(bookid) VALUES (?)";
     private static final String ADD_NEW_BOOK_QUERY = "INSERT INTO book(author, title, year) VALUES (?, ?, ?)";
+    private static final String GET_BOOK_BY_ID = "SELECT author, title, year FROM book WHERE id=?";
 
     public BookDAO() {
     }
@@ -77,5 +80,9 @@ public class BookDAO {
 
     public List<Integer> getFreeBookInstancesForThisBook(int bookId) throws SQLException {
         return executor.executeQuery(GET_FREE_BOOK_INSTANCE_ID_QUERY, bookInstancesIdListHandler, bookId);
+    }
+
+    public Optional<Book> getById(int bookId) throws SQLException {
+        return executor.executeQuery(GET_BOOK_BY_ID, bookOneHandler, bookId);
     }
 }

@@ -65,4 +65,15 @@ public class UserOrderService {
             e.printStackTrace();
         }
     }
+
+    public UserOrder getById(int user_orderid) throws SQLException {
+        try {
+            Optional<UserOrder> oUserOrder = userOrderDAO.getUserOrderByID(user_orderid);
+            if (!oUserOrder.isPresent()) throw new SQLException("There is no such user_order for id = " + user_orderid);
+            else return oUserOrder.get();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
 }
