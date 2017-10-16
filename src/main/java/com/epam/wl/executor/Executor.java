@@ -1,20 +1,45 @@
 package com.epam.wl.executor;
 
 import com.epam.wl.db.JdbcConnector;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class Executor {
     private static Executor instance;
-    private final static DataSource dataSource = JdbcConnector.getDataSource();
+    private static DataSource dataSource;
+    // Selector for prod and test dataSource. Switch in jdbc.properties file.
+    private static String mode = "production";
+    private static final DataSource postgresDataSource = JdbcConnector.getDataSource();
+    private static EmbeddedDatabase testDataSource;
+
+    static {
+        final Properties properties = new Properties();
+        try (InputStream resourceAsStream = JdbcConnector.class.getResourceAsStream("/jdbc.properties")) {
+            properties.load(resourceAsStream);
+            mode = properties.getProperty("mode");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if ("test".equals(mode)) testDataSource = JdbcConnector.getTestDataSource();
+    }
 
     private Executor() {
     }
 
+    public static void resetTestDataSource() {
+        if ("test".equals(mode)) dataSource = JdbcConnector.getNewTestDataSource();
+    }
+
     public static synchronized Executor getInstance() {
+        if ("test".equals(mode)) dataSource = testDataSource;
+        else dataSource = postgresDataSource;
         if (instance == null)
             instance = new Executor();
         return instance;
