@@ -27,12 +27,10 @@ public class BookDAO {
     private static final String GET_FREE_BOOK_INSTANCE_ID_QUERY = "SELECT * FROM book_instance LEFT JOIN book_order "
              + "ON book_instance.id=book_order.book_instanceid WHERE "
              + "book_instance.bookid=? AND book_instanceid IS NULL";
-    private static final String ADD_NEW_BOOK_INSTANCE_QUERY = "INSERT INTO book_instance(bookid) VALUES (?)";
     private static final String ADD_NEW_BOOK_QUERY = "INSERT INTO book(author, title, year) VALUES (?, ?, ?)";
     private static final String GET_BOOK_BY_ID = "SELECT id, author, title, year FROM book WHERE id=?";
 
-    public BookDAO() {
-    }
+    private BookDAO() {}
 
     public static synchronized BookDAO getInstance() {
         if (instance == null)
@@ -44,34 +42,8 @@ public class BookDAO {
         return executor.executeQuery(GET_ALL_BOOKS_QUERY, bookListHandler);
     }
 
-    public List<BookInstance> getAllBookInstances() throws SQLException {
-        return executor.executeQuery(GET_ALL_BOOKS_INSTANCES_QUERY, bookInstanceListHandler);
-    }
-
-    public int getBookId(String author, String title, int year) throws SQLException {
-        return executor.executeQuery(GET_BOOK_ID_QUERY, bookIdHandler, author, title, year);
-    }
-
     public int getFreeBookInstanceId(int bookId) throws SQLException {
         return executor.executeQuery(GET_FREE_BOOK_INSTANCE_ID_QUERY, bookInstanceIdHandler, bookId);
-    }
-
-    public void addNewBookInstance(String author, String title, int year) throws SQLException {
-        int bookId;
-
-        try {
-            bookId = getBookId(author, title, year);
-        } catch (SQLException e) {
-            if (!"No such book in database".equals(e.getMessage())) {
-                throw e;
-            }
-            else {
-                addNewBook(author, title, year);
-                bookId = getBookId(author, title, year);
-            }
-        }
-
-        executor.executeUpdate(ADD_NEW_BOOK_INSTANCE_QUERY, bookId);
     }
 
     private void addNewBook(String author, String title, int year) throws SQLException {

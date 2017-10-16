@@ -59,8 +59,7 @@ public class UserOrderDAO {
 //            "book.title, book.author, book.year, user_order.status FROM user_order " +
 //            "INNER JOIN \"user\" ON \"user\".id=user_order.userId INNER JOIN book ON book.id=user_order.bookId WHERE \"user\".id = ?";
 
-    public UserOrderDAO() {
-    }
+    private UserOrderDAO() {}
 
     public static synchronized UserOrderDAO getInstance() {
         if (instance == null)

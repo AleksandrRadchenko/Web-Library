@@ -36,8 +36,7 @@ public class UserDAO {
             "SELECT * FROM users WHERE name=? AND lastname=?";
     private static final String GET_USER_BY_EMAIL_QUERY = "SELECT * FROM users WHERE email=?";
 
-    public UserDAO() {
-    }
+    private UserDAO() {}
 
     public static synchronized UserDAO getInstance() {
         if (instance == null)
