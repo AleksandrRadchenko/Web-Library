@@ -1,4 +1,4 @@
-package com.epam.wl;
+package com.epam.wl.services;
 
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -8,8 +8,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-public interface DBHelper {
-
+public interface MockDBHelper {
     static EmbeddedDatabase getEmbeddedDatabase() {
         final EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         final EmbeddedDatabase db = builder
