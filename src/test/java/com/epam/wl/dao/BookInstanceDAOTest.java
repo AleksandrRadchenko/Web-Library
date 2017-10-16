@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class BookInstanceDAOTest {
+public class BookInstanceDAOTest implements TestData {
     private final BookInstanceDAO bookInstanceDAO = BookInstanceDAO.getInstance();
 
     @Test
