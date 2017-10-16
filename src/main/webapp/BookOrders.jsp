@@ -12,8 +12,9 @@
     <img src="img/logo.jpg" alt="logo">
     <hr>
 </div>
-<h3>Orders of ${bookorders.get(0).userOrder.user.name} ${bookorders.get(0).userOrder.user.lastName}</h3>
-<table border="1">
+<div align="center">
+    <h3>Orders of ${bookorders.get(0).userOrder.user.name} ${bookorders.get(0).userOrder.user.lastname}</h3>
+    <table border="1">
     <tr>
         <td><b>Book order id</b></td>
         <td><b>Book instance id</b></td>
@@ -33,5 +34,6 @@
         </tr>
     </c:forEach>
 </table>
+</div>
 </body>
 </html>

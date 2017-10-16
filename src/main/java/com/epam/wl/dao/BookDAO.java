@@ -29,7 +29,7 @@ public class BookDAO {
              + "book_instance.bookid=? AND book_instanceid IS NULL";
     private static final String ADD_NEW_BOOK_INSTANCE_QUERY = "INSERT INTO book_instance(bookid) VALUES (?)";
     private static final String ADD_NEW_BOOK_QUERY = "INSERT INTO book(author, title, year) VALUES (?, ?, ?)";
-    private static final String GET_BOOK_BY_ID = "SELECT author, title, year FROM book WHERE id=?";
+    private static final String GET_BOOK_BY_ID = "SELECT id, author, title, year FROM book WHERE id=?";
 
     public BookDAO() {
     }

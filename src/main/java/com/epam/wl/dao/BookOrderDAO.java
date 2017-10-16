@@ -55,7 +55,7 @@ public class BookOrderDAO {
             final int userOrderId,
             final BookOption bookOption)
             throws SQLException {
-        executor.executeUpdate(QUERY_CREATE, String.valueOf(bookInstanceId), String.valueOf(userOrderId), String.valueOf(bookOption.toString()));
+        executor.executeUpdate(QUERY_CREATE, bookInstanceId, userOrderId, String.valueOf(bookOption.toString()));
     }
 
     public List<BookOrder> getAll() throws SQLException {
