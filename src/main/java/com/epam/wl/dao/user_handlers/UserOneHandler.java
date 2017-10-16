@@ -3,7 +3,6 @@ package com.epam.wl.dao.user_handlers;
 import com.epam.wl.entities.User;
 import com.epam.wl.enums.UserRole;
 import com.epam.wl.executor.ResultHandler;
-import com.epam.wl.services.MockDBHelper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

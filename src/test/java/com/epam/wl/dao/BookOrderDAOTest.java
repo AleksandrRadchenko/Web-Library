@@ -1,6 +1,5 @@
 package com.epam.wl.dao;
 
-import com.epam.wl.DBHelper;
 import com.epam.wl.entities.BookOrder;
 import com.epam.wl.enums.BookOption;
 import org.junit.jupiter.api.AfterEach;

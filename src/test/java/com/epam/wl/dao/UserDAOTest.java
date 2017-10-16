@@ -1,12 +1,10 @@
 package com.epam.wl.dao;
 
-import com.epam.wl.DBHelper;
 import com.epam.wl.entities.User;
 import com.epam.wl.enums.UserRole;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.omg.CORBA.UnknownUserException;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
 import java.sql.SQLException;

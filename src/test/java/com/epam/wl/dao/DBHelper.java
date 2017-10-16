@@ -1,4 +1,4 @@
-package com.epam.wl.services;
+package com.epam.wl.dao;
 
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -8,11 +8,13 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-public interface MockDBHelper {
+public interface DBHelper {
+
     static EmbeddedDatabase getEmbeddedDatabase() {
         final EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         final EmbeddedDatabase db = builder
                 .setType(EmbeddedDatabaseType.H2)
+                .setScriptEncoding("UTF-8")
                 .addScript("H2DBinit.sql")
                 .addScript("H2DBdata.sql")
                 .build();

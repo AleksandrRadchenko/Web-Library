@@ -1,6 +1,5 @@
 package com.epam.wl.dao;
 
-import com.epam.wl.DBHelper;
 import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.UserOrderStatus;
 import org.junit.jupiter.api.AfterEach;

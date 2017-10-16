@@ -1,14 +1,11 @@
 package com.epam.wl.dao;
 
-import com.epam.wl.DBHelper;
 import com.epam.wl.entities.Book;
 import com.epam.wl.entities.BookInstance;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
