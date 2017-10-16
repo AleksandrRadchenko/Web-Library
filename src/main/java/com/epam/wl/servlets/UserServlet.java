@@ -17,11 +17,11 @@ public class UserServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         TestUserService service = TestUserService.getInstance();
-        request.setAttribute("users", service.getUser());//request.setAttribute("users", TestUserService.getUser());
-        request.setAttribute("books", service.getUserOrderBooks());
+        HttpSession session = request.getSession(false);
 
-        HttpSession session = request.getSession(true);//false
-        session.setAttribute("userID", service.getUser().get(0).getId());
+        request.setAttribute("users", service.getUser((User)session.getAttribute("currentSessionUser")));//request.setAttribute("users", TestUserService.getUser());
+        request.setAttribute("books", service.getUserOrderBooks((User)session.getAttribute("currentSessionUser")));
+
         request.getRequestDispatcher("users.jsp").forward(request, response);
     }
 }

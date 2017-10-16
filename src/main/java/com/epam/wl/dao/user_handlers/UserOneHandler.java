@@ -23,7 +23,6 @@ public class UserOneHandler implements ResultHandler<Optional<User>> {
 
     @Override
     public Optional<User> handle(ResultSet resultSet) throws SQLException {
-        MockDBHelper.printResultSet(resultSet);
 
         if (!resultSet.next()) return Optional.empty();
         int userID = resultSet.getInt("id");

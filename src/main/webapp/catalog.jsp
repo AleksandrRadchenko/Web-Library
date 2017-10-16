@@ -21,9 +21,9 @@
             <td><b></b></td>
         </tr>
 <jsp:useBean id="identification" scope="request" type="java.util.List"/>
-<c:forEach items="${identification}" var="usersid">
+<c:forEach items="${identification}" var="userID">
         <td>
-                ${usersid.id}
+                ${userID.id}
         </td>
 </c:forEach>
         <td colspan="1">
@@ -39,6 +39,7 @@
         <td><b>Author</b></td>
         <td><b>Title</b></td>
         <td><b>Year</b></td>
+        <td></td>
     </tr>
     <jsp:useBean id="books" scope="request" type="java.util.List"/>
     <c:forEach items="${books}" var="book">
@@ -47,6 +48,7 @@
             <td>${book.author}</td>
             <td>${book.title}</td>
             <td>${book.year}</td>
+            <td></td>
         </tr>
     </c:forEach>
 </table>

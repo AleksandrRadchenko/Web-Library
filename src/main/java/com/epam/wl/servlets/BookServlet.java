@@ -20,8 +20,8 @@ public class BookServlet extends HttpServlet {
         TestBookService service = TestBookService.getInstance();
 
         HttpSession session = request.getSession(false);
-        List<User> list = new ArrayList<>();//currentSessionUser String
-        list.add((User) session.getAttribute("currentSessionUser"));//userID
+        List<User> list = new ArrayList<>();
+        list.add((User) session.getAttribute("currentSessionUser")  );
 
         request.setAttribute("identification", list);
         request.setAttribute("books", service.getBooks());

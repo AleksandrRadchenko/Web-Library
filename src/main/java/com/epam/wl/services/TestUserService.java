@@ -6,6 +6,7 @@ import com.epam.wl.db.JdbcConnector;
 import com.epam.wl.entities.User;
 import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.UserRole;
+import com.epam.wl.servlets.UserServlet;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -16,11 +17,9 @@ import java.util.Optional;
 public class TestUserService {
 
     private static TestUserService instance;
-    private static DataSource dataSource = JdbcConnector.getDataSource();
-
-    private UserOrderDAO userOrderDAO;
-    private UserDAO userDAO;
     private static List<User> users = new ArrayList<>(1);
+    private final UserOrderDAO userOrderDAO = UserOrderDAO.getInstance();
+    private final UserDAO userDAO = UserDAO.getInstance();
 
     private TestUserService() {
     }
@@ -28,16 +27,14 @@ public class TestUserService {
     public static synchronized TestUserService getInstance() {
         if (instance == null) {
             instance = new TestUserService();
-            instance.userDAO = new UserDAO(dataSource);
-            instance.userOrderDAO = new UserOrderDAO(dataSource);
         }
         return instance;
     }
 
-    public List<User> getUser() {
+    public List<User> getUser(User loggedUser) {
         Optional<User> user = null;
         try {
-            user = userDAO.getUserByID(1);
+            user = userDAO.getUserByID(loggedUser.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -68,10 +65,10 @@ public class TestUserService {
         }
     }
 
-    public List<UserOrder> getUserOrderBooks() {
+    public List<UserOrder> getUserOrderBooks(User loggedUser) {
         List<UserOrder> bookList = new ArrayList<>();
         try {
-            bookList = userOrderDAO.getUserOrderByUserId(1);
+            bookList = userOrderDAO.getUserOrderByUserId(loggedUser.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }

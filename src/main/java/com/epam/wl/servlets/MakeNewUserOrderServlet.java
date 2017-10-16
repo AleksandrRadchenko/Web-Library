@@ -1,5 +1,6 @@
 package com.epam.wl.servlets;
 
+import com.epam.wl.entities.User;
 import com.epam.wl.services.UserOrderService;
 
 import javax.servlet.ServletException;
@@ -15,11 +16,12 @@ public class MakeNewUserOrderServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int bookId = Integer.valueOf(request.getParameter("bookid"));
-
         HttpSession session = request.getSession(false);
+        int userId = ((User) session.getAttribute("currentSessionUser")).getId();
+
         session.setAttribute("bookID", bookId);
         UserOrderService userOrderService = UserOrderService.getInstance();
-        userOrderService.createNewUserOrder(bookId, Integer.parseInt(session.getAttribute("userID").toString()));//userId
+        userOrderService.createNewUserOrder(bookId, userId);//userId
 
         request.getRequestDispatcher("/userprofile").forward(request, response);
 

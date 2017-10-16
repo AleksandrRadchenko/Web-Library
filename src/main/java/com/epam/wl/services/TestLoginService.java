@@ -25,10 +25,10 @@ public class TestLoginService {
 
     public String getRolePage(String email) throws SQLException {
         if (userDAO.isLibrarian(email)) {
-            return "librarian_from_login.jsp";
+            return "/librarian";
         }
 
-        return "users.jsp";
+        return "/userprofile";//users.jsp
     }
 
     public String addNewUser(String name, String lastName, String email, String password, UserRole userRole,

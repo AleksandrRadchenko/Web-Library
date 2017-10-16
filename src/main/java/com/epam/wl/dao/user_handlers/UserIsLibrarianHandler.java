@@ -19,7 +19,7 @@ public class UserIsLibrarianHandler implements ResultHandler<Boolean> {
 
     @Override
     public Boolean handle(ResultSet resultSet) throws SQLException {
-        if (resultSet.first()) {
+        if (resultSet.next()) {
             return "LIBRARIAN".equals(resultSet.getString("role"));
         }
 
