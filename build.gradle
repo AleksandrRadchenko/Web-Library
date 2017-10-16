@@ -30,14 +30,17 @@ dependencies {
     //'org.apache.logging.log4j:log4j-core:+',
 
     compile 'javax.servlet:jstl:1.2'
+    runtime 'org.postgresql:postgresql:+'
 
     // Tomcat include javax.servlet lib
     providedCompile 'javax.servlet:javax.servlet-api:+'
 
     compileOnly 'org.projectlombok:lombok:+'
 
-    compile 'com.h2database:h2:+'
+    testRuntime 'com.h2database:h2:+'
 //                'mysql:mysql-connector-java:6.0.5'
+// https://mvnrepository.com/artifact/org.postgresql/postgresql
+
 
     testCompile 'org.junit.jupiter:junit-jupiter-api:+',
             'org.hamcrest:java-hamcrest:+'
