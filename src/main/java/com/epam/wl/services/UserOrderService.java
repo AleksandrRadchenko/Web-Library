@@ -2,6 +2,7 @@ package com.epam.wl.services;
 
 import com.epam.wl.dao.BookDAO;
 import com.epam.wl.dao.UserOrderDAO;
+import com.epam.wl.entities.User;
 import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.UserOrderStatus;
 

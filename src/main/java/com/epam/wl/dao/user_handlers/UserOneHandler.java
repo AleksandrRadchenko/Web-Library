@@ -3,6 +3,7 @@ package com.epam.wl.dao.user_handlers;
 import com.epam.wl.entities.User;
 import com.epam.wl.enums.UserRole;
 import com.epam.wl.executor.ResultHandler;
+import com.epam.wl.services.MockDBHelper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +23,7 @@ public class UserOneHandler implements ResultHandler<Optional<User>> {
 
     @Override
     public Optional<User> handle(ResultSet resultSet) throws SQLException {
+
         if (!resultSet.next()) return Optional.empty();
         int userID = resultSet.getInt("id");
         String name = resultSet.getString("name");
