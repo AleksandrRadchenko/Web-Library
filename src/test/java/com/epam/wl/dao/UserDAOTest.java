@@ -14,7 +14,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-class UserDAOTest {
+class UserDAOTest implements TestData {
 
     private UserDAO userDAO;
     private EmbeddedDatabase dataSource;

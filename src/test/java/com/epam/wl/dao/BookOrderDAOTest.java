@@ -17,7 +17,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SuppressWarnings({"ResultOfMethodCallIgnored", "ConstantConditions"})
-class BookOrderDAOTest {
+class BookOrderDAOTest implements TestData {
     private EmbeddedDatabase dataSource;
     private List<BookOrder> entireTable;
     private final BookOrderDAO bookOrderDAO = BookOrderDAO.getInstance();
