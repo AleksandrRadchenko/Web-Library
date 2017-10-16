@@ -20,9 +20,12 @@
             <td><b></b></td>
             <td><b></b></td>
         </tr>
-        <td colspan="1">
-            <input name="userid" type="text">
+<jsp:useBean id="identification" scope="request" type="java.util.List"/>
+<c:forEach items="${identification}" var="usersid">
+        <td>
+                ${usersid}
         </td>
+</c:forEach>
         <td colspan="1">
             <input name="bookid" type="text">
         </td>
@@ -30,7 +33,6 @@
             <input type="submit">
         </td>
         <td></td>
-        <hr>
     </form>
     <tr>
         <td><b>Book ID </b></td>

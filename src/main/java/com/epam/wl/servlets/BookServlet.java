@@ -7,21 +7,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "BookServlet", urlPatterns = "/catalog")
 public class BookServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         TestBookService service = TestBookService.getInstance();
-        request.setAttribute("books", service.getBooks());//bookList TestBookService.getBooks(
+
+        HttpSession session = request.getSession(false);
+        List<String> list = new ArrayList<>();
+        list.add(session.getAttribute("userID").toString());
+
+        request.setAttribute("identification", list);
+        request.setAttribute("books", service.getBooks());
         request.getRequestDispatcher("catalog.jsp").forward(request, response);
-        //HttpSession session = request.getSession(true);
-        //
     }
 }

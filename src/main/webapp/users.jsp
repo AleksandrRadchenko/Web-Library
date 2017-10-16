@@ -33,18 +33,23 @@
     </c:forEach>
 </table>
 <hr>
+    <h4>You can change your parameters here, User</h4>
 <form action="${pageContext.request.contextPath}/useredit" method="POST">
     <tr>
         <td colspan="1">
+            <b>Name</b>
             <input name="name" type="text">
         </td>
         <td colspan="1">
+            <b>Lastname</b>
             <input name="lastname" type="text">
         </td>
         <td colspan="1">
+            <b>Email</b>
             <input name="email" type="text">
         </td>
         <td colspan="1">
+            <b>Password</b>
             <input name="passwordhash" type="text">
         </td>
         <td colspan="1">
@@ -53,7 +58,9 @@
     </tr>
 </form>
 <hr>
+<br>
 <a href="http://localhost:8080/catalog">Welcome to out catalog of books!</a><br>
+<br>
 <table border="1">
     <jsp:useBean id="books" scope="request" type="java.util.List"/>
     <c:forEach items="${books}" var="book">
