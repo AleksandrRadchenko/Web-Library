@@ -18,7 +18,7 @@ public class BookOrderServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (!request.getParameter("userid").isEmpty()) {
+        if (request.getParameter("userid") != null) {
             request.setAttribute("bookorders", bookOrderService.getByUserId(Integer.parseInt(request.getParameter("userid"))));
         } else {
             request.setAttribute("bookorders", bookOrderService.getAll());
