@@ -15,14 +15,14 @@ INSERT INTO book_instance (bookid) VALUES (2);
 INSERT INTO book_instance (bookid) VALUES (4);
 INSERT INTO book_instance (bookid) VALUES (3);
 
-INSERT INTO user (name, lastname, email, passwordhash, role)
+INSERT INTO users (name, lastname, email, passwordhash, role)
 VALUES ('Иван', 'Иванов', 'ivan@ivan.ru', 'fdfsdcdzc', 'USER');
-INSERT INTO user (name, lastname, email, passwordhash, role)
+INSERT INTO users (name, lastname, email, passwordhash, role)
 VALUES ('Федор', 'Федоров', 'fedor@ivan.ru', 'fdfsdcdrfdsfzc', 'USER');
-INSERT INTO user (name, lastname, email, passwordhash, role)
+INSERT INTO users (name, lastname, email, passwordhash, role)
 VALUES ('Петр', 'Петров', 'petr@ivan.ru', 'fdfsdcdssdfdzc', 'USER');
-INSERT INTO user (name, lastname, email, passwordhash, role)
-VALUES ('Семен', 'Семенов', 'semen@ivan.ru', 'fdfsdcdssdfdzc', 'USER');
+INSERT INTO users (name, lastname, email, passwordhash, role)
+VALUES ('Семен', 'Семенов', 'semen@ivan.ru', 'fdfsdcdssdfdzc', 'LIBRARIAN');
 
 INSERT INTO user_order (bookid, userid, status) VALUES (1, 1, 'IN_PROGRESS');
 INSERT INTO user_order (bookid, userid, status) VALUES (2, 2, 'IN_PROGRESS');

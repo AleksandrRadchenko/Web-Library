@@ -22,12 +22,12 @@ public class JdbcConnector {
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-                Properties properties = new Properties();
+                final Properties properties = new Properties();
                 try (InputStream resourceAsStream = JdbcConnector.class.getResourceAsStream("/jdbc.properties")) {
                     properties.load(resourceAsStream);
-                    String url = properties.getProperty("url");
-                    String userName = properties.getProperty("userName");
-                    String password = properties.getProperty("password");
+                    final String url = properties.getProperty("url");
+                    final String userName = properties.getProperty("userName");
+                    final String password = properties.getProperty("password");
                     instance = new JdbcConnector();
                     instance.dataSource = new DriverManagerDataSource(url, userName, password);
                 } catch (IOException e) {

@@ -5,6 +5,7 @@
 </head>
 <body>
 <a href="http://localhost:8080/librarian">User orders request</a><br>
+<a href="http://localhost:8080/login.jsp">Login</a><br>
 Hello there!
 </body>
 </html>

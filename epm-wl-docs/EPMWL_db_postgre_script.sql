@@ -1,15 +1,7 @@
-CREATE SEQUENCE user_id_seq;
+DROP SCHEMA IF EXISTS public CASCADE;
+CREATE SCHEMA public;
 
-CREATE SEQUENCE order_id_seq;
-
-CREATE SEQUENCE book_id_seq;
-
-CREATE SEQUENCE book_order_id_seq;
-
-CREATE SEQUENCE edition_id_seq;
-
-
-CREATE TABLE "user"
+CREATE TABLE users
 (
   id           SERIAL NOT NULL
     CONSTRAINT user_pkey
@@ -22,10 +14,10 @@ CREATE TABLE "user"
 );
 
 CREATE UNIQUE INDEX user_id_uindex
-  ON "user" (id);
+  ON users (id);
 
 CREATE UNIQUE INDEX user_email_uindex
-  ON "user" (email);
+  ON users (email);
 
 CREATE TABLE user_order
 (
@@ -35,7 +27,7 @@ CREATE TABLE user_order
   bookid INTEGER                NOT NULL,
   userid    INTEGER                NOT NULL
     CONSTRAINT order_user_id_fk
-    REFERENCES "user"
+    REFERENCES users
     ON UPDATE CASCADE ON DELETE CASCADE,
   status    VARCHAR(45)            NOT NULL
 );
@@ -114,14 +106,14 @@ INSERT INTO book_instance (bookid) VALUES (2);
 INSERT INTO book_instance (bookid) VALUES (4);
 INSERT INTO book_instance (bookid) VALUES (3);
 
-INSERT INTO "user" (name, lastname, email, passwordhash, role)
+INSERT INTO users (name, lastname, email, passwordhash, role)
 VALUES ('Иван', 'Иванов', 'ivan@ivan.ru', 'fdfsdcdzc', 'USER');
-INSERT INTO "user" (name, lastname, email, passwordhash, role)
+INSERT INTO users (name, lastname, email, passwordhash, role)
 VALUES ('Федор', 'Федоров', 'fedor@ivan.ru', 'fdfsdcdrfdsfzc', 'USER');
-INSERT INTO "user" (name, lastname, email, passwordhash, role)
+INSERT INTO users (name, lastname, email, passwordhash, role)
 VALUES ('Петр', 'Петров', 'petr@ivan.ru', 'fdfsdcdssdfdzc', 'USER');
-INSERT INTO "user" (name, lastname, email, passwordhash, role)
-VALUES ('Семен', 'Семенов', 'semen@ivan.ru', 'fdfsdcdssdfdzc', 'USER');
+INSERT INTO users (name, lastname, email, passwordhash, role)
+VALUES ('Семен', 'Семенов', 'semen@ivan.ru', 'fdfsdcdssdfdzc', 'LIBRARIAN');
 
 INSERT INTO user_order (bookid, userid, status) VALUES (1, 1, 'IN_PROGRESS');
 INSERT INTO user_order (bookid, userid, status) VALUES (2, 2, 'IN_PROGRESS');
