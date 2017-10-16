@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @javax.servlet.annotation.WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
-    private final TestLoginService service = new TestLoginService();
+    private final TestLoginService service = TestLoginService.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);

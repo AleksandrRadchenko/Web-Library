@@ -1,6 +1,5 @@
 package com.epam.wl.services;
 
-import com.epam.wl.DBHelper;
 import com.epam.wl.dao.UserDAO;
 import com.epam.wl.entities.User;
 import com.epam.wl.enums.UserRole;
@@ -11,7 +10,18 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 public class TestLoginService {
-    public static UserDAO userDAO = new UserDAO(DBHelper.getEmbeddedDatabase());
+    private static TestLoginService instance;
+    private final UserDAO userDAO = UserDAO.getInstance();
+
+    private TestLoginService() {
+    }
+
+    public static synchronized TestLoginService getInstance() {
+        if (instance == null) {
+            instance = new TestLoginService();
+        }
+        return instance;
+    }
 
     public String getRolePage(String email) throws SQLException {
         if (userDAO.isLibrarian(email)) {

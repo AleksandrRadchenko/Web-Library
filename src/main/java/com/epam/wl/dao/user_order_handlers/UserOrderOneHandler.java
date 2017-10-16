@@ -12,19 +12,31 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 public class UserOrderOneHandler implements ResultHandler<Optional<UserOrder>> {
+
+    private static UserOrderOneHandler instance;
+
+    private UserOrderOneHandler() {
+    }
+
+    public static synchronized UserOrderOneHandler getInstance() {
+        if (instance == null)
+            instance = new UserOrderOneHandler();
+        return instance;
+    }
+
     @Override
     public Optional<UserOrder> handle(ResultSet resultSet) throws SQLException {
         if (!resultSet.next()) return Optional.empty();
-        final int userOrderID = resultSet.getInt("user_order.id");
-        final int userID = resultSet.getInt("user.id");
-        final String userName = resultSet.getString("user.name");
-        final String userLastname = resultSet.getString("user.lastname");
-        final String userEmail = resultSet.getString("user.email");
+        final int userOrderID = resultSet.getInt("user_order_id");
+        final int userID = resultSet.getInt("user_id");
+        final String userName = resultSet.getString("user_name");
+        final String userLastname = resultSet.getString("user_lastname");
+        final String userEmail = resultSet.getString("user_email");
         final int bookId = resultSet.getInt("book_id");
-        final String bookTitle = resultSet.getString("book.title");
-        final  String bookAuthor = resultSet.getString("book.author");
-        final int bookYear = resultSet.getInt("book.year");
-        final UserOrderStatus status = UserOrderStatus.valueOf(resultSet.getString("user_order.status"));
+        final String bookTitle = resultSet.getString("title");
+        final String bookAuthor = resultSet.getString("author");
+        final int bookYear = resultSet.getInt("year");
+        final UserOrderStatus status = UserOrderStatus.valueOf(resultSet.getString("status"));
         final User user = new User(userID, userName, userLastname, userEmail, "", UserRole.USER);
         final Book book = new Book(bookId, bookTitle, bookAuthor, bookYear);
         return Optional.of(new UserOrder(userOrderID, user, book, status));

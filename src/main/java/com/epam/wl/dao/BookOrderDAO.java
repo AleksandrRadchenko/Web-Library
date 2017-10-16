@@ -7,7 +7,6 @@ import com.epam.wl.enums.BookOption;
 import com.epam.wl.executor.Executor;
 import com.epam.wl.executor.ResultHandler;
 
-import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -60,11 +59,11 @@ public class BookOrderDAO {
     }
 
     public List<BookOrder> getByUserId(int id) throws SQLException {
-        return executor.executeQuery(QUERY_GET_BY_USER_ID, bookOrderListHandler, String.valueOf(id));
+        return executor.executeQuery(QUERY_GET_BY_USER_ID, bookOrderListHandler, id);
     }
 
     public Optional<BookOrder> getById(final int id) throws SQLException {
-        return executor.executeQuery(QUERY_GET_BY_ID, bookOrderOneHandler, String.valueOf(id));
+        return executor.executeQuery(QUERY_GET_BY_ID, bookOrderOneHandler, id);
     }
 
     /**
@@ -74,13 +73,13 @@ public class BookOrderDAO {
      * @throws SQLException
      */
     @SuppressWarnings("JavaDoc")
-    public void update(BookOrder newBookOrder) throws SQLException {
-        executor.executeUpdate(QUERY_UPDATE,
-                String.valueOf(newBookOrder.getBookInstanceId()),
-                String.valueOf(newBookOrder.getUserOrderId()),
-                String.valueOf(newBookOrder.getBookOption()),
-                String.valueOf(newBookOrder.getId()));
-    }
+//    public void update(BookOrder newBookOrder) throws SQLException {
+//        executor.executeUpdate(QUERY_UPDATE,
+//                String.valueOf(newBookOrder.getBookInstanceId()),
+//                String.valueOf(newBookOrder.getUserOrderId()),
+//                String.valueOf(newBookOrder.getBookOption()),
+//                String.valueOf(newBookOrder.getId()));
+//    }
 
     public void deleteById(final int id) throws SQLException {
         executor.executeUpdate(QUERY_DELETE, String.valueOf(id));

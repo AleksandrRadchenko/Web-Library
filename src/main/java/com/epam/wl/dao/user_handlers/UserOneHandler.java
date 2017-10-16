@@ -9,6 +9,17 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 public class UserOneHandler implements ResultHandler<Optional<User>> {
+    private static UserOneHandler instance;
+
+    private UserOneHandler() {
+    }
+
+    public static synchronized UserOneHandler getInstance() {
+        if (instance == null)
+            instance = new UserOneHandler();
+        return instance;
+    }
+
     @Override
     public Optional<User> handle(ResultSet resultSet) throws SQLException {
         if (!resultSet.next()) return Optional.empty();

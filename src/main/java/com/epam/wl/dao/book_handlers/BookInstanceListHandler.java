@@ -9,6 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookInstanceListHandler implements ResultHandler<List<BookInstance>> {
+    private static BookInstanceListHandler instance;
+
+    private BookInstanceListHandler() {
+    }
+
+    public static synchronized BookInstanceListHandler getInstance() {
+        if (instance == null)
+            instance = new BookInstanceListHandler();
+        return instance;
+    }
     @Override
     public List<BookInstance> handle(ResultSet resultSet) throws SQLException {
         final List<BookInstance> bookInstances = new ArrayList<>();

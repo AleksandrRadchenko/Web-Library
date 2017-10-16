@@ -13,6 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserOrderListHandler implements ResultHandler<List<UserOrder>> {
+    private static UserOrderListHandler instance;
+
+    private UserOrderListHandler() {
+    }
+
+    public static synchronized UserOrderListHandler getInstance() {
+        if (instance == null)
+            instance = new UserOrderListHandler();
+        return instance;
+    }
+
     @Override
     public List<UserOrder> handle(ResultSet resultSet) throws SQLException {
         List<UserOrder> resultUserOrderList = new ArrayList();
