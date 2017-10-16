@@ -1,36 +1,23 @@
 package com.epam.wl.dao;
 
-import com.epam.wl.DBHelper;
+import com.epam.wl.entities.BookOrder;
 import com.epam.wl.entities.User;
-import com.epam.wl.enums.UserRole;
 import com.epam.wl.services.BookOrderService;
-import org.hamcrest.core.Is;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
-public class BookOrderServiceTest {
+public class BookOrderServiceTest implements TestData {
     private EmbeddedDatabase dataSource;
     private BookOrderService bookOrderService;
-    private static List<User> allUsers;
-
-    @BeforeAll
-    static void init() {
-        allUsers = new ArrayList<>();
-        allUsers.add(new User(1, "Иван", "Иванов", "ivan@ivan.ru", "", UserRole.USER));
-        allUsers.add(new User(2, "Федор", "Федоров", "fedor@ivan.ru", "", UserRole.USER));
-        allUsers.add(new User(3, "Петр", "Петров", "petr@ivan.ru", "", UserRole.USER));
-        allUsers.add(new User(4, "Семен", "Семенов", "semen@ivan.ru", "", UserRole.USER));
-    }
+    private static final List<User> allUsers = users;
 
     @BeforeEach
     void setUp() throws SQLException {
@@ -45,10 +32,26 @@ public class BookOrderServiceTest {
 
     @Test
     void getAllUsers() {
-        List<User> actual = bookOrderService.getAllUsers();
+        final List<User> actual = bookOrderService.getAllUsersWithOrders();
         actual.sort(Comparator.comparing(User::getId));
-        assertThat(actual, Is.is(allUsers));
+        assertThat(actual, is(allUsers));
     }
 
+    @Test
+    void getBookOrderByUserId() {
+        final int userid = 3;
+        final List<BookOrder> expected = new ArrayList<>(Collections.singletonList(bo3));
+        final List<BookOrder> actual = bookOrderService.getByUserId(userid);
+        actual.sort(Comparator.comparing(BookOrder::getId));
+        assertThat(actual, is(expected));
+    }
+
+    @Test
+    void getAllBookOrders() {
+        final List<BookOrder> expected = bookOrders;
+        final List<BookOrder> actual = bookOrderService.getAll();
+        actual.sort(Comparator.comparing(BookOrder::getId));
+        assertThat(actual, is(expected));
+    }
 
 }

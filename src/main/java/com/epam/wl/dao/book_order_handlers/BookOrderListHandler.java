@@ -27,7 +27,7 @@ public class BookOrderListHandler implements ResultHandler<List<BookOrder>> {
     public List<BookOrder> handle(ResultSet resultSet) throws SQLException {
         List<BookOrder> output = new ArrayList<BookOrder>();
         while (resultSet.next()) {
-            int id = resultSet.getInt("id");
+            int id = resultSet.getInt("book_order_id");
             int book_instanceid = resultSet.getInt("book_instanceid");
             int user_orderid = resultSet.getInt("user_orderid");
             BookOption option = BookOption.valueOf(resultSet.getString("option"));

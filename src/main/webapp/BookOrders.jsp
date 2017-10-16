@@ -34,6 +34,7 @@ Orders of ${username}:
         <td><b>Book author</b></td>
         <%--<td><b>Order id</b></td>--%>
         <%--<td><b>Book option</b></td>--%>
+        <td></td>
     </tr>
     <c:forEach items="${bookorders}" var="bookorder">
         <tr>

@@ -23,13 +23,13 @@ public class BookOrderServlet extends HttpServlet {
 
         if (!(request.getParameter("userid") == null)) {
             List<BookOrder> bookOrders = bookOrderService.getByUserId(Integer.parseInt(request.getParameter("userid")));
-            request.setAttribute("username", bookOrders.get(0).getName() + " " + bookOrders.get(0).getLastName());
+            request.setAttribute("username", bookOrders.get(0).getUserOrder().getUser().getName() + " " + bookOrders.get(0).getUserOrder().getUser().getLastname());
             request.setAttribute("bookorders", bookOrders);
-            request.setAttribute("allusers", bookOrderService.getAllUsers());
+            request.setAttribute("allusers", bookOrderService.getAllUsersWithOrders()); // TODO: 17.10.2017 chage for UserService.getAllUsers() 
         } else {
             request.setAttribute("username", "all users");
             request.setAttribute("bookorders", bookOrderService.getAll());
-            request.setAttribute("allusers", bookOrderService.getAllUsers());
+            request.setAttribute("allusers", bookOrderService.getAllUsersWithOrders());
         }
         request.getRequestDispatcher("BookOrders.jsp").forward(request, response);
     }

@@ -8,7 +8,6 @@ import com.epam.wl.executor.Executor;
 import com.epam.wl.executor.ResultHandler;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,15 +24,18 @@ public class BookOrderDAO {
     // language=H2
     private final static String QUERY_CREATE = "INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES(?, ?, ?);";
     // language=H2
-    private final static String QUERY_GET_ALL = "SELECT id, book_instanceid, user_orderid, option FROM book_order";
+    private final static String QUERY_GET_ALL = "SELECT id AS book_order_id, book_instanceid, user_orderid, option FROM book_order";
     // language=H2
-//    private final static String QUERY_GET_BY_USER_ID = "SELECT * FROM book_order WHERE user.id=?";
+    private final static String QUERY_GET_BY_USER_ID =
+            "SELECT book_order.id AS book_order_id, book_instanceid, user_orderid, option " +
+            "FROM book_order INNER JOIN user_order ON user_order.id=book_order.user_orderid WHERE userid=?";
     // language=H2
-    private final static String QUERY_GET_BY_ID = "SELECT * FROM book_order WHERE id=?";
+    private final static String QUERY_GET_BY_ID = "SELECT id AS book_order_id, book_instanceid, user_orderid, option FROM book_order WHERE id=?";
     // language=H2
     private final static String QUERY_UPDATE = "UPDATE book_order SET book_instanceid=?, user_orderid=?, option=? WHERE id=?";
 
-    private BookOrderDAO(){}
+    private BookOrderDAO() {
+    }
 
     public static synchronized BookOrderDAO getInstance() {
         if (instance == null)
@@ -43,9 +45,10 @@ public class BookOrderDAO {
 
     /**
      * Create row in book_order table
+     *
      * @param bookInstanceId int
-     * @param userOrderId int
-     * @param bookOption enum
+     * @param userOrderId    int
+     * @param bookOption     enum
      * @return 1 (number of rows changed) if success, or throws SQLexception
      * @throws SQLException
      */
@@ -63,8 +66,7 @@ public class BookOrderDAO {
     }
 
     public List<BookOrder> getByUserId(int id) throws SQLException {
-        return new ArrayList<>(); // TODO: 16.10.2017
-        //        return executor.executeQuery(QUERY_GET_BY_USER_ID, bookOrderListHandler, id);
+        return executor.executeQuery(QUERY_GET_BY_USER_ID, bookOrderListHandler, id);
     }
 
     public Optional<BookOrder> getById(final int id) throws SQLException {
@@ -73,6 +75,7 @@ public class BookOrderDAO {
 
     /**
      * Updates BookOrder with id == newBookOrder.getId(), using fields from newBookOrder
+     *
      * @param newBookOrder
      * @return 1 (number of rows changed) if success, or throws SQLexception
      * @throws SQLException

@@ -16,13 +16,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 class UserDAOTest implements TestData {
 
-    private UserDAO userDAO;
+    private UserDAO userDAO = UserDAO.getInstance();
     private EmbeddedDatabase dataSource;
 
     @BeforeEach
     public void initDatabase() {
         dataSource = DBHelper.getNewEmbeddedDatabase();
-        userDAO = new UserDAO(dataSource);
     }
 
     @AfterEach
