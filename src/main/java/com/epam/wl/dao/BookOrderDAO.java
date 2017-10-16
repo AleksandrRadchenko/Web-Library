@@ -8,6 +8,7 @@ import com.epam.wl.executor.Executor;
 import com.epam.wl.executor.ResultHandler;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,11 +24,14 @@ public class BookOrderDAO {
             "INNER JOIN book ON book.id=user_order.bookId INNER JOIN user ON user.id=user_order.userid";
     // language=H2
     private final static String QUERY_CREATE = "INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES(?, ?, ?);";
-    private final static String QUERY_GET_ALL = "SELECT " + ALL_FIELDS + " FROM " + JOIN_4_TABLES;
-    private final static String QUERY_GET_BY_USER_ID = "SELECT " + ALL_FIELDS + " FROM " + JOIN_4_TABLES + " WHERE user.id=?";
-    private final static String QUERY_GET_BY_ID = "SELECT " + ALL_FIELDS + " FROM " + JOIN_4_TABLES + " WHERE book_order.id=?";
+    // language=H2
+    private final static String QUERY_GET_ALL = "SELECT id, book_instanceid, user_orderid, option FROM book_order";
+    // language=H2
+//    private final static String QUERY_GET_BY_USER_ID = "SELECT * FROM book_order WHERE user.id=?";
+    // language=H2
+    private final static String QUERY_GET_BY_ID = "SELECT * FROM book_order WHERE id=?";
+    // language=H2
     private final static String QUERY_UPDATE = "UPDATE book_order SET book_instanceid=?, user_orderid=?, option=? WHERE id=?";
-    private final static String QUERY_DELETE = "DELETE FROM book_order WHERE id = ?";
 
     private BookOrderDAO(){}
 
@@ -51,7 +55,7 @@ public class BookOrderDAO {
             final int userOrderId,
             final BookOption bookOption)
             throws SQLException {
-        executor.executeUpdate(QUERY_CREATE, String.valueOf(bookInstanceId), String.valueOf(userOrderId), String.valueOf(bookOption.toString()));
+        executor.executeUpdate(QUERY_CREATE, bookInstanceId, userOrderId, String.valueOf(bookOption.toString()));
     }
 
     public List<BookOrder> getAll() throws SQLException {
@@ -59,7 +63,8 @@ public class BookOrderDAO {
     }
 
     public List<BookOrder> getByUserId(int id) throws SQLException {
-        return executor.executeQuery(QUERY_GET_BY_USER_ID, bookOrderListHandler, id);
+        return new ArrayList<>(); // TODO: 16.10.2017
+        //        return executor.executeQuery(QUERY_GET_BY_USER_ID, bookOrderListHandler, id);
     }
 
     public Optional<BookOrder> getById(final int id) throws SQLException {
@@ -79,9 +84,5 @@ public class BookOrderDAO {
                 newBookOrder.getUserOrder().getId(),
                 newBookOrder.getBookOption().toString(),
                 newBookOrder.getId());
-    }
-
-    public void deleteById(final int id) throws SQLException {
-        executor.executeUpdate(QUERY_DELETE, String.valueOf(id));
     }
 }

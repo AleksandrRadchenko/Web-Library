@@ -12,31 +12,28 @@
     <img src="img/logo.jpg" alt="logo">
     <hr>
 </div>
-<h3>Orders of ${bookorders.get(0).name} ${bookorders.get(0).lastName}</h3>
-<table border="1">
+<div align="center">
+    <h3>Orders of ${bookorders.get(0).userOrder.user.name} ${bookorders.get(0).userOrder.user.lastname}</h3>
+    <table border="1">
     <tr>
         <td><b>Book order id</b></td>
         <td><b>Book instance id</b></td>
         <td><b>Book title</b></td>
         <td><b>Book author</b></td>
-        <td><b>Order id</b></td>
-        <td><b>Book option</b></td>
+        <%--<td><b>Order id</b></td>--%>
+        <%--<td><b>Book option</b></td>--%>
     </tr>
     <c:forEach items="${bookorders}" var="bookorder">
         <tr>
             <td>${bookorder.id}</td>
-            <td>${bookorder.bookInstanceId}</td>
-            <td>${bookorder.title}</td>
-            <td>${bookorder.author}</td>
-            <td>${bookorder.userOrderId}</td>
-            <td>${bookorder.bookOption}</td>
+            <td>${bookorder.bookInstance.id}</td>
+            <td>${bookorder.bookInstance.book.title}</td>
+            <td>${bookorder.bookInstance.book.author}</td>
+            <%--<td>${bookorder.userOrderId}</td>--%>
+            <%--<td>${bookorder.bookOption}</td>--%>
         </tr>
     </c:forEach>
 </table>
-</div>
-<div class="footer">
-    <hr>
-    &copy;&nbsp;2017. All rights reserved.
 </div>
 </body>
 </html>
