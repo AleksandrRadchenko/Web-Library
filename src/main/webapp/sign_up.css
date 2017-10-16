@@ -1,0 +1,84 @@
+p {
+    font-size: 14px;
+}
+
+form {
+    font-family: sans-serif;
+    border: 1px solid #D4DADB;
+    padding: 0 15px;
+    border-radius: 3px;
+    background-color: white;
+}
+
+form img {
+    width: 80px;
+    vertical-align: middle;
+}
+
+fieldset {
+    padding: 0;
+    margin: 0;
+    margin: 15px 0;
+    border: none;
+}
+
+label {
+    width: 80px;
+    font-size: 14px;
+    display: inline-block;
+}
+
+form input {
+    border: 1px solid #C1C1C1;
+    padding: 3px 5px;
+    margin: 7px;
+    font-weight: bolder;
+    width: 260px;
+}
+
+form input:valid + span {
+    content: url(http://htmlbook.ru/example/images/ok.png);
+}
+
+form input:invalid + span {
+    content: url(http://www.clker.com/cliparts/4/3/1/f/1195436930767206781not_ok_mark_h_kon_l_vdal_01.svg);
+    height: 15px;
+    vertical-align: middle;
+    margin-left: -3px;
+}
+
+.sum {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #E3E3E3;
+    border-radius: 3px;
+}
+
+.sum input {
+    padding: 2px 15px;
+    margin-left: 95px;
+    border-radius: 15px;
+    border: 2px solid #008F00;
+    background: linear-gradient(#00E000, #008F00);
+    color: white;
+}
+
+.option input {
+    margin: 3px 0 0 -30px;
+}
+
+.sumsum {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #E3E3E3;
+    border-radius: 3px;
+}
+
+.sumsum input {
+    padding: 2px 15px;
+    margin-left: 95px;
+    border-radius: 15px;
+    border: 2px solid #5F9EA0;
+    background: linear-gradient(#20B2AA, #008B8B);
+    color: white;
+}
