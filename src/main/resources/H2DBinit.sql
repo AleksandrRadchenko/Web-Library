@@ -17,7 +17,7 @@ CREATE SEQUENCE edition_id_seq;
 -- create type option as enum ('SUBSCRIPTION', 'READING_ROOM')
 -- ;
 
-CREATE TABLE user
+CREATE TABLE users
 (
   id           INTEGER AUTO_INCREMENT NOT NULL
     CONSTRAINT user_pkey
@@ -30,10 +30,10 @@ CREATE TABLE user
 );
 
 CREATE UNIQUE INDEX user_id_uindex
-  ON user (id);
+  ON users (id);
 
 CREATE UNIQUE INDEX user_email_uindex
-  ON user (email);
+  ON users (email);
 
 CREATE TABLE user_order
 (
@@ -43,7 +43,7 @@ CREATE TABLE user_order
   bookid INTEGER                NOT NULL,
   userid    INTEGER                NOT NULL
     CONSTRAINT order_user_id_fk
-    REFERENCES user
+    REFERENCES users
     ON UPDATE CASCADE ON DELETE CASCADE,
   status    VARCHAR(45)            NOT NULL
 );
