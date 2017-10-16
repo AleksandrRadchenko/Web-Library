@@ -18,14 +18,14 @@ public class MakeNewBookOrderServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userOrderId = Integer.valueOf(request.getParameter("userOrderId"));
-        int bookInstanceId = Integer.valueOf(request.getParameter("bookInstanceId"));
-        BookOption bookOption = BookOption.valueOf(request.getParameter("bookOption"));
+        final int userOrderId = Integer.valueOf(request.getParameter("userOrderId"));
+        final int bookInstanceId = Integer.valueOf(request.getParameter("bookInstanceId"));
+        final BookOption bookOption = BookOption.valueOf(request.getParameter("bookOption"));
 
-        BookOrderService bookOrderService = BookOrderService.getInstance();
+        final BookOrderService bookOrderService = BookOrderService.getInstance();
         bookOrderService.create(bookInstanceId, userOrderId, bookOption);
 
-        UserOrderService userOrderService = UserOrderService.getInstance();
+        final UserOrderService userOrderService = UserOrderService.getInstance();
         userOrderService.setUserOrderStatus(userOrderId, UserOrderStatus.IN_PROGRESS);
 
         request.getRequestDispatcher("/librarian").forward(request, response);

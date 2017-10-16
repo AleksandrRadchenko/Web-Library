@@ -17,18 +17,18 @@ public class UserOrderListHandler implements ResultHandler<List<UserOrder>> {
     public List<UserOrder> handle(ResultSet resultSet) throws SQLException {
         List<UserOrder> resultUserOrderList = new ArrayList();
         while (resultSet.next()) {
-            int userOrderID = resultSet.getInt("user_order_id");
-            int userID = resultSet.getInt("user_id");
-            String userName = resultSet.getString("user_name");
-            String userLastname = resultSet.getString("user_lastname");
-            String userEmail = resultSet.getString("user_email");
-            int bookId = resultSet.getInt("book_id");
-            String bookTitle = resultSet.getString("title");
-            String bookAuthor = resultSet.getString("author");
-            int bookYear = resultSet.getInt("year");
-            UserOrderStatus status = UserOrderStatus.valueOf(resultSet.getString("status"));
-            User user = new User(userID, userName, userLastname, userEmail, "", UserRole.USER);
-            Book book = new Book(bookId, bookTitle, bookAuthor, bookYear);
+            final int userOrderID = resultSet.getInt("user_order_id");
+            final int userID = resultSet.getInt("user_id");
+            final String userName = resultSet.getString("user_name");
+            final String userLastname = resultSet.getString("user_lastname");
+            final String userEmail = resultSet.getString("user_email");
+            final int bookId = resultSet.getInt("book_id");
+            final String bookTitle = resultSet.getString("title");
+            final String bookAuthor = resultSet.getString("author");
+            final int bookYear = resultSet.getInt("year");
+            final UserOrderStatus status = UserOrderStatus.valueOf(resultSet.getString("status"));
+            final User user = new User(userID, userName, userLastname, userEmail, "", UserRole.USER);
+            final Book book = new Book(bookId, bookTitle, bookAuthor, bookYear);
             resultUserOrderList.add(new UserOrder(userOrderID, user, book, status));
         }
         return resultUserOrderList;

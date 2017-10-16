@@ -15,10 +15,10 @@ public class MakeNewUserOrderServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userId = Integer.valueOf(request.getParameter("userId"));
-        int bookId = Integer.valueOf(request.getParameter("bookId"));
+        final int userId = Integer.valueOf(request.getParameter("userId"));
+        final int bookId = Integer.valueOf(request.getParameter("bookId"));
 
-        UserOrderService userOrderService = UserOrderService.getInstance();
+        final UserOrderService userOrderService = UserOrderService.getInstance();
         userOrderService.createNewUserOrder(bookId, userId);
 
         request.getRequestDispatcher("/catalog").forward(request, response);
