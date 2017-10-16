@@ -8,16 +8,17 @@ import com.epam.wl.enums.UserRole;
 import com.epam.wl.executor.Executor;
 import com.epam.wl.executor.ResultHandler;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.List;
 import java.util.Optional;
 
 public class UserDAO {
-    private Executor executor;
-    private final ResultHandler<Optional<User>> userOneHandler;
-    private final ResultHandler<List<User>> userListHandler;
-    private final ResultHandler<Boolean> userIsLibrarianHandler;
+
+    private static UserDAO instance;
+    private final Executor executor = Executor.getInstance();
+    private final ResultHandler<Optional<User>> userOneHandler = UserOneHandler.getInstance();
+    private final ResultHandler<List<User>> userListHandler = UserListHandler.getInstance();
+    private final ResultHandler<Boolean> userIsLibrarianHandler = UserIsLibrarianHandler.getInstance();
 
     private static final String ADD_USER_SCRIPT =
             "INSERT INTO users(name, lastname, email, passwordhash, role) VALUES(?,?,?,?,?)";
@@ -35,12 +36,13 @@ public class UserDAO {
             "SELECT * FROM users WHERE name=? AND lastname=?";
     private static final String GET_USER_BY_EMAIL_QUERY = "SELECT * FROM users WHERE email=?";
 
+    public UserDAO() {
+    }
 
-    public UserDAO(DataSource dataSource) {
-        this.executor = new Executor(dataSource);
-        this.userListHandler = new UserListHandler();
-        this.userOneHandler = new UserOneHandler();
-        this.userIsLibrarianHandler = new UserIsLibrarianHandler();
+    public static synchronized UserDAO getInstance() {
+        if (instance == null)
+            instance = new UserDAO();
+        return instance;
     }
 
     public void addUser(String name, String lastname, String email, String passwordHash, UserRole userRole) throws SQLException {

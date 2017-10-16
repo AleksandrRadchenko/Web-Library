@@ -11,6 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookOrderListHandler implements ResultHandler<List<BookOrder>> {
+    private static BookOrderListHandler instance;
+
+    private BookOrderListHandler() {
+    }
+
+    public static synchronized BookOrderListHandler getInstance() {
+        if (instance == null)
+            instance = new BookOrderListHandler();
+        return instance;
+    }
+
     @Override
     public List<BookOrder> handle(ResultSet resultSet) throws SQLException {
         List<BookOrder> output = new ArrayList<BookOrder>();

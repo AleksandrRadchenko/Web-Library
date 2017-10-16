@@ -1,16 +1,24 @@
 package com.epam.wl.executor;
 
-import lombok.RequiredArgsConstructor;
+import com.epam.wl.db.JdbcConnector;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-@RequiredArgsConstructor
 public class Executor {
-    private final DataSource dataSource;
+    private static Executor instance;
+    private final static DataSource dataSource = JdbcConnector.getDataSource();
+
+    private Executor() {
+    }
+
+    public static synchronized Executor getInstance() {
+        if (instance == null)
+            instance = new Executor();
+        return instance;
+    }
 
     public void executeUpdate(final String update, Object... args) throws SQLException {
         try (PreparedStatement stmt = dataSource.getConnection().prepareStatement(update)) {

@@ -4,10 +4,18 @@ import com.epam.wl.executor.ResultHandler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BookInstanceIdHandler implements ResultHandler<Integer> {
+    private static BookInstanceIdHandler instance;
+
+    private BookInstanceIdHandler() {
+    }
+
+    public static synchronized BookInstanceIdHandler getInstance() {
+        if (instance == null)
+            instance = new BookInstanceIdHandler();
+        return instance;
+    }
     @Override
     public Integer handle(ResultSet resultSet) throws SQLException {
         if (resultSet.next()) {

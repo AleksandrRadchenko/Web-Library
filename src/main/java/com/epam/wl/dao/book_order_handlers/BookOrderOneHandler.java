@@ -10,6 +10,17 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 public class BookOrderOneHandler implements ResultHandler<Optional<BookOrder>> {
+    private static BookOrderOneHandler instance;
+
+    private BookOrderOneHandler() {
+    }
+
+    public static synchronized BookOrderOneHandler getInstance() {
+        if (instance == null)
+            instance = new BookOrderOneHandler();
+        return instance;
+    }
+
     @Override
     public Optional<BookOrder> handle(ResultSet resultSet) throws SQLException {
         if (!resultSet.next()) return Optional.empty();

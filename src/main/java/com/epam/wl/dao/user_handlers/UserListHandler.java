@@ -10,6 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserListHandler implements ResultHandler<List<User>> {
+    private static UserListHandler instance;
+
+    private UserListHandler() {
+    }
+
+    public static synchronized UserListHandler getInstance() {
+        if (instance == null)
+            instance = new UserListHandler();
+        return instance;
+    }
+
     @Override
     public List<User> handle(ResultSet resultSet) throws SQLException {
         List<User> resultUserList = new ArrayList();

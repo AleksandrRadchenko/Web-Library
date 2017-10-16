@@ -6,18 +6,18 @@ import com.epam.wl.entities.BookInstance;
 import com.epam.wl.executor.Executor;
 import com.epam.wl.executor.ResultHandler;
 
-import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BookDAO {
-    private Executor executor;
-    private final ResultHandler<List<Book>> bookListHandler;
-    private final ResultHandler<List<BookInstance>> bookInstanceListHandler;
-    private final ResultHandler<Integer> bookIdHandler;
-    private final ResultHandler<Integer> bookInstanceIdHandler;
-    private final ResultHandler<List<Integer>> bookInstancesIdListHandler;
+
+    private static BookDAO instance;
+    private final Executor executor = Executor.getInstance();
+    private final ResultHandler<List<Book>> bookListHandler = BookListHandler.getInstance();
+    private final ResultHandler<List<BookInstance>> bookInstanceListHandler = BookInstanceListHandler.getInstance();
+    private final ResultHandler<Integer> bookIdHandler = BookIdHandler.getInstance();
+    private final ResultHandler<Integer> bookInstanceIdHandler = BookInstanceIdHandler.getInstance();
+    private final ResultHandler<List<Integer>> bookInstancesIdListHandler = BookInstancesIdListHandler.getInstance();
 
     private static final String GET_ALL_BOOKS_QUERY = "SELECT * FROM book";
     private static final String GET_ALL_BOOKS_INSTANCES_QUERY = "SELECT * FROM book_instance";
@@ -28,13 +28,13 @@ public class BookDAO {
     private static final String ADD_NEW_BOOK_INSTANCE_QUERY = "INSERT INTO book_instance(bookid) VALUES (?)";
     private static final String ADD_NEW_BOOK_QUERY = "INSERT INTO book(author, title, year) VALUES (?, ?, ?)";
 
-    public BookDAO(DataSource dataSource) {
-        this.executor = new Executor(dataSource);
-        this.bookListHandler = new BookListHandler();
-        this.bookInstanceListHandler = new BookInstanceListHandler();
-        this.bookIdHandler = new BookIdHandler();
-        this.bookInstanceIdHandler = new BookInstanceIdHandler();
-        this.bookInstancesIdListHandler = new BookInstancesIdListHandler();
+    public BookDAO() {
+    }
+
+    public static synchronized BookDAO getInstance() {
+        if (instance == null)
+            instance = new BookDAO();
+        return instance;
     }
 
     public List<Book> getAllBooks() throws SQLException {
@@ -46,11 +46,11 @@ public class BookDAO {
     }
 
     public int getBookId(String author, String title, int year) throws SQLException {
-        return executor.executeQuery(GET_BOOK_ID_QUERY, bookIdHandler, author, title, String.valueOf(year));
+        return executor.executeQuery(GET_BOOK_ID_QUERY, bookIdHandler, author, title, year);
     }
 
     public int getFreeBookInstanceId(int bookId) throws SQLException {
-        return executor.executeQuery(GET_FREE_BOOK_INSTANCE_ID_QUERY, bookInstanceIdHandler, String.valueOf(bookId));
+        return executor.executeQuery(GET_FREE_BOOK_INSTANCE_ID_QUERY, bookInstanceIdHandler, bookId);
     }
 
     public void addNewBookInstance(String author, String title, int year) throws SQLException {
@@ -68,14 +68,14 @@ public class BookDAO {
             }
         }
 
-        executor.executeUpdate(ADD_NEW_BOOK_INSTANCE_QUERY, String.valueOf(bookId));
+        executor.executeUpdate(ADD_NEW_BOOK_INSTANCE_QUERY, bookId);
     }
 
     private void addNewBook(String author, String title, int year) throws SQLException {
-        executor.executeUpdate(ADD_NEW_BOOK_QUERY, author, title, String.valueOf(year));
+        executor.executeUpdate(ADD_NEW_BOOK_QUERY, author, title, year);
     }
 
     public List<Integer> getFreeBookInstancesForThisBook(int bookId) throws SQLException {
-        return executor.executeQuery(GET_FREE_BOOK_INSTANCE_ID_QUERY, bookInstancesIdListHandler, String.valueOf(bookId));
+        return executor.executeQuery(GET_FREE_BOOK_INSTANCE_ID_QUERY, bookInstancesIdListHandler, bookId);
     }
 }
