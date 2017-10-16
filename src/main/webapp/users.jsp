@@ -12,67 +12,60 @@
     <hr>
 </div>
 <div align="center">
-<h1>Welcome to your profile, User</h1>
-<table border="1">
-    <tr>
-        <td><b>id</b> </td>
-        <td><b>name</b></td>
-        <td><b>lastname</b> </td>
-        <td><b>email</b></td>
-        <td><b>role</b></td>
-    </tr>
     <jsp:useBean id="users" scope="request" type="java.util.List"/>
-    <c:forEach items="${users}" var="user">
+    <h1>Welcome to your profile, ${users.get(0).name}!</h1>
+    <table border="1">
         <tr>
-            <td>${user.id}</td>
-            <td>${user.name}</td>
-            <td> ${user.lastname}</td>
-            <td> ${user.email}</td>
-            <td> ${user.role}</td>
+            <td><b>id</b></td>
+            <td><b>name</b></td>
+            <td><b>lastname</b></td>
+            <td><b>email</b></td>
+            <td><b>role</b></td>
         </tr>
-    </c:forEach>
-</table>
-<hr>
-    <h4>You can change your parameters here, User</h4>
-<form action="${pageContext.request.contextPath}/useredit" method="POST">
-    <tr>
-        <td colspan="1">
-            <b>Name</b>
+        <tr>
+            <td>${users.get(0).id}</td>
+            <td>${users.get(0).name}</td>
+            <td>${users.get(0).lastname}</td>
+            <td>${users.get(0).email}</td>
+            <td>${users.get(0).role}</td>
+        </tr>
+    </table>
+    <hr>
+    <div>
+        <h4>You can change your parameters here:</h4><br>
+        <form action="${pageContext.request.contextPath}/useredit" method="POST">
+            <b>Name: </b>
             <input name="name" type="text">
-        </td>
-        <td colspan="1">
-            <b>Lastname</b>
+            <b>Lastname: </b>
             <input name="lastname" type="text">
-        </td>
-        <td colspan="1">
-            <b>Email</b>
+            <b>Email: </b>
             <input name="email" type="text">
-        </td>
-        <td colspan="1">
-            <b>Password</b>
+            <b>Password: </b>
             <input name="passwordhash" type="text">
-        </td>
-        <td colspan="1">
             <input type="submit">
-        </td>
-    </tr>
-</form>
-<hr>
-<br>
-<a href="http://localhost:8080/catalog">Welcome to out catalog of books!</a><br>
-<br>
-<table border="1">
-    <jsp:useBean id="books" scope="request" type="java.util.List"/>
-    <c:forEach items="${books}" var="book">
-        <tr>
-            <td>${book.id}</td>
-            <td>${book.book.author}</td>
-            <td> ${book.book.title}</td>
-            <td> ${book.book.year}</td>
-            <td> ${book.status}</td>
-        </tr>
-    </c:forEach>
-</table>
+        </form>
+    </div>
+
+    <hr>
+    <br>
+    <a href="${pageContext.request.contextPath}/catalog">Welcome to out catalog of books!</a><br>
+    <br>
+    <table border="1">
+        <jsp:useBean id="books" scope="request" type="java.util.List"/>
+        <c:forEach items="${books}" var="book">
+            <tr>
+                <td>${book.id}</td>
+                <td>${book.book.author}</td>
+                <td> ${book.book.title}</td>
+                <td> ${book.book.year}</td>
+                <td> ${book.status}</td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
+<div class="footer">
+    <hr>
+    &copy;&nbsp;2017. All rights reserved.
 </div>
 </body>
 </html>

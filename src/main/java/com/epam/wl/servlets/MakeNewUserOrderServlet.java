@@ -15,7 +15,7 @@ import java.io.IOException;
 public class MakeNewUserOrderServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int bookId = Integer.valueOf(request.getParameter("bookid"));
+        int bookId = Integer.valueOf(request.getParameter("bookId"));
         HttpSession session = request.getSession(false);
         int userId = ((User) session.getAttribute("currentSessionUser")).getId();
 

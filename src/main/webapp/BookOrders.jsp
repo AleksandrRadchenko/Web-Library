@@ -33,5 +33,10 @@
         </tr>
     </c:forEach>
 </table>
+</div>
+<div class="footer">
+    <hr>
+    &copy;&nbsp;2017. All rights reserved.
+</div>
 </body>
 </html>

@@ -52,6 +52,10 @@
 <div class="sum">
     <input type="submit" value="Sign up" form='send'>
 </div>
-</body>
 </div>
+<div class="footer">
+    <hr>
+    &copy;&nbsp;2017. All rights reserved.
+</div>
+</body>
 </html>

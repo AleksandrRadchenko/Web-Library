@@ -12,46 +12,60 @@
     <hr>
 </div>
 <div align="center">
-<table border="1">
-    <form action="${pageContext.request.contextPath}/userorderfromcatalog" method="GET">
+    <h2>Book catalog</h2>
+    <table border="1">
+        <%--<tr>--%>
+            <%--<td><b>User ID </b></td>--%>
+            <%--<td><b>Book ID</b></td>--%>
+            <%--<td><b></b></td>--%>
+            <%--<td><b></b></td>--%>
+        <%--</tr>--%>
+        <%--<jsp:useBean id="identification" scope="request" type="java.util.List"/>--%>
+
+        <%--ddd${identification.get(0).id}ddd--%>
+        <%--<c:forEach items="${identification}" var="userID">--%>
+            <%--<td>--%>
+                    <%--${userID.id}--%>
+            <%--</td>--%>
+        <%--</c:forEach>--%>
+        <%--<td colspan="1">--%>
+            <%--<input name="bookid" type="text">--%>
+        <%--</td>--%>
+        <%--<td colspan="1">--%>
+            <%--<input type="submit">--%>
+        <%--</td>--%>
+        <%--<td></td>--%>
         <tr>
-            <td><b>User ID </b></td>
-            <td><b>Book ID</b></td>
-            <td><b></b></td>
-            <td><b></b></td>
-        </tr>
-<jsp:useBean id="identification" scope="request" type="java.util.List"/>
-<c:forEach items="${identification}" var="userID">
-        <td>
-                ${userID.id}
-        </td>
-</c:forEach>
-        <td colspan="1">
-            <input name="bookid" type="text">
-        </td>
-        <td colspan="1">
-            <input type="submit">
-        </td>
-        <td></td>
-    </form>
-    <tr>
-        <td><b>Book ID </b></td>
-        <td><b>Author</b></td>
-        <td><b>Title</b></td>
-        <td><b>Year</b></td>
-        <td></td>
-    </tr>
-    <jsp:useBean id="books" scope="request" type="java.util.List"/>
-    <c:forEach items="${books}" var="book">
-        <tr>
-            <td>${book.id}</td>
-            <td>${book.author}</td>
-            <td>${book.title}</td>
-            <td>${book.year}</td>
+            <td><b>Author</b></td>
+            <td><b>Title</b></td>
+            <td><b>Year</b></td>
             <td></td>
         </tr>
-    </c:forEach>
-</table>
+
+        <jsp:useBean id="books" scope="request" type="java.util.List"/>
+        <c:forEach items="${books}" var="book">
+            <tr>
+                <td>${book.author}</td>
+                <td>${book.title}</td>
+                <td>${book.year}</td>
+                <td>
+                    <form action="${pageContext.request.contextPath}/userorderfromcatalog" method="GET">
+                        <%--<jsp:useBean id="identification" scope="request" type="java.util.List"/>--%>
+                        <%--<input type="hidden" value="${identification.get(0).id}" name="userId">--%>
+                        <input type="hidden" value="${book.id}" name="bookId">
+                        <div class="button">
+                            <input type="submit" value="Order">
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
 </body>
+</div>
+<div class="footer">
+    <hr>
+    &copy;&nbsp;2017. All rights reserved.
+</div>
 </html>
