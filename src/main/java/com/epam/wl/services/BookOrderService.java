@@ -41,4 +41,8 @@ public class BookOrderService {
         }
         return result;
     }
+
+    public void deleteById(int userOrderId) throws SQLException {
+        bookOrderDAO.deleteById(userOrderId);
+    }
 }

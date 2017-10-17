@@ -24,7 +24,8 @@ public class BookDAO {
     private static final String GET_ALL_BOOKS_QUERY = "SELECT * FROM book";
     private static final String GET_ALL_BOOKS_INSTANCES_QUERY = "SELECT * FROM book_instance";
     private static final String GET_BOOK_ID_QUERY = "SELECT * FROM book WHERE author=? AND title=? AND year=?";
-    private static final String GET_FREE_BOOK_INSTANCE_ID_QUERY = "SELECT * FROM book_instance LEFT JOIN book_order "
+    private static final String GET_FREE_BOOK_INSTANCE_ID_QUERY = "SELECT book_instance.id AS book_instance_id " +
+            "FROM book_instance LEFT JOIN book_order "
              + "ON book_instance.id=book_order.book_instanceid WHERE "
              + "book_instance.bookid=? AND book_instanceid IS NULL";
     private static final String ADD_NEW_BOOK_QUERY = "INSERT INTO book(author, title, year) VALUES (?, ?, ?)";

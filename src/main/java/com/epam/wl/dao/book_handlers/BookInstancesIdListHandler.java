@@ -24,7 +24,7 @@ public class BookInstancesIdListHandler implements ResultHandler<List<Integer>> 
         final List<Integer> bookInstancesId = new ArrayList<>();
 
         while (resultSet.next()) {
-            bookInstancesId.add(resultSet.getInt("id"));
+            bookInstancesId.add(resultSet.getInt("book_instance_id"));
         }
 
         return bookInstancesId;
