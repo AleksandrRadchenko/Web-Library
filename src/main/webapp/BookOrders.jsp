@@ -50,7 +50,7 @@
                 <td>
                     <c:if test="${'CLOSED' != bookorder.userOrder.status}">
                         <form action="${pageContext.request.contextPath}/close_user_order" method="GET">
-                            <input type="hidden" value="${bookorder.userOrder.id}" name="book_orderid">
+                            <input type="hidden" value="${bookorder.userOrder.id}" name="userOrderId">
                             <div class="button">
                                 <input type="submit" value="Close order">
                             </div>

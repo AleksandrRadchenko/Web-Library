@@ -1,6 +1,7 @@
 package com.epam.wl.servlets;
 
 import com.epam.wl.enums.UserOrderStatus;
+import com.epam.wl.services.BookOrderService;
 import com.epam.wl.services.UserOrderService;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 @WebServlet(name = "CloseUserOrderServlet", urlPatterns = "/close_user_order")
 public class CloseUserOrderServlet extends HttpServlet {
     private final UserOrderService userOrderService = UserOrderService.getInstance();
+    private final BookOrderService bookOrderService = BookOrderService.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -21,8 +23,10 @@ public class CloseUserOrderServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            if (request.getParameter("book_orderid") != null) {
-                userOrderService.setUserOrderStatus(Integer.parseInt(request.getParameter("book_orderid")), UserOrderStatus.CLOSED);
+            if (request.getParameter("userOrderId") != null) {
+                int userOrderId = Integer.parseInt(request.getParameter("userOrderId"));
+                bookOrderService.deleteById(userOrderId);
+                userOrderService.setUserOrderStatus(userOrderId, UserOrderStatus.CLOSED);
             }
             response.sendRedirect("/book_order");
         } catch (SQLException | IllegalArgumentException e) {

@@ -34,6 +34,8 @@ public class BookOrderDAO {
     // language=H2
     private final static String QUERY_UPDATE = "UPDATE book_order SET book_instanceid=?, user_orderid=?, option=? WHERE id=?";
 
+    public static final String DELETE_BY_ID = "DELETE FROM book_order WHERE user_orderid = ?";
+
     private BookOrderDAO() {
     }
 
@@ -71,5 +73,9 @@ public class BookOrderDAO {
 
     public Optional<BookOrder> getById(final int id) throws SQLException {
         return executor.executeQuery(QUERY_GET_BY_ID, bookOrderOneHandler, id);
+    }
+
+    public void deleteById(int userOrderId) throws SQLException {
+        executor.executeUpdate(DELETE_BY_ID, userOrderId);
     }
 }
