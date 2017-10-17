@@ -27,9 +27,15 @@ public interface TestData {
     BookInstance bi8 = new BookInstance(8, b2);
     BookInstance bi9 = new BookInstance(9, b2);
     BookInstance bi10 = new BookInstance(10, b4);
-    BookInstance bi11 = new BookInstance(11, b3);
-    List<BookInstance> bookInstances = new ArrayList<>(Arrays.asList(bi1,bi2,bi3,bi4,bi5,bi6,bi7,bi8,bi9,bi10,bi11));
+    BookInstance bi11 = new BookInstance(10, b4);
     BookInstance bi12 = new BookInstance(12, b4);
+    BookInstance bi13 = new BookInstance(13, b3);
+    BookInstance bi14 = new BookInstance(14, b3);
+    BookInstance bi15 = new BookInstance(15, b3);
+    BookInstance bi16 = new BookInstance(16, b3);
+    BookInstance bi17 = new BookInstance(17, b3);
+    List<BookInstance> bookInstances = new ArrayList<>(Arrays.asList(bi1,bi2,bi3,bi4,bi5,bi6,bi7,bi8,bi9,bi10,bi11));
+    BookInstance bi18 = new BookInstance(18, b4);
 
     User u1 = new User(1, "Иван", "Иванов", "ivan@ivan.ru", "fdfsdcdzc", UserRole.USER);
     User u2 = new User(2, "Федор", "Федоров", "fedor@ivan.ru", "fdfsdcdrfdsfzc", UserRole.USER);

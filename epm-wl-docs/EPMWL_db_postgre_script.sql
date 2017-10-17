@@ -104,6 +104,11 @@ INSERT INTO book_instance (bookid) VALUES (2);
 INSERT INTO book_instance (bookid) VALUES (2);
 INSERT INTO book_instance (bookid) VALUES (2);
 INSERT INTO book_instance (bookid) VALUES (4);
+INSERT INTO book_instance (bookid) VALUES (4);
+INSERT INTO book_instance (bookid) VALUES (4);
+INSERT INTO book_instance (bookid) VALUES (3);
+INSERT INTO book_instance (bookid) VALUES (3);
+INSERT INTO book_instance (bookid) VALUES (3);
 INSERT INTO book_instance (bookid) VALUES (3);
 
 INSERT INTO users (name, lastname, email, passwordhash, role)
