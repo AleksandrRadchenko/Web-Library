@@ -57,7 +57,6 @@ public class Executor {
                 }
             }
             stmt.executeUpdate();
-            stmt.close();
         }
     }
 
@@ -73,7 +72,6 @@ public class Executor {
             final ResultSet result = stmt.executeQuery();
             T value = handler.handle(result);
             result.close();
-            stmt.close();
             return value;
         }
     }
