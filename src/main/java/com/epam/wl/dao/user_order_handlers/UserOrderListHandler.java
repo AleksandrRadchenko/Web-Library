@@ -13,9 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserOrderListHandler implements ResultHandler<List<UserOrder>> {
+    private static UserOrderListHandler instance;
+
+    private UserOrderListHandler() {
+    }
+
+    public static synchronized UserOrderListHandler getInstance() {
+        if (instance == null)
+            instance = new UserOrderListHandler();
+        return instance;
+    }
+
     @Override
     public List<UserOrder> handle(ResultSet resultSet) throws SQLException {
-        List<UserOrder> resultUserOrderList = new ArrayList();
+        final List<UserOrder> resultUserOrderList = new ArrayList();
         while (resultSet.next()) {
             final int userOrderID = resultSet.getInt("user_order_id");
             final int userID = resultSet.getInt("user_id");

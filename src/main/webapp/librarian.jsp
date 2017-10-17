@@ -12,7 +12,7 @@
     <hr>
 </div>
 <div align="center">
-    <a href="http://localhost:8080/book_order"><h2>Current book orders>></h2></a>
+    <a href="${pageContext.request.contextPath}/book_order"><h2>Current book orders>></h2></a>
     <hr>
     <h2>New user orders</h2>
     <table>
@@ -38,9 +38,6 @@
             <td><b>
                 <center>Year</center>
             </b></td>
-            <%--<td><b>--%>
-            <%--<center>Status</center>--%>
-            <%--</b></td>--%>
             <td><b>
                 <center>Available<br>exemplars</center>
             </b></td>
@@ -59,14 +56,12 @@
                 <td>${order.key.book.title}</td>
                 <td>${order.key.book.author}</td>
                 <td>${order.key.book.year}</td>
-                    <%--<td>${order.key.status}</td>--%>
                 <c:choose>
                     <c:when test="${!empty order.value}">
                         <form action="${pageContext.request.contextPath}/makeBookOrder" method="GET">
                             <td>
                                 <input type="hidden" value="${order.key.id}" name="userOrderId">
                                 <div class="select" align="center"><select name="bookInstanceId">
-                                    <%--<option disabled selected>select exemplar</option>--%>
                                     <c:forEach items="${order.value}" var="bookInstance">
                                         <option value="${bookInstance}">${bookInstance}</option>
                                     </c:forEach>
@@ -97,7 +92,7 @@
 </div>
 <div class="footer">
     <hr>
-    &copy;&nbsp;2017. Полное или частичное копирование информации с&nbsp;этого сайта запрещено.
+    &copy;&nbsp;2017. All rights reserved.
 </div>
 </body>
 </html>

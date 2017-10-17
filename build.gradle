@@ -1,5 +1,4 @@
-//	Aleksandr_radchenko: let's try Spring 5 for now...
-def springVersion = '+'  //def springVersion = '4.3.11.RELEASE'
+def springVersion = '+'
 
 group 'EPM-WL'
 version '1.0-SNAPSHOT'
@@ -20,27 +19,19 @@ repositories {
 dependencies {
     // Spring
     compile 'org.springframework:spring-jdbc:' + springVersion
-//    'org.springframework:spring-context:' + springVersion,
-//    'org.springframework:spring-context-support:' + springVersion,
-//    'org.springframework:spring-tx:' + springVersion,
-//    Aleksandr_radchenko: We are prohibited to use MVC, AFAIK
-//    'org.springframework:spring-mvc:' + springVersion
 
     //'org.apache.logging.log4j:log4j-api:+',
     //'org.apache.logging.log4j:log4j-core:+',
 
-    compile 'javax.servlet:jstl:1.2'
-    runtime 'org.postgresql:postgresql:+'
+    compile 'javax.servlet:jstl:1.2',
+    'org.postgresql:postgresql:+'
 
     // Tomcat include javax.servlet lib
     providedCompile 'javax.servlet:javax.servlet-api:+'
 
     compileOnly 'org.projectlombok:lombok:+'
 
-    testRuntime 'com.h2database:h2:+'
-//                'mysql:mysql-connector-java:6.0.5'
-// https://mvnrepository.com/artifact/org.postgresql/postgresql
-
+    runtime 'com.h2database:h2:+'
 
     testCompile 'org.junit.jupiter:junit-jupiter-api:+',
             'org.hamcrest:java-hamcrest:+'

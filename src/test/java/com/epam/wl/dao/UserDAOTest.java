@@ -1,12 +1,11 @@
 package com.epam.wl.dao;
 
-import com.epam.wl.DBHelper;
 import com.epam.wl.entities.User;
 import com.epam.wl.enums.UserRole;
+import com.epam.wl.executor.Executor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.omg.CORBA.UnknownUserException;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
 import java.sql.SQLException;
@@ -16,20 +15,13 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-class UserDAOTest {
+class UserDAOTest implements TestData {
 
-    private UserDAO userDAO;
-    private EmbeddedDatabase dataSource;
+    private UserDAO userDAO = UserDAO.getInstance();
 
     @BeforeEach
-    public void initDatabase() {
-        dataSource = DBHelper.getEmbeddedDatabase();
-        userDAO = new UserDAO(dataSource);
-    }
-
-    @AfterEach
-    public void dropDatabase() throws SQLException {
-        dataSource.shutdown();
+    public void initDatabase() throws SQLException {
+            Executor.resetTestDataSource();
     }
 
     @Test

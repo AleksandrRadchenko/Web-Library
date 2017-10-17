@@ -1,6 +1,9 @@
 package com.epam.wl.db;
 
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -9,6 +12,7 @@ import java.util.Properties;
 
 public class JdbcConnector {
     private static JdbcConnector instance;
+    private static EmbeddedDatabase testInstance;
     private DataSource dataSource;
 
     private JdbcConnector() {
@@ -36,5 +40,29 @@ public class JdbcConnector {
             }
         }
         return instance.dataSource;
+    }
+
+    public static EmbeddedDatabase getTestDataSource() {
+        if (testInstance == null) {
+            EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+            testInstance = builder
+                    .setType(EmbeddedDatabaseType.H2)
+                    .setScriptEncoding("UTF-8")
+                    .addScript("H2DBinit.sql")
+                    .addScript("H2DBdata.sql")
+                    .build();
+        }
+        return testInstance;
+    }
+
+    public static EmbeddedDatabase getNewTestDataSource() {
+        testInstance.shutdown();
+        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+        return builder
+                .setType(EmbeddedDatabaseType.H2)
+                .setScriptEncoding("UTF-8")
+                .addScript("H2DBinit.sql")
+                .addScript("H2DBdata.sql")
+                .build();
     }
 }

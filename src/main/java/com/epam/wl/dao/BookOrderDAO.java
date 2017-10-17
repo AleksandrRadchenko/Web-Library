@@ -7,31 +7,48 @@ import com.epam.wl.enums.BookOption;
 import com.epam.wl.executor.Executor;
 import com.epam.wl.executor.ResultHandler;
 
-import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 public class BookOrderDAO {
-    private Executor executor;
-    private final ResultHandler<Optional<BookOrder>> bookOrderOneHandler = new BookOrderOneHandler();
-    private final ResultHandler<List<BookOrder>> bookOrderListHandler = new BookOrderListHandler();
+    private static BookOrderDAO instance;
+    private final Executor executor = Executor.getInstance();
+    private final ResultHandler<Optional<BookOrder>> bookOrderOneHandler = BookOrderOneHandler.getInstance();
+    private final ResultHandler<List<BookOrder>> bookOrderListHandler = BookOrderListHandler.getInstance();
 
-    private static final String QUERY_CREATE = "INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES(?, ?, ?);";
-    private static final String QUERY_GET_ALL = "SELECT id, book_instanceid, user_orderid, option FROM book_order";
-    private static final String QUERY_GET_BY_ID = "SELECT id, book_instanceid, user_orderid, option FROM book_order WHERE id=?";
-    private static final String QUERY_UPDATE = "UPDATE book_order SET book_instanceid=?, user_orderid=?, option=?";
-    private static final String QUERY_DELETE = "DELETE FROM book_order WHERE id = ?";
+    private final static String ALL_FIELDS = "book_order.id, book_instanceid, bookid, author, title, " +
+            "year, user_orderid, userid, status, name, lastname, email, option";
+    private final static String JOIN_4_TABLES = "book_order INNER JOIN user_order ON user_order.id=book_order.user_orderid " +
+            "INNER JOIN book ON book.id=user_order.bookId INNER JOIN user ON user.id=user_order.userid";
+    // language=H2
+    private final static String QUERY_CREATE = "INSERT INTO book_order (book_instanceid, user_orderid, option) VALUES(?, ?, ?);";
+    // language=H2
+    private final static String QUERY_GET_ALL = "SELECT id AS book_order_id, book_instanceid, user_orderid, option FROM book_order";
+    // language=H2
+    private final static String QUERY_GET_BY_USER_ID =
+            "SELECT book_order.id AS book_order_id, book_instanceid, user_orderid, option " +
+            "FROM book_order INNER JOIN user_order ON user_order.id=book_order.user_orderid WHERE userid=?";
+    // language=H2
+    private final static String QUERY_GET_BY_ID = "SELECT id AS book_order_id, book_instanceid, user_orderid, option FROM book_order WHERE id=?";
+    // language=H2
+    private final static String QUERY_UPDATE = "UPDATE book_order SET book_instanceid=?, user_orderid=?, option=? WHERE id=?";
 
-    public BookOrderDAO(DataSource dataSource) {
-        executor = new Executor(dataSource);
+    private BookOrderDAO() {
+    }
+
+    public static synchronized BookOrderDAO getInstance() {
+        if (instance == null)
+            instance = new BookOrderDAO();
+        return instance;
     }
 
     /**
      * Create row in book_order table
+     *
      * @param bookInstanceId int
-     * @param userOrderId int
-     * @param bookOption enum
+     * @param userOrderId    int
+     * @param bookOption     enum
      * @return 1 (number of rows changed) if success, or throws SQLexception
      * @throws SQLException
      */
@@ -41,19 +58,24 @@ public class BookOrderDAO {
             final int userOrderId,
             final BookOption bookOption)
             throws SQLException {
-        executor.executeUpdate(QUERY_CREATE, String.valueOf(bookInstanceId), String.valueOf(userOrderId), String.valueOf(bookOption.toString()));
+        executor.executeUpdate(QUERY_CREATE, bookInstanceId, userOrderId, String.valueOf(bookOption.toString()));
     }
 
     public List<BookOrder> getAll() throws SQLException {
         return executor.executeQuery(QUERY_GET_ALL, bookOrderListHandler);
     }
 
+    public List<BookOrder> getByUserId(int id) throws SQLException {
+        return executor.executeQuery(QUERY_GET_BY_USER_ID, bookOrderListHandler, id);
+    }
+
     public Optional<BookOrder> getById(final int id) throws SQLException {
-        return executor.executeQuery(QUERY_GET_BY_ID, bookOrderOneHandler, String.valueOf(id));
+        return executor.executeQuery(QUERY_GET_BY_ID, bookOrderOneHandler, id);
     }
 
     /**
      * Updates BookOrder with id == newBookOrder.getId(), using fields from newBookOrder
+     *
      * @param newBookOrder
      * @return 1 (number of rows changed) if success, or throws SQLexception
      * @throws SQLException
@@ -61,12 +83,9 @@ public class BookOrderDAO {
     @SuppressWarnings("JavaDoc")
     public void update(BookOrder newBookOrder) throws SQLException {
         executor.executeUpdate(QUERY_UPDATE,
-                String.valueOf(newBookOrder.getBookInstanceId()),
-                String.valueOf(newBookOrder.getOrderId()),
-                String.valueOf(newBookOrder.getBookOption().toString()));
-    }
-
-    public void deleteById(final int id) throws SQLException {
-        executor.executeUpdate(QUERY_DELETE, String.valueOf(id));
+                newBookOrder.getBookInstance().getId(),
+                newBookOrder.getUserOrder().getId(),
+                newBookOrder.getBookOption().toString(),
+                newBookOrder.getId());
     }
 }

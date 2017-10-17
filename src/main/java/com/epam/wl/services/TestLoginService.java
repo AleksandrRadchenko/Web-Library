@@ -1,6 +1,5 @@
 package com.epam.wl.services;
 
-import com.epam.wl.DBHelper;
 import com.epam.wl.dao.UserDAO;
 import com.epam.wl.entities.User;
 import com.epam.wl.enums.UserRole;
@@ -11,14 +10,25 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 public class TestLoginService {
-    public static UserDAO userDAO = new UserDAO(DBHelper.getEmbeddedDatabase());
+    private static TestLoginService instance;
+    private final UserDAO userDAO = UserDAO.getInstance();
+
+    private TestLoginService() {
+    }
+
+    public static synchronized TestLoginService getInstance() {
+        if (instance == null) {
+            instance = new TestLoginService();
+        }
+        return instance;
+    }
 
     public String getRolePage(String email) throws SQLException {
         if (userDAO.isLibrarian(email)) {
-            return "librarian_from_login.jsp";
+            return "/librarian";
         }
 
-        return "user_from_login.jsp";
+        return "/userprofile";//users.jsp
     }
 
     public String addNewUser(String name, String lastName, String email, String password, UserRole userRole,
@@ -31,7 +41,7 @@ public class TestLoginService {
             return "captcha_error.jsp";
         }
 
-        Optional<User> user = null;
+        Optional<User> user = Optional.empty();
 
         try {
             user = userDAO.getUserByEmail(email);

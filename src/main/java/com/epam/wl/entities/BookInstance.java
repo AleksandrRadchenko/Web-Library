@@ -3,8 +3,9 @@ package com.epam.wl.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data @AllArgsConstructor
+@Data
+@AllArgsConstructor
 public class BookInstance {
     private int id;
-    private int bookId;
+    private Book book;
 }

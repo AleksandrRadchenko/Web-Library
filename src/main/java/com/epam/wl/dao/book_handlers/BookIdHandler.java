@@ -6,6 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class BookIdHandler implements ResultHandler<Integer> {
+    private static BookIdHandler instance;
+
+    private BookIdHandler() {
+    }
+
+    public static synchronized BookIdHandler getInstance() {
+        if (instance == null)
+            instance = new BookIdHandler();
+        return instance;
+    }
+
     @Override
     public Integer handle(ResultSet resultSet) throws SQLException {
         if (resultSet.first()) {

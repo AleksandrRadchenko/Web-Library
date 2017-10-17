@@ -2,21 +2,18 @@ package com.epam.wl.services;
 
 import com.epam.wl.dao.BookDAO;
 import com.epam.wl.dao.UserOrderDAO;
-import com.epam.wl.db.JdbcConnector;
+import com.epam.wl.entities.User;
 import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.UserOrderStatus;
 
-import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.*;
 
 public class UserOrderService {
 
     private static UserOrderService instance;
-    private static DataSource dataSource = JdbcConnector.getDataSource();
-
-    private UserOrderDAO userOrderDAO;
-    private BookDAO bookDAO;
+    private final UserOrderDAO userOrderDAO = UserOrderDAO.getInstance();
+    private final BookDAO bookDAO = BookDAO.getInstance();
 
     private UserOrderService() {
     }
@@ -24,8 +21,6 @@ public class UserOrderService {
     public static synchronized UserOrderService getInstance() {
         if (instance == null) {
             instance = new UserOrderService();
-            instance.userOrderDAO = new UserOrderDAO(dataSource);
-            instance.bookDAO = new BookDAO(dataSource);
         }
         return instance;
     }
@@ -69,6 +64,17 @@ public class UserOrderService {
             userOrderDAO.createNewUserOrder(bookID, userID);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public UserOrder getById(int user_orderid) throws SQLException {
+        try {
+            Optional<UserOrder> oUserOrder = userOrderDAO.getUserOrderByID(user_orderid);
+            if (!oUserOrder.isPresent()) throw new SQLException("There is no such user_order for id = " + user_orderid);
+            else return oUserOrder.get();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
         }
     }
 }
