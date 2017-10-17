@@ -1,4 +1,9 @@
+<%@ page import="com.epam.wl.executor.Executor" %>
+<%@ page import="java.sql.SQLException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% if ("test".equals(Executor.getMode())) {
+    throw new SQLException("DATABASE IN TEST MODE!!!!!!!!");
+}%>
 <html>
 <head>
     <title>Ultra Mega Hyper Library</title>

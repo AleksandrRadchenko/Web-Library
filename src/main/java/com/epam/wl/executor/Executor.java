@@ -1,6 +1,7 @@
 package com.epam.wl.executor;
 
 import com.epam.wl.db.JdbcConnector;
+import lombok.Getter;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
 import javax.sql.DataSource;
@@ -15,7 +16,8 @@ public class Executor {
     private static Executor instance;
     private static DataSource dataSource;
     // Selector for prod and test dataSource. Switch in jdbc.properties file.
-    private static String mode = "production";
+    @Getter
+    static String mode = "production";
     private static final DataSource postgresDataSource = JdbcConnector.getDataSource();
     private static EmbeddedDatabase testDataSource;
 

@@ -2,7 +2,6 @@ package com.epam.wl.services;
 
 import com.epam.wl.dao.BookDAO;
 import com.epam.wl.dao.UserOrderDAO;
-import com.epam.wl.entities.User;
 import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.UserOrderStatus;
 
@@ -35,7 +34,7 @@ public class UserOrderService {
 
     public Map<UserOrder, List<Integer>> getUserOrderAndFreeBookInstanceMap(List<UserOrder> userOrderList) {
         final Map<UserOrder, List<Integer>> resultMap = new TreeMap<>(Comparator.comparingInt(UserOrder::getId));
-        userOrderList.forEach(userOrder -> resultMap.put(userOrder, getFreeBookInstancesForThisBook(userOrder.getBook().getId())));
+//        userOrderList.forEach(userOrder -> resultMap.put(userOrder, getFreeBookInstancesForThisBook(userOrder.getBook().getId())));
         return resultMap;
     }
 
