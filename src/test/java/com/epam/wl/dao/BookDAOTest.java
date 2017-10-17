@@ -2,7 +2,6 @@ package com.epam.wl.dao;
 
 import com.epam.wl.entities.Book;
 import com.epam.wl.executor.Executor;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
@@ -26,18 +25,11 @@ public class BookDAOTest implements TestData {
         Executor.resetTestDataSource();
     }
 
-    /**
-     * Shuts down database after each call test method
-     */
-    @AfterEach
-    void dropDatabase() {
-        dataSource.shutdown();
-    }
-
     @Test
     void testGetAllBooks() throws SQLException {
-        List<Book> books = new ArrayList<>();
-        assertThat(books, is(bookDAO.getAllBooks()));
+        List<Book> expected = books;
+        List<Book> actual = bookDAO.getAllBooks();
+        assertThat(actual, is(books));
     }
 
     @Test
