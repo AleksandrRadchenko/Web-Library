@@ -16,7 +16,9 @@ public class BookInstanceDAOTest implements TestData {
 
     @Test
     void getById() throws SQLException {
-        assertThat(bi10, Is.is(bookInstanceDAO.getById(10).get()));
+        BookInstance actual = bookInstanceDAO.getById(10).get(); // 4
+        BookInstance expextedBookId = new BookInstance(10, new Book(4, "Лев Толстой", "Война и мир", 1978));
+        assertThat(actual, Is.is(expextedBookId));
     }
 
     @Test
