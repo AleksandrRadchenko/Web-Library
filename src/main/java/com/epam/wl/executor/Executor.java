@@ -2,7 +2,6 @@ package com.epam.wl.executor;
 
 import com.epam.wl.db.JdbcConnector;
 import lombok.Getter;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -20,7 +19,7 @@ public class Executor {
     @Getter
     static String mode = "production";
     private static final DataSource postgresDataSource = JdbcConnector.getDataSource();
-    private static EmbeddedDatabase testDataSource;
+    private static DataSource testDataSource;
 
     static {
         final Properties properties = new Properties();
@@ -63,7 +62,6 @@ public class Executor {
     }
 
     public <T> T executeQuery(final String query, final ResultHandler<T> handler, Object... args) throws SQLException {
-//        CachedRowSet resultSet = new CachedRowSetImpl();
         try (final Connection con = dataSource.getConnection();
              final PreparedStatement stmt = con.prepareStatement(query)) {
             for (int i = 0; i < args.length; i++) {

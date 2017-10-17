@@ -3,10 +3,8 @@ package com.epam.wl.dao;
 import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.UserOrderStatus;
 import com.epam.wl.executor.Executor;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,6 +15,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings("ConstantConditions")
 class UserOrderDAOTest implements TestData {
 
     private UserOrderDAO userOrderDAO = UserOrderDAO.getInstance();
