@@ -28,9 +28,9 @@ class UserOrderDAOTest implements TestData {
 
     @Test
     void testCreateUserOrder() throws SQLException {
-        userOrderDAO.createNewUserOrder(1, 3);
-        UserOrder expectedUserOrder = uo5;
-        assertThat(expectedUserOrder, is(userOrderDAO.getUserOrderByID(u5.getId()).get()));
+        userOrderDAO.createNewUserOrder(uo6.getBook().getId(),uo6.getUser().getId());
+        UserOrder actual = userOrderDAO.getUserOrderByID(uo6.getId()).get();
+        assertThat(actual, is(uo6));
     }
 
     @Test
@@ -44,31 +44,29 @@ class UserOrderDAOTest implements TestData {
 
     @Test
     void testGetAllUserOrders() throws SQLException {
-        List<UserOrder> expectedOrderList = userOrders;
-        assertThat(expectedOrderList, is(userOrderDAO.getAllUserOrders()));
+        //List<UserOrder> expectedOrderList = userOrders;
+        assertThat(userOrders, is(userOrderDAO.getAllUserOrders()));
     }
 
     @Test
     void testGetUserOrderByID() throws SQLException {
-        UserOrder expectedUserOrder = uo2;
+        //UserOrder expectedUserOrder = uo2;
         UserOrder actualUserOrder = userOrderDAO.getUserOrderByID(uo2.getId()).get();
 
-        assertThat(expectedUserOrder, is(actualUserOrder));
+        assertThat(uo2, is(actualUserOrder));
     }
 
     @Test
-    void testGetUserByStatus() throws SQLException {
-        List<UserOrder> expectedOrderList = userOrders;
-
-        assertThat(expectedOrderList, is(userOrderDAO.getUserOrderByStatus(UserOrderStatus.IN_PROGRESS)));
+    void testGetUserOrderByStatus() throws SQLException {
+        assertThat(inProgressUserOrders, is(userOrderDAO.getUserOrderByStatus(UserOrderStatus.IN_PROGRESS)));
     }
 
     @Test
     void testGetUserOrderByUserId() throws SQLException {
         List<UserOrder> expectedOrderList = new ArrayList<>();
-        expectedOrderList.add(uo3);
+        expectedOrderList.add(uo3);//3, u3, b3, UserOrderStatus.IN_PROGRESS)
 
-        assertThat(expectedOrderList, is(userOrderDAO.getUserOrderByUserId(uo3.getId())));
+        assertThat(expectedOrderList, is(userOrderDAO.getUserOrderByUserId(uo3.getUser().getId())));//.getId()
     }
 
     @Test

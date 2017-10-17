@@ -21,31 +21,21 @@ public class UserOrderDAO {
     public static final String UPDATE_NEW = "INSERT INTO user_order (userid, bookid, status) VALUES (?, ?, 'NEW');";
 
     public static final String UPDATE_STATUS = "UPDATE user_order SET status = ? WHERE id = ?;";
-    // TODO: 16.10.2017
-    public static final String QUERY_ALL = "SELECT user_order.id, \"user\".id, \"user\".name, \"user\".lastname, \"user\".email," +
-            "book.title, book.author, book.year, user_order.status FROM user_order " +
-            "INNER JOIN \"USER\" ON \"USER\".id=user_order.userId INNER JOIN book ON book.id=user_order.bookId;";
 
-    public static final String QUERY_ALL_POST = "SELECT user_order.id AS user_order_id, \"user\".id AS user_id, \"user\".name AS user_name, " +
-            "\"user\".lastname AS user_lastname, \"user\".email AS user_email, book.id AS book_id, " +
-            "book.title AS title, book.author AS author, book.year AS year, user_order.status AS status FROM user_order " +
-            "INNER JOIN \"user\" ON \"user\".id=user_order.userId INNER JOIN book ON book.id=user_order.bookId;";
+    public static final String QUERY_ALL_POST = "SELECT user_order.id AS user_order_id, users.id AS user_id, " +
+            "book.id AS book_id, user_order.status AS status " +
+            "FROM user_order INNER JOIN users ON users.id=user_order.userId INNER JOIN book ON book.id=user_order.bookId;";
 
-    public static final String QUERY_BY_ID = "SELECT id, bookid, userid, status FROM user_order WHERE id=?";
-
-    public static final String QUERY_BY_STATUS = "SELECT user_order.id, user.id, user.name, user.lastname, user.email," +
-            "book.title, book.author, book.year, user_order.status FROM user_order " +
-            "INNER JOIN user ON user.id=user_order.userId INNER JOIN book ON book.id=user_order.bookId WHERE status = ?";
+    public static final String QUERY_BY_ID = "SELECT id AS user_order_id, bookid AS book_id, userid AS user_id, status FROM user_order WHERE id=?";
 
     public static final String QUERY_BY_STATUS_POST = "SELECT user_order.id AS user_order_id, users.id AS user_id, " +
-            "users.name AS user_name, users.lastname AS user_lastname, users.email AS user_email,  book.id AS book_id, book.title AS title, " +
-            "book.author AS author, book.year AS year, user_order.status AS status FROM user_order INNER JOIN users ON users.id=user_order.userId " +
+            "book.id AS book_id, user_order.status AS status " +
+            "FROM user_order INNER JOIN users ON users.id=user_order.userId " +
             "INNER JOIN book ON book.id=user_order.bookId  WHERE status = ?;";
 
     public static final String QUERY_BY_USER_ID_POST =
-            "SELECT user_order.id AS user_order_id, users.id AS user_id, users.name AS user_name, " +
-                    "users.lastname AS user_lastname, users.email AS user_email," +
-                    "book.id AS book_id, book.title AS title, book.author AS author, book.year AS year, user_order.status AS status " +
+            "SELECT user_order.id AS user_order_id, users.id AS user_id, " +
+                    "book.id AS book_id, user_order.status AS status " +
                     "FROM user_order INNER JOIN users ON users.id=user_order.userId INNER JOIN book ON book.id=user_order.bookId WHERE user_order.userId = ?;";
 
     private UserOrderDAO() {}

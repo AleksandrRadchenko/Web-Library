@@ -22,7 +22,7 @@ public class BookOrderServiceTest implements TestData {
 
     @BeforeEach
     void setUp() throws SQLException {
-            Executor.resetTestDataSource();
+        Executor.resetTestDataSource();
     }
 
     @Test

@@ -28,9 +28,9 @@ public class UserOrderOneHandler implements ResultHandler<Optional<UserOrder>> {
     @Override
     public Optional<UserOrder> handle(ResultSet resultSet) throws SQLException {
         if (!resultSet.next()) return Optional.empty();
-        final int id = resultSet.getInt("id");
-        final int bookId = resultSet.getInt("bookid");
-        final int userId = resultSet.getInt("userid");
+        final int id = resultSet.getInt("user_order_id");
+        final int bookId = resultSet.getInt("book_id");
+        final int userId = resultSet.getInt("user_id");
         final UserOrderStatus status = UserOrderStatus.valueOf(resultSet.getString("status"));
         final Book book = BookDAO.getInstance().getById(bookId).get(); // TODO: 16.10.2017 optional
         final User user = UserDAO.getInstance().getUserByID(userId).get(); // TODO: 16.10.2017

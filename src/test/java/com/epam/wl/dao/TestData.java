@@ -47,8 +47,9 @@ public interface TestData {
     UserOrder uo2 = new UserOrder(2, u2, b2, UserOrderStatus.IN_PROGRESS);
     UserOrder uo3 = new UserOrder(3, u3, b3, UserOrderStatus.IN_PROGRESS);
     UserOrder uo4 = new UserOrder(4, u4, b4, UserOrderStatus.IN_PROGRESS);
-    UserOrder uo5 = new UserOrder(5, u3, b1, UserOrderStatus.NEW);
+    UserOrder uo5 = new UserOrder(5, u1, b3, UserOrderStatus.NEW);
     List<UserOrder> userOrders = new ArrayList<>(Arrays.asList(uo1, uo2, uo3, uo4, uo5));
+    List<UserOrder> inProgressUserOrders = new ArrayList<>(Arrays.asList(uo1, uo2, uo3, uo4));
     UserOrder uo6 = new UserOrder(6, u2, b4, UserOrderStatus.NEW);
 
 

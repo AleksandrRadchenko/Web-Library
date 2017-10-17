@@ -59,14 +59,4 @@ class BookOrderDAOTest implements TestData {
     void failToGetByNegativeId() throws SQLException {
         assertThrows(NoSuchElementException.class, bookOrderDAO.getById(-5)::get);
     }
-
-    //    @Test
-//    void update() throws SQLException {
-//        int expectedInt = 1;
-//        BookOrder newBookOrder = new BookOrder(3, 9, 2, BookOption.READING_ROOM);
-//        bookOrderDAO.update(newBookOrder);
-//        BookOrder actual = bookOrderDAO.getById(newBookOrder.getId()).get();
-//        assertThat(actual, is(newBookOrder));
-//    }
-//
 }

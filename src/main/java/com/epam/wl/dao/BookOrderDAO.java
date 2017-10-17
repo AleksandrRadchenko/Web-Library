@@ -28,7 +28,7 @@ public class BookOrderDAO {
     // language=H2
     private final static String QUERY_GET_BY_USER_ID =
             "SELECT book_order.id AS book_order_id, book_instanceid, user_orderid, option " +
-            "FROM book_order INNER JOIN user_order ON user_order.id=book_order.user_orderid WHERE userid=?";
+                    "FROM book_order INNER JOIN user_order ON user_order.id=book_order.user_orderid WHERE userid=?";
     // language=H2
     private final static String QUERY_GET_BY_ID = "SELECT id AS book_order_id, book_instanceid, user_orderid, option FROM book_order WHERE id=?";
     // language=H2
@@ -71,21 +71,5 @@ public class BookOrderDAO {
 
     public Optional<BookOrder> getById(final int id) throws SQLException {
         return executor.executeQuery(QUERY_GET_BY_ID, bookOrderOneHandler, id);
-    }
-
-    /**
-     * Updates BookOrder with id == newBookOrder.getId(), using fields from newBookOrder
-     *
-     * @param newBookOrder
-     * @return 1 (number of rows changed) if success, or throws SQLexception
-     * @throws SQLException
-     */
-    @SuppressWarnings("JavaDoc")
-    public void update(BookOrder newBookOrder) throws SQLException {
-        executor.executeUpdate(QUERY_UPDATE,
-                newBookOrder.getBookInstance().getId(),
-                newBookOrder.getUserOrder().getId(),
-                newBookOrder.getBookOption().toString(),
-                newBookOrder.getId());
     }
 }
