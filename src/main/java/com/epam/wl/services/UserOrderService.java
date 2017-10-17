@@ -25,24 +25,12 @@ public class UserOrderService {
         return instance;
     }
 
-    public List<UserOrder> getNewUserOrders() {
-        List<UserOrder> resultList = new ArrayList<>();
-        try {
-            resultList = userOrderDAO.getUserOrderByStatus(UserOrderStatus.NEW);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return resultList;
+    public List<UserOrder> getNewUserOrders() throws SQLException{
+        return userOrderDAO.getUserOrderByStatus(UserOrderStatus.NEW);
     }
 
-    private List<Integer> getFreeBookInstancesForThisBook(int bookId) {
-        List<Integer> resultList = new ArrayList<>();
-        try {
-            resultList = bookDAO.getFreeBookInstancesForThisBook(bookId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return resultList;
+    private List<Integer> getFreeBookInstancesForThisBook(int bookId) throws SQLException{
+        return bookDAO.getFreeBookInstancesForThisBook(bookId);
     }
 
     public Map<UserOrder, List<Integer>> getUserOrderAndFreeBookInstanceMap(List<UserOrder> userOrderList) {
