@@ -93,6 +93,10 @@ INSERT INTO book (author, title, year) VALUES ('Петр Иванов', 'Азб�
 INSERT INTO book (author, title, year) VALUES ('Herbert Schildt', 'Java: A Beginner''s Guide, Sixth Edition', 2014);
 INSERT INTO book (author, title, year) VALUES ('Bruce Eckel', 'Thinking in Java (4th Edition)', 2016);
 INSERT INTO book (author, title, year) VALUES ('Лев Толстой', 'Война и мир', 1978);
+INSERT INTO book (author, title, year) VALUES ('Михаил булгаков', 'Собачье сердце', 2001);
+INSERT INTO book (author, title, year) VALUES ('Carl Sagan', 'Pale Blue Dot', 2017);
+INSERT INTO book (author, title, year) VALUES ('Иван Бунин', 'Темные аллеи', 1998);
+INSERT INTO book (author, title, year) VALUES ('Александр Пушкин', 'Евгений Онегин', 2011);
 
 INSERT INTO book_instance (bookid) VALUES (1);
 INSERT INTO book_instance (bookid) VALUES (1);
@@ -110,6 +114,25 @@ INSERT INTO book_instance (bookid) VALUES (3);
 INSERT INTO book_instance (bookid) VALUES (3);
 INSERT INTO book_instance (bookid) VALUES (3);
 INSERT INTO book_instance (bookid) VALUES (3);
+INSERT INTO book_instance (bookid) VALUES (5);
+INSERT INTO book_instance (bookid) VALUES (5);
+INSERT INTO book_instance (bookid) VALUES (5);
+INSERT INTO book_instance (bookid) VALUES (5);
+INSERT INTO book_instance (bookid) VALUES (6);
+INSERT INTO book_instance (bookid) VALUES (6);
+INSERT INTO book_instance (bookid) VALUES (6);
+INSERT INTO book_instance (bookid) VALUES (6);
+INSERT INTO book_instance (bookid) VALUES (7);
+INSERT INTO book_instance (bookid) VALUES (7);
+INSERT INTO book_instance (bookid) VALUES (7);
+INSERT INTO book_instance (bookid) VALUES (7);
+INSERT INTO book_instance (bookid) VALUES (7);
+INSERT INTO book_instance (bookid) VALUES (8);
+INSERT INTO book_instance (bookid) VALUES (8);
+INSERT INTO book_instance (bookid) VALUES (8);
+INSERT INTO book_instance (bookid) VALUES (8);
+INSERT INTO book_instance (bookid) VALUES (8);
+INSERT INTO book_instance (bookid) VALUES (8);
 
 INSERT INTO users (name, lastname, email, passwordhash, role)
 VALUES ('Иван', 'Иванов', 'ivan@ivan.ru', 'fdfsdcdzc', 'USER');
