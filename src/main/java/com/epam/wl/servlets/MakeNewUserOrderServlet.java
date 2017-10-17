@@ -14,20 +14,22 @@ import java.sql.SQLException;
 
 @WebServlet(name = "MakeNewUserOrderServlet", urlPatterns = "/userorderfromcatalog")
 public class MakeNewUserOrderServlet extends HttpServlet {
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int bookId = Integer.valueOf(request.getParameter("bookId"));
             HttpSession session = request.getSession(false);
             int userId = ((User) session.getAttribute("currentSessionUser")).getId();
 
-            session.setAttribute("bookID", bookId);
             UserOrderService userOrderService = UserOrderService.getInstance();
-            userOrderService.createNewUserOrder(bookId, userId);//userId
+            userOrderService.createNewUserOrder(bookId, userId);
+            request.removeAttribute("bookId");
 
-            request.getRequestDispatcher("/userprofile").forward(request, response);
+            response.sendRedirect("/userprofile");
         } catch (SQLException | IllegalArgumentException e) {
             request.getRequestDispatcher("errors/error500.html").forward(request, response);
         }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }

@@ -48,7 +48,7 @@ public class TestUserService {
         user.get().setLastname(lastName);
         user.get().setEmail(email);
         user.get().setPasswordHash(passwordHash);
-        user.get().setRole(UserRole.USER);
+        user.get().setRole(user.get().getRole());
         users.clear();
         users.add(0, user.get());
         userDAO.updateUser(users.get(0).getId(), name, lastName, email, passwordHash, users.get(0).getRole());
