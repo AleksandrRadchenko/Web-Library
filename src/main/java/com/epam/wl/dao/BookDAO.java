@@ -2,7 +2,6 @@ package com.epam.wl.dao;
 
 import com.epam.wl.dao.book_handlers.*;
 import com.epam.wl.entities.Book;
-import com.epam.wl.entities.BookInstance;
 import com.epam.wl.executor.Executor;
 import com.epam.wl.executor.ResultHandler;
 
@@ -15,15 +14,11 @@ public class BookDAO {
     private static BookDAO instance;
     private final Executor executor = Executor.getInstance();
     private final ResultHandler<List<Book>> bookListHandler = BookListHandler.getInstance();
-    private final ResultHandler<List<BookInstance>> bookInstanceListHandler = BookInstanceListHandler.getInstance();
-    private final ResultHandler<Integer> bookIdHandler = BookIdHandler.getInstance();
     private final ResultHandler<Integer> bookInstanceIdHandler = BookInstanceIdHandler.getInstance();
     private final ResultHandler<List<Integer>> bookInstancesIdListHandler = BookInstancesIdListHandler.getInstance();
     private final ResultHandler<Optional<Book>> bookOneHandler = BookOneHandler.getInstance();
 
     private static final String GET_ALL_BOOKS_QUERY = "SELECT * FROM book";
-    private static final String GET_ALL_BOOKS_INSTANCES_QUERY = "SELECT * FROM book_instance";
-    private static final String GET_BOOK_ID_QUERY = "SELECT * FROM book WHERE author=? AND title=? AND year=?";
     private static final String GET_FREE_BOOK_INSTANCE_ID_QUERY = "SELECT book_instance.id AS book_instance_id " +
             "FROM book_instance LEFT JOIN book_order "
             + "ON book_instance.id=book_order.book_instanceid WHERE "
