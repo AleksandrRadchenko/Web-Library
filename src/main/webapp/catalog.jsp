@@ -28,7 +28,7 @@
                 <td>${book.title}</td>
                 <td>${book.year}</td>
                 <td>
-                    <form action="${pageContext.request.contextPath}/userorderfromcatalog" method="GET">
+                    <form action="${pageContext.request.contextPath}/userorderfromcatalog" method="POST">
                         <input type="hidden" value="${book.id}" name="bookId">
                         <div class="button">
                             <input type="submit" value="Order">

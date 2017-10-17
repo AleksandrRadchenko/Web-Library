@@ -11,6 +11,11 @@
     <img src="img/logo.jpg" alt="logo">
     <hr>
 </div>
+<form action="/log_out" method="post">
+    <div class="sum">
+        <input type="submit" value="Log out">
+    </div>
+</form>
 <div align="center">
     <a href="${pageContext.request.contextPath}/book_order"><h2>Current book orders>></h2></a>
     <hr>

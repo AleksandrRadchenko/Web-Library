@@ -12,23 +12,28 @@
     <img src="img/logo.jpg" alt="logo">
     <hr>
 </div>
+<form action="/log_out" method="post">
+    <div class="sum">
+        <input type="submit" value="Log out">
+    </div>
+</form>
 <div align="center">
     <br>
-    <h1>${users.get(0).name}'s profile</h1><br>
+    <h1>Welcome to your profile, ${users.get(0).name}!</h1><br><br>
+    <h3>${users.get(0).name} ${users.get(0).lastname} <br>e-mail: ${users.get(0).email}</h3>
     <hr>
     <div align="center">
         <h4>Your current orders</h4>
         <table border="1">
             <jsp:useBean id="books" scope="request" type="java.util.List"/>
             <tr>
-                <td>Author</td>
-                <td>Title</td>
-                <td>Year</td>
-                <td>Status</td>
+                <td><b>Author</b></td>
+                <td><b>Title</b></td>
+                <td><b>Year</b></td>
+                <td><b>Status</b></td>
             </tr>
             <c:forEach items="${books}" var="book">
                 <tr>
-                    <%--<td>${book.id}</td>--%>
                     <td>${book.book.author}</td>
                     <td> ${book.book.title}</td>
                     <td> ${book.book.year}</td>
@@ -46,14 +51,14 @@
 <div>
     <form action="${pageContext.request.contextPath}/useredit" method="POST">
         <b>Name: </b>
-        <input name="name" type="text">
+        <input name="name" type="text" required>
         <b>Lastname: </b>
-        <input name="lastname" type="text">
+        <input name="lastname" type="text" required>
         <b>Email: </b>
-        <input name="email" type="text">
+        <input name="email" type="text" required>
         <b>Password: </b>
-        <input name="passwordhash" type="text">
-        <input type="submit">
+        <input name="passwordhash" type="password" minlength="6" required>
+        <input type="submit" value="Edit info">
     </form>
 </div>
 
