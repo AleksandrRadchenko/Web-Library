@@ -34,11 +34,11 @@ public class TestLoginService {
     public String addNewUser(String name, String lastName, String email, String password, UserRole userRole,
                              String passwordRepeat, String captcha) {
         if (!password.equals(passwordRepeat)) {
-            return "passwords_error.jsp";
+            return "errors/passwords_error.html";
         }
 
         if (!"W68HP".equals(captcha)) {
-            return "captcha_error.jsp";
+            return "errors/captcha_error.html";
         }
 
         Optional<User> user = Optional.empty();
@@ -50,7 +50,7 @@ public class TestLoginService {
         }
 
         if (user.isPresent()) {
-            return "user_already_exists.jsp";
+            return "errors/user_already_exists.html";
         }
 
         try {
@@ -75,12 +75,12 @@ public class TestLoginService {
 
                 return getRolePage(email);
             } else {
-                return "login_error.jsp";
+                return "errors/login_error.html";
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return "login_error.jsp";
+        return "errors/login_error.html";
     }
 }
