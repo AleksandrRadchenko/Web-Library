@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "BookOrderCloseServlet", urlPatterns = "/close_book_order")
-public class BookOrderCloseServlet extends HttpServlet {
+@WebServlet(name = "CloseUserOrderServlet", urlPatterns = "/close_user_order")
+public class CloseUserOrderServlet extends HttpServlet {
     private final UserOrderService userOrderService = UserOrderService.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -19,7 +19,7 @@ public class BookOrderCloseServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (!request.getParameter("book_orderid").isEmpty()) {
+        if (request.getParameter("book_orderid") != null) {
             userOrderService.setUserOrderStatus(Integer.parseInt(request.getParameter("book_orderid")), UserOrderStatus.CLOSED);
         }
         response.sendRedirect("/book_order");

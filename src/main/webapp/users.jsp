@@ -20,6 +20,12 @@
         <h4>Your current orders</h4>
         <table border="1">
             <jsp:useBean id="books" scope="request" type="java.util.List"/>
+            <tr>
+                <td>Author</td>
+                <td>Title</td>
+                <td>Year</td>
+                <td>Status</td>
+            </tr>
             <c:forEach items="${books}" var="book">
                 <tr>
                     <%--<td>${book.id}</td>--%>

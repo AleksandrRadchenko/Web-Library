@@ -32,8 +32,8 @@ Orders of ${username}:
         <td><b>Book instance id</b></td>
         <td><b>Book title</b></td>
         <td><b>Book author</b></td>
-        <%--<td><b>Order id</b></td>--%>
-        <%--<td><b>Book option</b></td>--%>
+        <td><b>Book option</b></td>
+        <td><b>Status</b></td>
         <td></td>
     </tr>
     <c:forEach items="${bookorders}" var="bookorder">
@@ -42,15 +42,17 @@ Orders of ${username}:
             <td>${bookorder.bookInstance.id}</td>
             <td>${bookorder.bookInstance.book.title}</td>
             <td>${bookorder.bookInstance.book.author}</td>
-            <%--<td>${bookorder.userOrderId}</td>--%>
-            <%--<td>${bookorder.bookOption}</td>--%>
+            <td>${bookorder.bookOption}</td>
+            <td>${bookorder.userOrder.status}</td>
             <td>
-                <form action="${pageContext.request.contextPath}/close_book_order" method="GET">
-                    <input type="hidden" value="${bookorder.id}" name="book_orderid">
+                <c:if test = "${'CLOSED' != bookorder.userOrder.status}">
+                <form action="${pageContext.request.contextPath}/close_user_order" method="GET">
+                    <input type="hidden" value="${bookorder.userOrder.id}" name="book_orderid">
                     <div class="button">
                         <input type="submit" value="Close order">
                     </div>
                 </form>
+                </c:if>
             </td>
         </tr>
     </c:forEach>

@@ -41,7 +41,7 @@ public class TestLoginService {
             return "captcha_error.jsp";
         }
 
-        Optional<User> user = null;
+        Optional<User> user = Optional.empty();
 
         try {
             user = userDAO.getUserByEmail(email);

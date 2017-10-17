@@ -21,7 +21,7 @@ public class BookOrderServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (!(request.getParameter("userid") == null)) {
+        if (request.getParameter("userid") != null) {
             List<BookOrder> bookOrders = bookOrderService.getByUserId(Integer.parseInt(request.getParameter("userid")));
             request.setAttribute("username", bookOrders.get(0).getUserOrder().getUser().getName() + " " + bookOrders.get(0).getUserOrder().getUser().getLastname());
             request.setAttribute("bookorders", bookOrders);

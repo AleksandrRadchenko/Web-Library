@@ -14,7 +14,6 @@ public class SignUpServlet extends HttpServlet {
     private final TestLoginService service = TestLoginService.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("sign up");
         response.sendRedirect(service.addNewUser(request.getParameter("name"),
                 request.getParameter("last_name"), request.getParameter("email"),
                 request.getParameter("password"), "user".equals(request.getParameter("role"))
