@@ -4,13 +4,14 @@ import com.epam.wl.entities.BookOrder;
 import com.epam.wl.entities.User;
 import com.epam.wl.executor.Executor;
 import com.epam.wl.services.BookOrderService;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -25,14 +26,14 @@ public class BookOrderServiceTest implements TestData {
     }
 
     @Test
-    void getAllUsers() {
+    void getAllUsers() throws SQLException {
         final List<User> actual = bookOrderService.getAllUsersWithOrders();
         actual.sort(Comparator.comparing(User::getId));
         assertThat(actual, is(allUsers));
     }
 
     @Test
-    void getBookOrderByUserId() {
+    void getBookOrderByUserId() throws SQLException {
         final int userid = 3;
         final List<BookOrder> expected = new ArrayList<>(Collections.singletonList(bo3));
         final List<BookOrder> actual = bookOrderService.getByUserId(userid);
@@ -41,7 +42,7 @@ public class BookOrderServiceTest implements TestData {
     }
 
     @Test
-    void getAllBookOrders() {
+    void getAllBookOrders() throws SQLException {
         final List<BookOrder> expected = bookOrders;
         final List<BookOrder> actual = bookOrderService.getAll();
         actual.sort(Comparator.comparing(BookOrder::getId));

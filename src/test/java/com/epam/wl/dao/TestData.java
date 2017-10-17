@@ -33,9 +33,8 @@ public interface TestData {
     BookInstance bi14 = new BookInstance(14, b3);
     BookInstance bi15 = new BookInstance(15, b3);
     BookInstance bi16 = new BookInstance(16, b3);
-    BookInstance bi17 = new BookInstance(17, b3);
-    List<BookInstance> bookInstances = new ArrayList<>(Arrays.asList(bi1,bi2,bi3,bi4,bi5,bi6,bi7,bi8,bi9,bi10,bi11));
-    BookInstance bi18 = new BookInstance(18, b4);
+    List<BookInstance> bookInstances = new ArrayList<>(Arrays.asList(bi1,bi2,bi3,bi4,bi5,bi6,bi7,bi8,bi9,bi10,bi11,bi12,bi13,bi14,bi15,bi16));
+    BookInstance bi17 = new BookInstance(17, b4);
 
     User u1 = new User(1, "Иван", "Иванов", "ivan@ivan.ru", "fdfsdcdzc", UserRole.USER);
     User u2 = new User(2, "Федор", "Федоров", "fedor@ivan.ru", "fdfsdcdrfdsfzc", UserRole.USER);
@@ -48,8 +47,10 @@ public interface TestData {
     UserOrder uo2 = new UserOrder(2, u2, b2, UserOrderStatus.IN_PROGRESS);
     UserOrder uo3 = new UserOrder(3, u3, b3, UserOrderStatus.IN_PROGRESS);
     UserOrder uo4 = new UserOrder(4, u4, b4, UserOrderStatus.IN_PROGRESS);
-    List<UserOrder> userOrders = new ArrayList<>(Arrays.asList(uo1, uo2, uo3, uo4));
     UserOrder uo5 = new UserOrder(5, u3, b1, UserOrderStatus.NEW);
+    List<UserOrder> userOrders = new ArrayList<>(Arrays.asList(uo1, uo2, uo3, uo4, uo5));
+    UserOrder uo6 = new UserOrder(6, u2, b4, UserOrderStatus.NEW);
+
 
     BookOrder bo1 = new BookOrder(1, bi4, uo1, BookOption.SUBSCRIPTION);
     BookOrder bo2 = new BookOrder(2, bi6, uo2, BookOption.SUBSCRIPTION);
