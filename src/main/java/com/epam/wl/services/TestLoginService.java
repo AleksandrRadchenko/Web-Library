@@ -28,11 +28,11 @@ public class TestLoginService {
             return "/librarian";
         }
 
-        return "/userprofile";//users.jsp
+        return "/userprofile";
     }
 
     public String addNewUser(String name, String lastName, String email, String password, UserRole userRole,
-                             String passwordRepeat, String captcha) {
+                             String passwordRepeat, String captcha) throws SQLException {
         if (!password.equals(passwordRepeat)) {
             return "errors/passwords_error.html";
         }
@@ -41,46 +41,29 @@ public class TestLoginService {
             return "errors/captcha_error.html";
         }
 
-        Optional<User> user = Optional.empty();
-
-        try {
-            user = userDAO.getUserByEmail(email);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Optional<User> user;
+        user = userDAO.getUserByEmail(email);
 
         if (user.isPresent()) {
             return "errors/user_already_exists.html";
         }
-
-        try {
-            userDAO.addUser(name, lastName, email, password, userRole);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        userDAO.addUser(name, lastName, email, password, userRole);
         return "login.jsp";
     }
 
-    public String confirmUser(HttpServletRequest request) {
+    public String confirmUser(HttpServletRequest request) throws SQLException {
         final String email = request.getParameter("email");
         final String password = request.getParameter("password");
 
-        try {
-            Optional<User> userOptional = userDAO.getUserByEmailAndPassword(email, password);
+        Optional<User> userOptional = userDAO.getUserByEmailAndPassword(email, password);
 
-            if (userOptional.isPresent()) {
-                HttpSession session = request.getSession(true);
-                session.setAttribute("currentSessionUser", userOptional.get());
+        if (userOptional.isPresent()) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("currentSessionUser", userOptional.get());
 
-                return getRolePage(email);
-            } else {
-                return "errors/login_error.html";
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return getRolePage(email);
+        } else {
+            return "errors/login_error.html";
         }
-
-        return "errors/login_error.html";
     }
 }

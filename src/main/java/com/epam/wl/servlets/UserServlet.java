@@ -16,12 +16,16 @@ import java.sql.SQLException;
 public class UserServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        TestUserService service = TestUserService.getInstance();
-        HttpSession session = request.getSession(false);
+        try {
+            TestUserService service = TestUserService.getInstance();
+            HttpSession session = request.getSession(false);
 
-        request.setAttribute("users", service.getUser((User)session.getAttribute("currentSessionUser")));//request.setAttribute("users", TestUserService.getUser());
-        request.setAttribute("books", service.getUserOrderBooks((User)session.getAttribute("currentSessionUser")));
+            request.setAttribute("users", service.getUser((User) session.getAttribute("currentSessionUser")));//request.setAttribute("users", TestUserService.getUser());
+            request.setAttribute("books", service.getUserOrderBooks((User) session.getAttribute("currentSessionUser")));
 
-        request.getRequestDispatcher("users.jsp").forward(request, response);
+            request.getRequestDispatcher("users.jsp").forward(request, response);
+        } catch (SQLException e) {
+            request.getRequestDispatcher("errors/error500.html").forward(request, response);
+        }
     }
 }

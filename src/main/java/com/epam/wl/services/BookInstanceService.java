@@ -18,13 +18,8 @@ public class BookInstanceService {
     }
 
     public BookInstance getById(int book_instanceid) throws SQLException {
-        try {
-            Optional<BookInstance> oBookInstance = bookInstanceDAO.getById(book_instanceid);
-            if (!oBookInstance.isPresent()) throw new SQLException("There is no such book_instance for id = " + book_instanceid);
-            else return oBookInstance.get();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
-        }
+        Optional<BookInstance> oBookInstance = bookInstanceDAO.getById(book_instanceid);
+        if (!oBookInstance.isPresent()) throw new SQLException("There is no such book_instance for id = " + book_instanceid);
+        else return oBookInstance.get();
     }
 }

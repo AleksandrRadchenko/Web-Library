@@ -21,35 +21,19 @@ public class BookOrderService {
         return instance;
     }
 
-    public void create(int bookInstanceId, int userOrderId, BookOption bookOption) {
-        try {
-            bookOrderDAO.create(bookInstanceId, userOrderId, bookOption);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void create(int bookInstanceId, int userOrderId, BookOption bookOption) throws SQLException {
+        bookOrderDAO.create(bookInstanceId, userOrderId, bookOption);
     }
 
-    public List<BookOrder> getAll() {
-        List<BookOrder> result = new ArrayList<>();
-        try {
-            result = bookOrderDAO.getAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
+    public List<BookOrder> getAll() throws SQLException {
+        return bookOrderDAO.getAll();
     }
 
-    public List<BookOrder> getByUserId(int userId) {
-        List<BookOrder> result = new ArrayList<>();
-        try {
-            result = bookOrderDAO.getByUserId(userId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
+    public List<BookOrder> getByUserId(int userId) throws SQLException {
+        return bookOrderDAO.getByUserId(userId);
     }
 
-    public List<User> getAllUsersWithOrders() {
+    public List<User> getAllUsersWithOrders() throws SQLException {
         List<BookOrder> bookOrders = getAll();
         List<User> result = new ArrayList<>();
         for (BookOrder bookorder : bookOrders) {
