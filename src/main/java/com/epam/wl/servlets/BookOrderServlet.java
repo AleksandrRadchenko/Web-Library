@@ -2,6 +2,7 @@ package com.epam.wl.servlets;
 
 import com.epam.wl.dao.UserDAO;
 import com.epam.wl.entities.BookOrder;
+import com.epam.wl.entities.User;
 import com.epam.wl.services.BookOrderService;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 
 @WebServlet(name = "BookOrderServlet", urlPatterns = "/book_order")
@@ -25,10 +27,13 @@ public class BookOrderServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             if (request.getParameter("userid") != null) {
-                List<BookOrder> bookOrders = bookOrderService.getByUserId(Integer.parseInt(request.getParameter("userid")));
-                request.setAttribute("username", bookOrders.get(0).getUserOrder().getUser().getName() + " " + bookOrders.get(0).getUserOrder().getUser().getLastname());
+                int userId = Integer.parseInt(request.getParameter("userid"));
+                List<BookOrder> bookOrders = bookOrderService.getByUserId(userId);
+                List<User> allUsers = userDAO.getAllUsers();
+                allUsers.sort(Comparator.comparing(User::getId));
+                request.setAttribute("allusers", allUsers);
+                request.setAttribute("username", allUsers.get(userId - 1).getName() + " " + allUsers.get(userId - 1).getLastname());
                 request.setAttribute("bookorders", bookOrders);
-                request.setAttribute("allusers", userDAO.getAllUsers());
             } else {
                 request.setAttribute("username", "all users");
                 request.setAttribute("bookorders", bookOrderService.getAll());
