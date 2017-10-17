@@ -1,5 +1,5 @@
 package com.epam.wl.services;
-;
+
 import com.epam.wl.dao.BookDAO;
 import com.epam.wl.entities.Book;
 import java.sql.SQLException;
@@ -19,14 +19,7 @@ public class TestBookService {
         return instance;
     }
 
-    public List<Book> getBooks() {
-        List<Book> bookList = null;
-        try {
-            bookList = bookDAO.getAllBooks();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return bookList;
+    public List<Book> getBooks() throws SQLException {
+        return bookDAO.getAllBooks();
     }
-
 }

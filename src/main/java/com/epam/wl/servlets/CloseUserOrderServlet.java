@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "CloseUserOrderServlet", urlPatterns = "/close_user_order")
 public class CloseUserOrderServlet extends HttpServlet {
@@ -19,9 +20,13 @@ public class CloseUserOrderServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("book_orderid") != null) {
-            userOrderService.setUserOrderStatus(Integer.parseInt(request.getParameter("book_orderid")), UserOrderStatus.CLOSED);
+        try {
+            if (request.getParameter("book_orderid") != null) {
+                userOrderService.setUserOrderStatus(Integer.parseInt(request.getParameter("book_orderid")), UserOrderStatus.CLOSED);
+            }
+            response.sendRedirect("/book_order");
+        } catch (SQLException | IllegalArgumentException e) {
+            request.getRequestDispatcher("errors/error500.html").forward(request, response);
         }
-        response.sendRedirect("/book_order");
     }
 }

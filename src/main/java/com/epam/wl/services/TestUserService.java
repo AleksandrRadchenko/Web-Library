@@ -31,14 +31,9 @@ public class TestUserService {
         return instance;
     }
 
-    public List<User> getUser(User loggedUser) {
-        Optional<User> user = null;
-        try {
-            user = userDAO.getUserByID(loggedUser.getId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        if (user.isPresent()) {//nullpoint
+    public List<User> getUser(User loggedUser) throws SQLException {
+        Optional<User> user = userDAO.getUserByID(loggedUser.getId());
+        if (user.isPresent()) {
             users.add(user.get());
             if (users.size() > 1) {
                 users.remove(1);
@@ -47,31 +42,19 @@ public class TestUserService {
         return users;
     }
 
-    public void editUser(String name, String lastName, String email, String passwordHash) {
+    public void editUser(String name, String lastName, String email, String passwordHash) throws SQLException {
         Optional<User> user = Optional.of(users.get(0));
         user.get().setName(name);
         user.get().setLastname(lastName);
         user.get().setEmail(email);
         user.get().setPasswordHash(passwordHash);
         user.get().setRole(UserRole.USER);
-        if (user != null) {
-            users.clear();
-            users.add(0, user.get());
-        }
-        try {
-            userDAO.updateUser(users.get(0).getId(), name, lastName, email, passwordHash, users.get(0).getRole());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        users.clear();
+        users.add(0, user.get());
+        userDAO.updateUser(users.get(0).getId(), name, lastName, email, passwordHash, users.get(0).getRole());
     }
 
-    public List<UserOrder> getUserOrderBooks(User loggedUser) {
-        List<UserOrder> bookList = new ArrayList<>();
-        try {
-            bookList = userOrderDAO.getUserOrderByUserId(loggedUser.getId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return bookList;
+    public List<UserOrder> getUserOrderBooks(User loggedUser) throws SQLException {
+        return userOrderDAO.getUserOrderByUserId(loggedUser.getId());
     }
 }

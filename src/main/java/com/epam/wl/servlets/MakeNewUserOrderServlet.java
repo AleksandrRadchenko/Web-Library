@@ -10,20 +10,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "MakeNewUserOrderServlet", urlPatterns = "/userorderfromcatalog")
 public class MakeNewUserOrderServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int bookId = Integer.valueOf(request.getParameter("bookId"));
-        HttpSession session = request.getSession(false);
-        int userId = ((User) session.getAttribute("currentSessionUser")).getId();
+        try {
+            int bookId = Integer.valueOf(request.getParameter("bookId"));
+            HttpSession session = request.getSession(false);
+            int userId = ((User) session.getAttribute("currentSessionUser")).getId();
 
-        session.setAttribute("bookID", bookId);
-        UserOrderService userOrderService = UserOrderService.getInstance();
-        userOrderService.createNewUserOrder(bookId, userId);//userId
+            session.setAttribute("bookID", bookId);
+            UserOrderService userOrderService = UserOrderService.getInstance();
+            userOrderService.createNewUserOrder(bookId, userId);//userId
 
-        request.getRequestDispatcher("/userprofile").forward(request, response);
-
+            request.getRequestDispatcher("/userprofile").forward(request, response);
+        } catch (SQLException | IllegalArgumentException e) {
+            request.getRequestDispatcher("errors/error500.html").forward(request, response);
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.epam.wl.services;
 
 import com.epam.wl.dao.BookDAO;
 import com.epam.wl.dao.UserOrderDAO;
+import com.epam.wl.entities.User;
 import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.UserOrderStatus;
 
@@ -32,36 +33,25 @@ public class UserOrderService {
         return bookDAO.getFreeBookInstancesForThisBook(bookId);
     }
 
-    public Map<UserOrder, List<Integer>> getUserOrderAndFreeBookInstanceMap(List<UserOrder> userOrderList) {
+    public Map<UserOrder, List<Integer>> getUserOrderAndFreeBookInstanceMap(List<UserOrder> userOrderList) throws SQLException {
         final Map<UserOrder, List<Integer>> resultMap = new TreeMap<>(Comparator.comparingInt(UserOrder::getId));
-//        userOrderList.forEach(userOrder -> resultMap.put(userOrder, getFreeBookInstancesForThisBook(userOrder.getBook().getId())));
+        for (UserOrder userOrder : userOrderList) {
+            resultMap.put(userOrder, getFreeBookInstancesForThisBook(userOrder.getBook().getId()));
+        }
         return resultMap;
     }
 
-    public void setUserOrderStatus(int userOrderId, UserOrderStatus newStatus) {
-        try {
-            userOrderDAO.setUserOrderStatus(userOrderId, newStatus);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void setUserOrderStatus(int userOrderId, UserOrderStatus newStatus) throws SQLException {
+        userOrderDAO.setUserOrderStatus(userOrderId, newStatus);
     }
 
-    public void createNewUserOrder(final int bookID, final int userID) {
-        try {
-            userOrderDAO.createNewUserOrder(bookID, userID);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void createNewUserOrder(final int bookID, final int userID) throws SQLException {
+        userOrderDAO.createNewUserOrder(bookID, userID);
     }
 
     public UserOrder getById(int user_orderid) throws SQLException {
-        try {
-            Optional<UserOrder> oUserOrder = userOrderDAO.getUserOrderByID(user_orderid);
-            if (!oUserOrder.isPresent()) throw new SQLException("There is no such user_order for id = " + user_orderid);
-            else return oUserOrder.get();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
-        }
+        Optional<UserOrder> oUserOrder = userOrderDAO.getUserOrderByID(user_orderid);
+        if (!oUserOrder.isPresent()) throw new SQLException("There is no such user_order for id = " + user_orderid);
+        else return oUserOrder.get();
     }
 }
