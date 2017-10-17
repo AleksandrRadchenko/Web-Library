@@ -58,11 +58,12 @@ public class JdbcConnector {
     public static EmbeddedDatabase getNewTestDataSource() {
         testInstance.shutdown();
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        return builder
+        testInstance = builder
                 .setType(EmbeddedDatabaseType.H2)
                 .setScriptEncoding("UTF-8")
                 .addScript("H2DBinit.sql")
                 .addScript("H2DBdata.sql")
                 .build();
+        return testInstance;
     }
 }
