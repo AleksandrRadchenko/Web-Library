@@ -22,4 +22,12 @@ public class TestBookService {
     public List<Book> getBooks() throws SQLException {
         return bookDAO.getAllBooks();
     }
+
+    public List<Book> getBookByAuthor(String author) throws SQLException {
+        return bookDAO.getBooksByAuthor(author);
+    }
+
+    public List<Book> getBooksByTitle(String title) throws SQLException {
+        return bookDAO.getBooksByTitle(title);
+    }
 }

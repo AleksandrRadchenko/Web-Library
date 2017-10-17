@@ -26,12 +26,15 @@ public class BookDAO {
     private static final String GET_BOOK_ID_QUERY = "SELECT * FROM book WHERE author=? AND title=? AND year=?";
     private static final String GET_FREE_BOOK_INSTANCE_ID_QUERY = "SELECT book_instance.id AS book_instance_id " +
             "FROM book_instance LEFT JOIN book_order "
-             + "ON book_instance.id=book_order.book_instanceid WHERE "
-             + "book_instance.bookid=? AND book_instanceid IS NULL";
+            + "ON book_instance.id=book_order.book_instanceid WHERE "
+            + "book_instance.bookid=? AND book_instanceid IS NULL";
     private static final String ADD_NEW_BOOK_QUERY = "INSERT INTO book(author, title, year) VALUES (?, ?, ?)";
     private static final String GET_BOOK_BY_ID = "SELECT id, author, title, year FROM book WHERE id=?";
+    public static final String GET_BOOKS_BY_AUTHOR = "SELECT * FROM book WHERE author LIKE ?;";
+    public static final String GET_BOOKS_BY_TITLE = "SELECT * FROM book WHERE title LIKE ?;";
 
-    private BookDAO() {}
+    private BookDAO() {
+    }
 
     public static synchronized BookDAO getInstance() {
         if (instance == null)
@@ -57,5 +60,13 @@ public class BookDAO {
 
     public Optional<Book> getById(int bookId) throws SQLException {
         return executor.executeQuery(GET_BOOK_BY_ID, bookOneHandler, bookId);
+    }
+
+    public List<Book> getBooksByAuthor(String author) throws SQLException {
+        return executor.executeQuery(GET_BOOKS_BY_AUTHOR, bookListHandler, "%" + author + "%");
+    }
+
+    public List<Book> getBooksByTitle(String title) throws SQLException {
+        return executor.executeQuery(GET_BOOKS_BY_TITLE, bookListHandler, "%" + title + "%");
     }
 }

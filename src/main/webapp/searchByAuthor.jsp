@@ -1,9 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<jsp:useBean id="authorName" scope="request" type="java.lang.String"/>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Book catalog</title>
+    <title>"${authorName}" search results</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body link=#4483e2 vlink=#09607c alink=#f20e56>
@@ -11,22 +12,8 @@
     <img src="img/logo.jpg" alt="logo">
     <hr>
 </div>
-
-<center><h2>Search by author</h2>
-    <form action="${pageContext.request.contextPath}/authorsearch" method='GET'>
-        <input type='text' name='author' placeholder='Author'>
-        <input type="submit" value="Search">
-    </form>
-    <h2>Search by title</h2>
-    <form action="${pageContext.request.contextPath}/titlesearch" method='GET'>
-        <input type='text' name='title' placeholder='Title'>
-        <input type="submit" value="Search">
-    </form>
-    <br></center>
-
-
 <div align="center">
-    <h2>Book catalog</h2>
+    <h2>"${authorName}" search results</h2>
     <table border="1">
         <tr>
             <td><b>Author</b></td>
@@ -34,7 +21,6 @@
             <td><b>Year</b></td>
             <td></td>
         </tr>
-
         <jsp:useBean id="books" scope="request" type="java.util.List"/>
         <c:forEach items="${books}" var="book">
             <tr>
@@ -52,6 +38,7 @@
             </tr>
         </c:forEach>
     </table>
+    <h2><a href="${pageContext.request.contextPath}/catalog">&lt;&lt;To all books</a></h2>
 </div>
 </body>
 </div>
