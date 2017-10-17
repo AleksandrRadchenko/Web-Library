@@ -63,7 +63,7 @@
                 <td>${order.key.book.year}</td>
                 <c:choose>
                     <c:when test="${!empty order.value}">
-                        <form action="${pageContext.request.contextPath}/makeBookOrder" method="GET">
+                        <form action="${pageContext.request.contextPath}/makeBookOrder" method="POST">
                             <td>
                                 <input type="hidden" value="${order.key.id}" name="userOrderId">
                                 <div class="select" align="center"><select name="bookInstanceId">

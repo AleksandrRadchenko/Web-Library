@@ -16,13 +16,13 @@ import java.sql.SQLException;
 @WebServlet(name = "MakeNewBookOrderServlet", urlPatterns = "/makeBookOrder")
 public class MakeNewBookOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             final int userOrderId = Integer.valueOf(request.getParameter("userOrderId"));
             final int bookInstanceId = Integer.valueOf(request.getParameter("bookInstanceId"));
             final BookOption bookOption = BookOption.valueOf(request.getParameter("bookOption"));
+            request.removeAttribute("userOrderId");
+            request.removeAttribute("bookInstanceId");
+            request.removeAttribute("bookOption");
 
             final BookOrderService bookOrderService = BookOrderService.getInstance();
             bookOrderService.create(bookInstanceId, userOrderId, bookOption);
@@ -30,9 +30,14 @@ public class MakeNewBookOrderServlet extends HttpServlet {
             final UserOrderService userOrderService = UserOrderService.getInstance();
             userOrderService.setUserOrderStatus(userOrderId, UserOrderStatus.IN_PROGRESS);
 
-            request.getRequestDispatcher("/librarian").forward(request, response);
+            //request.getRequestDispatcher().forward(request, response);
+            response.sendRedirect("/librarian");
         } catch (SQLException | IllegalArgumentException e) {
             request.getRequestDispatcher("errors/error500.html").forward(request, response);
         }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }
