@@ -2,6 +2,7 @@ package com.epam.wl.dao;
 
 import com.epam.wl.dao.user_order_handlers.UserOrderListHandler;
 import com.epam.wl.dao.user_order_handlers.UserOrderOneHandler;
+import com.epam.wl.entities.User;
 import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.UserOrderStatus;
 import com.epam.wl.executor.Executor;
@@ -38,7 +39,12 @@ public class UserOrderDAO {
                     "book.id AS book_id, user_order.status AS status " +
                     "FROM user_order INNER JOIN users ON users.id=user_order.userId INNER JOIN book ON book.id=user_order.bookId WHERE user_order.userId = ?;";
 
-    private UserOrderDAO() {}
+    public static final String UPDATE_DELETE_BY_BOOK_ID_AND_USER_ID =
+            "DELETE FROM user_order WHERE status='NEW' AND user_order.id=?;";
+    //"DELETE FROM user_order WHERE status='NEW' AND bookid=? AND userid=?;";
+
+    private UserOrderDAO() {
+    }
 
     public static synchronized UserOrderDAO getInstance() {
         if (instance == null)
@@ -68,5 +74,9 @@ public class UserOrderDAO {
 
     public List<UserOrder> getUserOrderByUserId(final int userId) throws SQLException {
         return executor.executeQuery(QUERY_BY_USER_ID_POST, userOrderListHandler, userId);
+    }
+
+    public void deleteNewUserOrder(int userOrderId) throws SQLException {//int bookId, User currentSessionUser
+        executor.executeUpdate(UPDATE_DELETE_BY_BOOK_ID_AND_USER_ID, userOrderId);//bookId, currentSessionUser.getId()
     }
 }

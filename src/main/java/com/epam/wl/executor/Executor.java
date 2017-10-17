@@ -48,7 +48,7 @@ public class Executor {
     }
 
     public void executeUpdate(final String update, Object... args) throws SQLException {
-        try (PreparedStatement stmt = dataSource.getConnection().prepareStatement(update)) {
+        try (PreparedStatement stmt = dataSource.getConnection().prepareStatement(update)) {//доходит, ок
             for (int i = 0; i < args.length; i++) {
                 if (args[i].getClass() == Integer.class) {
                     stmt.setInt(i + 1, (Integer) args[i]);

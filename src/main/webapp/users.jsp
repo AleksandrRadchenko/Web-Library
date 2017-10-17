@@ -25,19 +25,28 @@
     <div align="center">
         <h4>Your current orders</h4>
         <table border="1">
-            <jsp:useBean id="books" scope="request" type="java.util.List"/>
+            <jsp:useBean id="userorders" scope="request" type="java.util.List"/>
             <tr>
                 <td><b>Author</b></td>
                 <td><b>Title</b></td>
                 <td><b>Year</b></td>
                 <td><b>Status</b></td>
+                <td><b></b></td>
             </tr>
-            <c:forEach items="${books}" var="book">
+            <c:forEach items="${userorders}" var="userorder">
                 <tr>
-                    <td>${book.book.author}</td>
-                    <td> ${book.book.title}</td>
-                    <td> ${book.book.year}</td>
-                    <td> ${book.status}</td>
+                    <td>${userorder.book.author}</td>
+                    <td> ${userorder.book.title}</td>
+                    <td> ${userorder.book.year}</td>
+                    <td> ${userorder.status}</td>
+                    <td>
+                        <form action="${pageContext.request.contextPath}/usercancel" method="POST">
+                            <input type="hidden" value="${userorder.id}" name="userOrderId">
+                            <div class="button">
+                                <input type="submit" value="Cancel new order">
+                            </div>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
@@ -45,7 +54,6 @@
     <hr>
     <a href="${pageContext.request.contextPath}/catalog"><h2>Book catalog>></h2></a><br>
 </div>
-
 
 <h4> Here you can change your parameters:</h4><br>
 <div>
@@ -61,8 +69,6 @@
         <input type="submit" value="Edit info">
     </form>
 </div>
-
-
 <div class="footer">
     <hr>
     &copy;&nbsp;2017. All rights reserved.

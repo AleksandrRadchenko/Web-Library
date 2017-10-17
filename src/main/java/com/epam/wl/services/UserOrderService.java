@@ -54,4 +54,8 @@ public class UserOrderService {
         if (!oUserOrder.isPresent()) throw new SQLException("There is no such user_order for id = " + user_orderid);
         else return oUserOrder.get();
     }
+
+    public void deleteNewUserOrder(int userOrderId) throws SQLException {//int bookId, User currentSessionUser
+        userOrderDAO.deleteNewUserOrder(userOrderId);
+    }
 }
