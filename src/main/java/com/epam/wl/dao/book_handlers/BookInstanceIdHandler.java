@@ -16,6 +16,7 @@ public class BookInstanceIdHandler implements ResultHandler<Integer> {
             instance = new BookInstanceIdHandler();
         return instance;
     }
+
     @Override
     public Integer handle(ResultSet resultSet) throws SQLException {
         if (resultSet.next()) {

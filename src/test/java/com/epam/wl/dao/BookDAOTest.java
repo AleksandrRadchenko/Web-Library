@@ -1,6 +1,7 @@
 package com.epam.wl.dao;
 
 import com.epam.wl.entities.Book;
+import com.epam.wl.executor.Executor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ public class BookDAOTest implements TestData {
      */
     @BeforeEach
     void initDatabase() {
-        dataSource = DBHelper.getEmbeddedDatabase();
+        Executor.resetTestDataSource();
     }
 
     /**
@@ -47,7 +48,7 @@ public class BookDAOTest implements TestData {
         assertThat(expectedBookInstanceId, is(bookDAO.getFreeBookInstanceId(bookId)));
     }
 
-//    @Test
+    //    @Test
 //    void testAddNewBookInstance() throws SQLException {
 //        List<BookInstance> expectedBookInstances = bookDAO.getAllBookInstances();
 //        expectedBookInstances.add(new BookInstance(expectedBookInstances.size() + 1, b5));

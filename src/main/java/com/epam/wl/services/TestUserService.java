@@ -53,7 +53,7 @@ public class TestUserService {
         user.get().setLastname(lastName);
         user.get().setEmail(email);
         user.get().setPasswordHash(passwordHash);
-        user.get().setRole(UserRole.USER);//users.get(0).getRole()
+        user.get().setRole(UserRole.USER);
         if (user != null) {
             users.clear();
             users.add(0, user.get());

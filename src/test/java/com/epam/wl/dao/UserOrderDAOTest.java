@@ -2,6 +2,7 @@ package com.epam.wl.dao;
 
 import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.UserOrderStatus;
+import com.epam.wl.executor.Executor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,16 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class UserOrderDAOTest implements TestData {
 
     private UserOrderDAO userOrderDAO = UserOrderDAO.getInstance();
-    private EmbeddedDatabase dataSource;
 
     @BeforeEach
     public void initDatabase() {
-        dataSource = DBHelper.getNewEmbeddedDatabase();
-    }
-
-    @AfterEach
-    public void dropDatabase() throws SQLException {
-        dataSource.shutdown();
+            Executor.resetTestDataSource();
     }
 
     @Test

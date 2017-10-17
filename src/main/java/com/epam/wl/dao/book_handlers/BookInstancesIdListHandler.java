@@ -18,6 +18,7 @@ public class BookInstancesIdListHandler implements ResultHandler<List<Integer>> 
             instance = new BookInstancesIdListHandler();
         return instance;
     }
+
     @Override
     public List<Integer> handle(ResultSet resultSet) throws SQLException {
         final List<Integer> bookInstancesId = new ArrayList<>();

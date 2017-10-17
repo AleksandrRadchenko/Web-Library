@@ -19,6 +19,7 @@ public class BookListHandler implements ResultHandler<List<Book>> {
             instance = new BookListHandler();
         return instance;
     }
+
     @Override
     public List<Book> handle(ResultSet resultSet) throws SQLException {
         final List<Book> books = new ArrayList<>();
