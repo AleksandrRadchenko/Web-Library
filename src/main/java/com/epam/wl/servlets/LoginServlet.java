@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             response.sendRedirect(service.confirmUser(request));
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalArgumentException e) {
             request.getRequestDispatcher("errors/error500.html").forward(request, response);
         }
     }

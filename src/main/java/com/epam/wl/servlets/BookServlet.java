@@ -28,7 +28,7 @@ public class BookServlet extends HttpServlet {
             request.setAttribute("identification", list);
             request.setAttribute("books", service.getBooks());
             request.getRequestDispatcher("catalog.jsp").forward(request, response);
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalArgumentException e) {
             request.getRequestDispatcher("errors/error500.html").forward(request, response);
         }
     }

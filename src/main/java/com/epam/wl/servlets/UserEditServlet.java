@@ -25,7 +25,7 @@ public class UserEditServlet extends HttpServlet {
             TestUserService service = TestUserService.getInstance();
             service.editUser(name, lastName, email, passwordHash);
             response.sendRedirect("/userprofile");
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalArgumentException e) {
             request.getRequestDispatcher("errors/error500.html").forward(request, response);
         }
     }

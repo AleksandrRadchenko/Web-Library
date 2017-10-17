@@ -24,7 +24,7 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("books", service.getUserOrderBooks((User) session.getAttribute("currentSessionUser")));
 
             request.getRequestDispatcher("users.jsp").forward(request, response);
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalArgumentException e) {
             request.getRequestDispatcher("errors/error500.html").forward(request, response);
         }
     }

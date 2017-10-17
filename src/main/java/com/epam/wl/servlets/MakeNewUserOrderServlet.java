@@ -26,7 +26,7 @@ public class MakeNewUserOrderServlet extends HttpServlet {
             userOrderService.createNewUserOrder(bookId, userId);//userId
 
             request.getRequestDispatcher("/userprofile").forward(request, response);
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalArgumentException e) {
             request.getRequestDispatcher("errors/error500.html").forward(request, response);
         }
     }

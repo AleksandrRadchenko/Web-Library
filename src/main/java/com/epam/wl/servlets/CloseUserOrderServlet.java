@@ -25,7 +25,7 @@ public class CloseUserOrderServlet extends HttpServlet {
                 userOrderService.setUserOrderStatus(Integer.parseInt(request.getParameter("book_orderid")), UserOrderStatus.CLOSED);
             }
             response.sendRedirect("/book_order");
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalArgumentException e) {
             request.getRequestDispatcher("errors/error500.html").forward(request, response);
         }
     }

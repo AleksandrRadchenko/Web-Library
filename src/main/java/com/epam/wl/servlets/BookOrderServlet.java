@@ -33,7 +33,7 @@ public class BookOrderServlet extends HttpServlet {
                 request.setAttribute("allusers", bookOrderService.getAllUsersWithOrders());
             }
             request.getRequestDispatcher("BookOrders.jsp").forward(request, response);
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalArgumentException e) {
             request.getRequestDispatcher("errors/error500.html").forward(request, response);
         }
     }

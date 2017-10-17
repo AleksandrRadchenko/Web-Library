@@ -27,7 +27,7 @@ public class LibrarianPageServlet extends HttpServlet {
 
             request.setAttribute("userOrderMap", userOrderListMap);
             request.getRequestDispatcher("librarian.jsp").forward(request, response);
-        } catch (SQLException e){
+        } catch (SQLException | IllegalArgumentException e){
             request.getRequestDispatcher("errors/error500.html").forward(request, response);
         }
     }

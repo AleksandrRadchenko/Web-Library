@@ -21,7 +21,7 @@ public class SignUpServlet extends HttpServlet {
                     request.getParameter("password"), "user".equals(request.getParameter("role"))
                             ? UserRole.USER : UserRole.LIBRARIAN, request.getParameter("password_repeat"),
                     request.getParameter("captcha")));
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalArgumentException e) {
             request.getRequestDispatcher("errors/error500.html").forward(request, response);
         }
     }
