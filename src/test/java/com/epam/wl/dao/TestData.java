@@ -27,7 +27,7 @@ public interface TestData {
     BookInstance bi8 = new BookInstance(8, b2);
     BookInstance bi9 = new BookInstance(9, b2);
     BookInstance bi10 = new BookInstance(10, b4);
-    BookInstance bi11 = new BookInstance(10, b4);
+    BookInstance bi11 = new BookInstance(11, b3);
     BookInstance bi12 = new BookInstance(12, b4);
     BookInstance bi13 = new BookInstance(13, b3);
     BookInstance bi14 = new BookInstance(14, b3);
