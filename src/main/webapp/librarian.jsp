@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>User Orders</title>
+    <title>Librarian's page</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body link=#4483e2 vlink=#09607c alink=#f20e56>
