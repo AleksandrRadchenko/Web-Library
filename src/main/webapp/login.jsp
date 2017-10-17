@@ -16,7 +16,7 @@
 </div>
 <div align="center">
 
-<form action="/login" method="post">
+<form action="${pageContext.request.contextPath}/login" method="post">
     <fieldset>
         <label>E-mail</label>
         <input type="email" name="email" required/><span></span>
@@ -30,7 +30,7 @@
     </fieldset>
 </form>
 
-<form action="/redir" method="post">
+<form action="${pageContext.request.contextPath}/redir" method="post">
     <div class="sum">
         <input type="submit" value="Sign up">
     </div>
