@@ -2,6 +2,7 @@ package com.epam.wl.dao;
 
 import com.epam.wl.entities.BookOrder;
 import com.epam.wl.entities.User;
+import com.epam.wl.executor.Executor;
 import com.epam.wl.services.BookOrderService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,19 +16,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 public class BookOrderServiceTest implements TestData {
-    private EmbeddedDatabase dataSource;
-    private BookOrderService bookOrderService;
     private static final List<User> allUsers = users;
+    private final BookOrderService bookOrderService = BookOrderService.getInstance();
 
     @BeforeEach
     void setUp() throws SQLException {
-        dataSource = DBHelper.getNewEmbeddedDatabase();
-        bookOrderService = BookOrderService.getInstance();
-    }
-
-    @AfterEach
-    void tearDown() throws SQLException {
-        dataSource.shutdown();
+            Executor.resetTestDataSource();
     }
 
     @Test

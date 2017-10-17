@@ -22,10 +22,10 @@ public class BookOneHandler implements ResultHandler<Optional<Book>> {
     @Override
     public Optional<Book> handle(ResultSet resultSet) throws SQLException {
         if (!resultSet.next()) return Optional.empty();
-        int id = resultSet.getInt("id");
-        String author = resultSet.getString("author");
-        String title = resultSet.getString("title");
-        int year = resultSet.getInt("year");
+        final int id = resultSet.getInt("id");
+        final String author = resultSet.getString("author");
+        final String title = resultSet.getString("title");
+        final int year = resultSet.getInt("year");
         return Optional.of(new Book(id, author, title, year));
     }
 }

@@ -2,6 +2,7 @@ package com.epam.wl.dao;
 
 import com.epam.wl.entities.User;
 import com.epam.wl.enums.UserRole;
+import com.epam.wl.executor.Executor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,16 +18,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 class UserDAOTest implements TestData {
 
     private UserDAO userDAO = UserDAO.getInstance();
-    private EmbeddedDatabase dataSource;
 
     @BeforeEach
-    public void initDatabase() {
-        dataSource = DBHelper.getNewEmbeddedDatabase();
-    }
-
-    @AfterEach
-    public void dropDatabase() throws SQLException {
-        dataSource.shutdown();
+    public void initDatabase() throws SQLException {
+            Executor.resetTestDataSource();
     }
 
     @Test

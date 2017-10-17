@@ -23,14 +23,14 @@ public class UserListHandler implements ResultHandler<List<User>> {
 
     @Override
     public List<User> handle(ResultSet resultSet) throws SQLException {
-        List<User> resultUserList = new ArrayList();
+        final List<User> resultUserList = new ArrayList();
         while (resultSet.next()) {
-            int userID = resultSet.getInt("id");
-            String name = resultSet.getString("name");
-            String lastname = resultSet.getString("lastname");
-            String email = resultSet.getString("email");
-            String passwordhash = resultSet.getString("passwordhash");
-            UserRole role = UserRole.valueOf(resultSet.getString("role"));
+            final int userID = resultSet.getInt("id");
+            final String name = resultSet.getString("name");
+            final String lastname = resultSet.getString("lastname");
+            final String email = resultSet.getString("email");
+            final String passwordhash = resultSet.getString("passwordhash");
+            final UserRole role = UserRole.valueOf(resultSet.getString("role"));
             resultUserList.add(new User(userID, name, lastname, email, passwordhash, role));
         }
         return resultUserList;

@@ -48,17 +48,6 @@ public class UserOrderDAO {
                     "book.id AS book_id, book.title AS title, book.author AS author, book.year AS year, user_order.status AS status " +
                     "FROM user_order INNER JOIN users ON users.id=user_order.userId INNER JOIN book ON book.id=user_order.bookId WHERE user_order.userId = ?;";
 
-
-//     "SELECT user_order.id AS user_order_id, \"user\".id AS user_id, \"user\".name AS user_name," +
-//             "\"user\".lastname AS user_lastname, \"user\".email AS user_email," +
-//             "book.title AS book_title, book.author AS book_author, book.year AS book_year, user_order.status AS status" +
-//             "FROM user_order INNER JOIN \"user\" ON \"user\".id=user_order.userId INNER JOIN book ON book.id=user_order.bookId WHERE \"user\".id = ?;";
-
-//
-//            "SELECT user_order.id, \"user\".id, \"user\".name, \"user\".lastname, \"user\".email," +
-//            "book.title, book.author, book.year, user_order.status FROM user_order " +
-//            "INNER JOIN \"user\" ON \"user\".id=user_order.userId INNER JOIN book ON book.id=user_order.bookId WHERE \"user\".id = ?";
-
     private UserOrderDAO() {}
 
     public static synchronized UserOrderDAO getInstance() {

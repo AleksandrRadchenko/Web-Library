@@ -25,13 +25,13 @@ public class BookOrderListHandler implements ResultHandler<List<BookOrder>> {
 
     @Override
     public List<BookOrder> handle(ResultSet resultSet) throws SQLException {
-        List<BookOrder> output = new ArrayList<BookOrder>();
+        final List<BookOrder> output = new ArrayList<BookOrder>();
         while (resultSet.next()) {
-            int id = resultSet.getInt("book_order_id");
-            int book_instanceid = resultSet.getInt("book_instanceid");
-            int user_orderid = resultSet.getInt("user_orderid");
-            BookOption option = BookOption.valueOf(resultSet.getString("option"));
-            BookOrder bookOrder = new BookOrder(id, BookInstanceService.getInstance().getById(book_instanceid),
+            final int id = resultSet.getInt("book_order_id");
+            final int book_instanceid = resultSet.getInt("book_instanceid");
+            final int user_orderid = resultSet.getInt("user_orderid");
+            final BookOption option = BookOption.valueOf(resultSet.getString("option"));
+            final BookOrder bookOrder = new BookOrder(id, BookInstanceService.getInstance().getById(book_instanceid),
                     UserOrderService.getInstance().getById(user_orderid), option);
             output.add(bookOrder);
         }

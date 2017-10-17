@@ -26,7 +26,7 @@ public class UserOrderListHandler implements ResultHandler<List<UserOrder>> {
 
     @Override
     public List<UserOrder> handle(ResultSet resultSet) throws SQLException {
-        List<UserOrder> resultUserOrderList = new ArrayList();
+        final List<UserOrder> resultUserOrderList = new ArrayList();
         while (resultSet.next()) {
             final int userOrderID = resultSet.getInt("user_order_id");
             final int userID = resultSet.getInt("user_id");

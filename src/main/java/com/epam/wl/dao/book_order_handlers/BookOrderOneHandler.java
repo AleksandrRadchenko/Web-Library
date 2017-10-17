@@ -25,10 +25,10 @@ public class BookOrderOneHandler implements ResultHandler<Optional<BookOrder>> {
     @Override
     public Optional<BookOrder> handle(ResultSet resultSet) throws SQLException {
         if (!resultSet.next()) return Optional.empty();
-        int id = resultSet.getInt("book_order_id");
-        int book_instanceid = resultSet.getInt("book_instanceid");
-        int user_orderid = resultSet.getInt("user_orderid");
-        BookOption option = BookOption.valueOf(resultSet.getString("option"));
+        final int id = resultSet.getInt("book_order_id");
+        final int book_instanceid = resultSet.getInt("book_instanceid");
+        final int user_orderid = resultSet.getInt("user_orderid");
+        final BookOption option = BookOption.valueOf(resultSet.getString("option"));
         return Optional.of(new BookOrder(id, BookInstanceService.getInstance().getById(book_instanceid),
                 UserOrderService.getInstance().getById(user_orderid), option));
     }

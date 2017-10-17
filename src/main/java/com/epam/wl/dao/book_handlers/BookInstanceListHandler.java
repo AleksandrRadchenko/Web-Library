@@ -22,13 +22,14 @@ public class BookInstanceListHandler implements ResultHandler<List<BookInstance>
             instance = new BookInstanceListHandler();
         return instance;
     }
+
     @Override
     public List<BookInstance> handle(ResultSet resultSet) throws SQLException {
         final List<BookInstance> bookInstances = new ArrayList<>();
 
         while (resultSet.next()) {
-            int bookId = resultSet.getInt("bookid");
-            Optional<Book> oBook = BookDAO.getInstance().getById(bookId);
+            final int bookId = resultSet.getInt("bookid");
+            final Optional<Book> oBook = BookDAO.getInstance().getById(bookId);
             if (!oBook.isPresent()) throw new SQLException("There is no Book for id = " + bookId);
             else bookInstances.add(new BookInstance(resultSet.getInt("id"), oBook.get()));
         }

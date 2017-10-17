@@ -12,7 +12,8 @@ import java.util.Optional;
 public class BookInstanceOneHandler implements ResultHandler<Optional<BookInstance>> {
     private static BookInstanceOneHandler instance;
 
-    private BookInstanceOneHandler() {}
+    private BookInstanceOneHandler() {
+    }
 
     public static synchronized BookInstanceOneHandler getInstance() {
         if (instance == null)
@@ -24,9 +25,9 @@ public class BookInstanceOneHandler implements ResultHandler<Optional<BookInstan
     public Optional<BookInstance> handle(ResultSet resultSet) throws SQLException {
         if (!resultSet.next()) return Optional.empty();
 
-        int id = resultSet.getInt("id");
-        int bookId = resultSet.getInt("bookid");
-        Optional<Book> oBook = BookDAO.getInstance().getById(bookId);
+        final int id = resultSet.getInt("id");
+        final int bookId = resultSet.getInt("bookid");
+        final Optional<Book> oBook = BookDAO.getInstance().getById(bookId);
         return oBook.map(book -> new BookInstance(id, book));
     }
 }
