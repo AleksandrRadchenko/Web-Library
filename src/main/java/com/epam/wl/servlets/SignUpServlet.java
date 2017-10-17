@@ -15,6 +15,8 @@ public class SignUpServlet extends HttpServlet {
     private final TestLoginService service = TestLoginService.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         try {
             response.sendRedirect(service.addNewUser(request.getParameter("name"),
                     request.getParameter("last_name"), request.getParameter("email"),
