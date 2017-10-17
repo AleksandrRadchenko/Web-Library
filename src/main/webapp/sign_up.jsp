@@ -16,7 +16,7 @@
 </div>
 <div align="center">
 
-<form action="/sign_up" id='send' method='POST'>
+<form action="${pageContext.request.contextPath}/sign_up" id='send' method='POST'>
     <fieldset>
         <label>Name</label>
         <input type='text' name='name' placeholder='Name' required><span></span>
