@@ -1,5 +1,6 @@
 package com.epam.wl.servlets;
 
+import com.epam.wl.dao.UserDAO;
 import com.epam.wl.entities.BookOrder;
 import com.epam.wl.services.BookOrderService;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @WebServlet(name = "BookOrderServlet", urlPatterns = "/book_order")
 public class BookOrderServlet extends HttpServlet {
     private final BookOrderService bookOrderService = BookOrderService.getInstance();
+    private final UserDAO userDAO = UserDAO.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -26,11 +28,11 @@ public class BookOrderServlet extends HttpServlet {
                 List<BookOrder> bookOrders = bookOrderService.getByUserId(Integer.parseInt(request.getParameter("userid")));
                 request.setAttribute("username", bookOrders.get(0).getUserOrder().getUser().getName() + " " + bookOrders.get(0).getUserOrder().getUser().getLastname());
                 request.setAttribute("bookorders", bookOrders);
-                request.setAttribute("allusers", bookOrderService.getAllUsersWithOrders()); // TODO: 17.10.2017 chage for UserService.getAllUsers()
+                request.setAttribute("allusers", userDAO.getAllUsers());
             } else {
                 request.setAttribute("username", "all users");
                 request.setAttribute("bookorders", bookOrderService.getAll());
-                request.setAttribute("allusers", bookOrderService.getAllUsersWithOrders());
+                request.setAttribute("allusers", userDAO.getAllUsers());
             }
             request.getRequestDispatcher("BookOrders.jsp").forward(request, response);
         } catch (SQLException | IllegalArgumentException e) {
