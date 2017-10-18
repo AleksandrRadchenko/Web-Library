@@ -11,7 +11,7 @@
 
 <body link=#4483e2 vlink=#09607c alink=#f20e56>
 <div class="header">
-    <img src="img/logo.jpg" alt="logo">
+    <a href="${pageContext.request.contextPath}/"><img src="img/logo.jpg" alt="logo"></a>
     <hr>
 </div>
 <div align="center">

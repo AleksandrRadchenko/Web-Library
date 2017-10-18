@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="header">
-    <img src="img/logo.jpg" alt="logo">
+    <a href="${pageContext.request.contextPath}/"><img src="img/logo.jpg" alt="logo"></a>
     <hr>
 </div>
 <jsp:useBean id="bookorders" scope="request" type="java.util.List"/>
