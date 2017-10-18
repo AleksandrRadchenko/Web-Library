@@ -43,7 +43,12 @@
                         <form action="${pageContext.request.contextPath}/usercancel" method="POST">
                             <input type="hidden" value="${userorder.id}" name="userOrderId">
                             <div class="button">
-                                <input type="submit" value="Cancel new order">
+                                <c:choose><c:when test="${userorder.status eq 'NEW'}">
+                                    <input type="submit" value="Cancel order">
+                                </c:when><c:otherwise>
+                                    <input type="submit" value="Cancel order" disabled>
+                                </c:otherwise>
+                                </c:choose>
                             </div>
                         </form>
                     </td>

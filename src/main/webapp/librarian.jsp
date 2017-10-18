@@ -86,9 +86,10 @@
                         </form>
                     </c:when>
                     <c:otherwise>
-                        <td><center>No free<br>exemplars</center></td>
-                        <td></td>
-                        <td></td>
+                        <td><center>No exemplars</center></td>
+                        <td><select disabled>
+                        </select></td>
+                        <td><input type="submit" value="OK" disabled></td>
                     </c:otherwise>
                 </c:choose>
             </tr>

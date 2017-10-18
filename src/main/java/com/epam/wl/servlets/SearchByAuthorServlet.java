@@ -1,5 +1,6 @@
 package com.epam.wl.servlets;
 
+import com.epam.wl.entities.Book;
 import com.epam.wl.entities.User;
 import com.epam.wl.services.BookService;
 
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "SearchByAuthorServlet", urlPatterns = "/authorsearch")
 public class SearchByAuthorServlet extends HttpServlet {
@@ -24,7 +27,11 @@ public class SearchByAuthorServlet extends HttpServlet {
             User user = (User) session.getAttribute("currentSessionUser");
             if (user != null) {
                 request.setAttribute("identification", user);
-                request.setAttribute("books", service.getBookByAuthor(author));
+
+                List<Book> bookList = service.getBookByAuthor(author);
+                Map<Book, List<Integer>> bookMap = service.getBookAndFreeBookInstanceMap(bookList);
+                request.setAttribute("bookMap", bookMap);
+
                 request.setAttribute("authorName", author);
                 request.getRequestDispatcher("searchByAuthor.jsp").forward(request, response);
             } else {

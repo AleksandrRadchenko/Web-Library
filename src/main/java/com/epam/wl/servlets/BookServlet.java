@@ -1,5 +1,6 @@
 package com.epam.wl.servlets;
 
+import com.epam.wl.entities.Book;
 import com.epam.wl.entities.User;
 import com.epam.wl.services.BookService;
 
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "BookServlet", urlPatterns = "/catalog")
 public class BookServlet extends HttpServlet {
@@ -22,7 +25,11 @@ public class BookServlet extends HttpServlet {
             User user = (User) session.getAttribute("currentSessionUser");
             if (user != null) {
                 request.setAttribute("identification", user);
-                request.setAttribute("books", service.getBooks());
+
+                List<Book> bookList = service.getBooks();
+                Map<Book, List<Integer>> bookMap = service.getBookAndFreeBookInstanceMap(bookList);
+                request.setAttribute("bookMap", bookMap);
+
                 request.getRequestDispatcher("catalog.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("login.jsp").forward(request, response);

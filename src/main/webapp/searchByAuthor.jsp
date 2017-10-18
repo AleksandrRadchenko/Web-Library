@@ -21,17 +21,24 @@
             <td><b>Year</b></td>
             <td></td>
         </tr>
-        <jsp:useBean id="books" scope="request" type="java.util.List"/>
-        <c:forEach items="${books}" var="book">
+        <jsp:useBean id="bookMap" scope="request" type="java.util.Map"/>
+        <c:forEach items="${bookMap}" var="book">
             <tr>
-                <td>${book.author}</td>
-                <td>${book.title}</td>
-                <td>${book.year}</td>
+                <td>${book.key.author}</td>
+                <td>${book.key.title}</td>
+                <td>${book.key.year}</td>
                 <td>
                     <form action="${pageContext.request.contextPath}/userorderfromcatalog" method="POST">
-                        <input type="hidden" value="${book.id}" name="bookId">
+                        <input type="hidden" value="${book.key.id}" name="bookId">
                         <div class="button">
-                            <input type="submit" value="Order">
+                            <c:choose>
+                                <c:when test="${!empty book.value}">
+                                    <input type="submit" value="Order">
+                                </c:when>
+                                <c:otherwise>
+                                    <input type="submit" value="Order" disabled>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </form>
                 </td>
@@ -39,6 +46,7 @@
         </c:forEach>
     </table>
     <h2><a href="${pageContext.request.contextPath}/catalog">&lt;&lt;To all books</a></h2>
+    <a href="${pageContext.request.contextPath}/userprofile"><h2>&lt;&lt;Profile</h2></a>
 </div>
 </body>
 </div>
