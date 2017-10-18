@@ -11,6 +11,13 @@
     <a href="${pageContext.request.contextPath}/"><img src="img/logo.jpg" alt="logo"></a>
     <hr>
 </div>
+
+<form action="${pageContext.request.contextPath}/log_out" method="post">
+    <div class="sum">
+        <input type="submit" value="Log out">
+    </div>
+</form>
+
 <jsp:useBean id="bookorders" scope="request" type="java.util.List"/>
 <jsp:useBean id="username" scope="request" type="java.lang.String"/>
 <jsp:useBean id="allusers" scope="request" type="java.util.List"/>

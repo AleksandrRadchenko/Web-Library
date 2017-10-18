@@ -4,7 +4,6 @@ import com.epam.wl.entities.Book;
 import com.epam.wl.executor.Executor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,8 +12,8 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+@SuppressWarnings("WeakerAccess")
 public class BookDAOTest implements TestData {
-    private EmbeddedDatabase dataSource;
     private final BookDAO bookDAO = BookDAO.getInstance();
 
     /**

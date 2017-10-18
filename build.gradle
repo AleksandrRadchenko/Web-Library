@@ -24,14 +24,15 @@ dependencies {
     //'org.apache.logging.log4j:log4j-core:+',
 
     compile 'javax.servlet:jstl:1.2',
-    'org.postgresql:postgresql:+'
+            'org.postgresql:postgresql:+',
+            'com.mchange:c3p0:+'
 
     // Tomcat include javax.servlet lib
     providedCompile 'javax.servlet:javax.servlet-api:+'
 
     compileOnly 'org.projectlombok:lombok:+'
 
-    runtime 'com.h2database:h2:+'
+    testRuntime 'com.h2database:h2:+'
 
     testCompile 'org.junit.jupiter:junit-jupiter-api:+',
             'org.hamcrest:java-hamcrest:+'
