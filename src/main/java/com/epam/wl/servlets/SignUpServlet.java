@@ -1,7 +1,7 @@
 package com.epam.wl.servlets;
 
 import com.epam.wl.enums.UserRole;
-import com.epam.wl.services.TestLoginService;
+import com.epam.wl.services.LoginService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 @javax.servlet.annotation.WebServlet(name = "SignUpServlet", urlPatterns = "/sign_up")
 public class SignUpServlet extends HttpServlet {
-    private final TestLoginService service = TestLoginService.getInstance();
+    private final LoginService service = LoginService.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");

@@ -1,6 +1,6 @@
 package com.epam.wl.servlets;
 
-import com.epam.wl.services.TestUserService;
+import com.epam.wl.services.UserService;
 import com.epam.wl.entities.User;
 
 import javax.servlet.ServletException;
@@ -17,7 +17,7 @@ public class UserServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            TestUserService service = TestUserService.getInstance();
+            UserService service = UserService.getInstance();
             HttpSession session = request.getSession(false);
 
             User user = (User) session.getAttribute("currentSessionUser");

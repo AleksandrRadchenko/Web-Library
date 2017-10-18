@@ -5,16 +5,16 @@ import com.epam.wl.entities.Book;
 import java.sql.SQLException;
 import java.util.List;
 
-public class TestBookService {
-    private static TestBookService instance;
+public class BookService {
+    private static BookService instance;
     private final BookDAO bookDAO = BookDAO.getInstance();
 
-    private TestBookService() {
+    private BookService() {
     }
 
-    public static synchronized TestBookService getInstance() {
+    public static synchronized BookService getInstance() {
         if (instance == null) {
-            instance = new TestBookService();
+            instance = new BookService();
         }
         return instance;
     }

@@ -1,7 +1,7 @@
 package com.epam.wl.servlets;
 
 import com.epam.wl.entities.User;
-import com.epam.wl.services.TestBookService;
+import com.epam.wl.services.BookService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +17,7 @@ public class BookServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            TestBookService service = TestBookService.getInstance();
+            BookService service = BookService.getInstance();
             HttpSession session = request.getSession(false);
             User user = (User) session.getAttribute("currentSessionUser");
             if (user != null) {

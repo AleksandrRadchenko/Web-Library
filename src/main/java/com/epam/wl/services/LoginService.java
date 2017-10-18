@@ -9,16 +9,16 @@ import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class TestLoginService {
-    private static TestLoginService instance;
+public class LoginService {
+    private static LoginService instance;
     private final UserDAO userDAO = UserDAO.getInstance();
 
-    private TestLoginService() {
+    private LoginService() {
     }
 
-    public static synchronized TestLoginService getInstance() {
+    public static synchronized LoginService getInstance() {
         if (instance == null) {
-            instance = new TestLoginService();
+            instance = new LoginService();
         }
         return instance;
     }

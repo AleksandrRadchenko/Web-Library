@@ -2,31 +2,26 @@ package com.epam.wl.services;
 
 import com.epam.wl.dao.UserDAO;
 import com.epam.wl.dao.UserOrderDAO;
-import com.epam.wl.db.JdbcConnector;
 import com.epam.wl.entities.User;
 import com.epam.wl.entities.UserOrder;
-import com.epam.wl.enums.UserRole;
-import com.epam.wl.servlets.UserServlet;
 
-import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class TestUserService {
+public class UserService {
 
-    private static TestUserService instance;
+    private static UserService instance;
     private static User libraryUser = new User();
     private final UserOrderDAO userOrderDAO = UserOrderDAO.getInstance();
     private final UserDAO userDAO = UserDAO.getInstance();
 
-    private TestUserService() {
+    private UserService() {
     }
 
-    public static synchronized TestUserService getInstance() {
+    public static synchronized UserService getInstance() {
         if (instance == null) {
-            instance = new TestUserService();
+            instance = new UserService();
         }
         return instance;
     }
