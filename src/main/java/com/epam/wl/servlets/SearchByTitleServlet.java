@@ -23,13 +23,15 @@ public class SearchByTitleServlet extends HttpServlet {
             TestBookService service = TestBookService.getInstance();
 
             HttpSession session = request.getSession(false);
-            List<User> list = new ArrayList<>();
-            list.add((User) session.getAttribute("currentSessionUser"));
-
-            request.setAttribute("identification", list);
-            request.setAttribute("books", service.getBooksByTitle(title));
-            request.setAttribute("titleName", title);
-            request.getRequestDispatcher("searchByTitle.jsp").forward(request, response);
+            User user = (User) session.getAttribute("currentSessionUser");
+            if (user != null) {
+                request.setAttribute("identification", user);//list
+                request.setAttribute("books", service.getBooksByTitle(title));
+                request.setAttribute("titleName", title);
+                request.getRequestDispatcher("searchByTitle.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
         } catch (SQLException | IllegalArgumentException e) {
             e.printStackTrace();
             request.getRequestDispatcher("errors/error500.html").forward(request, response);

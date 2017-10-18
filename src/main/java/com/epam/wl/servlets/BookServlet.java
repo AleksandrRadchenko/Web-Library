@@ -1,5 +1,6 @@
 package com.epam.wl.servlets;
 
+import com.epam.wl.entities.User;
 import com.epam.wl.services.TestBookService;
 
 import javax.servlet.ServletException;
@@ -18,10 +19,14 @@ public class BookServlet extends HttpServlet {
         try {
             TestBookService service = TestBookService.getInstance();
             HttpSession session = request.getSession(false);
-
-            request.setAttribute("identification",  session.getAttribute("currentSessionUser"));
-            request.setAttribute("books", service.getBooks());
-            request.getRequestDispatcher("catalog.jsp").forward(request, response);
+            User user = (User) session.getAttribute("currentSessionUser");
+            if (user != null) {
+                request.setAttribute("identification", user);
+                request.setAttribute("books", service.getBooks());
+                request.getRequestDispatcher("catalog.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
         } catch (SQLException | IllegalArgumentException e) {
             request.getRequestDispatcher("errors/error500.html").forward(request, response);
         }

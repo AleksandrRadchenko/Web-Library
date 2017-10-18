@@ -30,7 +30,6 @@ public class MakeNewBookOrderServlet extends HttpServlet {
             final UserOrderService userOrderService = UserOrderService.getInstance();
             userOrderService.setUserOrderStatus(userOrderId, UserOrderStatus.IN_PROGRESS);
 
-            //request.getRequestDispatcher().forward(request, response);
             response.sendRedirect("/librarian");
         } catch (SQLException | IllegalArgumentException e) {
             request.getRequestDispatcher("errors/error500.html").forward(request, response);
