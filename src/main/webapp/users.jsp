@@ -18,8 +18,7 @@
     </div>
 </form>
 <div align="center">
-    <br>
-    <h1>Welcome to your profile, ${users.name}!</h1><br><br>
+    <h1>Welcome to your profile, ${users.name}!</h1><br>
     <h3>${users.name} ${users.lastname} <br>e-mail: ${users.email}</h3>
     <hr>
     <div align="center">
@@ -43,7 +42,12 @@
                         <form action="${pageContext.request.contextPath}/usercancel" method="POST">
                             <input type="hidden" value="${userorder.id}" name="userOrderId">
                             <div class="button">
-                                <input type="submit" value="Cancel new order">
+                                <c:choose><c:when test="${userorder.status eq 'NEW'}">
+                                    <input type="submit" value="Cancel order">
+                                </c:when><c:otherwise>
+                                    <input type="submit" value="Cancel order" disabled>
+                                </c:otherwise>
+                                </c:choose>
                             </div>
                         </form>
                     </td>

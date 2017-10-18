@@ -13,6 +13,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This servlet represents librarian's page in the library.
+ */
 @WebServlet(name = "LibrarianPageServlet", urlPatterns = "/librarian")
 public class LibrarianPageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

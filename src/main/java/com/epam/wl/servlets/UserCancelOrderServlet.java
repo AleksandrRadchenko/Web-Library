@@ -11,12 +11,14 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-
+/**
+ * Servlet for cancelling user's order.
+ */
 @WebServlet(name = "UserCancelOrderServlet", urlPatterns = "/usercancel")
 public class UserCancelOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            final int userOrderId = Integer.valueOf(request.getParameter("userOrderId"));
+            int userOrderId = Integer.valueOf(request.getParameter("userOrderId"));
             HttpSession session = request.getSession(false);
 
             UserOrderService userOrderService = UserOrderService.getInstance();
