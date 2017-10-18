@@ -4,6 +4,7 @@ import com.epam.wl.dao.BookOrderDAO;
 import com.epam.wl.entities.BookOrder;
 import com.epam.wl.entities.User;
 import com.epam.wl.enums.BookOption;
+import lombok.extern.log4j.Log4j2;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * BookOrderService is used to interact with BookOrderDAO and calling servlets to provide the required operations
  */
+@Log4j2
 public class BookOrderService {
     private static BookOrderService instance;
     private final BookOrderDAO bookOrderDAO = BookOrderDAO.getInstance();
@@ -19,8 +21,11 @@ public class BookOrderService {
     private BookOrderService(){}
 
     public static synchronized BookOrderService getInstance(){
-        if (instance == null)
+        if (instance == null) {
             instance = new BookOrderService();
+            log.info("BookOrderService instance created");
+        }
+        log.info("BookOrderService instance supplied");
         return instance;
     }
 
@@ -33,6 +38,7 @@ public class BookOrderService {
      */
     public void create(int bookInstanceId, int userOrderId, BookOption bookOption) throws SQLException {
         bookOrderDAO.create(bookInstanceId, userOrderId, bookOption);
+        log.info("Created book order ({}, {}, {})", bookInstanceId, userOrderId, bookOption);
     }
 
     /**
@@ -75,5 +81,6 @@ public class BookOrderService {
      */
     public void deleteById(int userOrderId) throws SQLException {
         bookOrderDAO.deleteById(userOrderId);
+        log.info("Deleted book order id={}");
     }
 }

@@ -2,10 +2,12 @@ package com.epam.wl.services;
 
 import com.epam.wl.dao.BookInstanceDAO;
 import com.epam.wl.entities.BookInstance;
+import lombok.extern.log4j.Log4j2;
 
 import java.sql.SQLException;
 import java.util.Optional;
 
+@Log4j2
 /**
  * BookInstanceService is used for interaction with BookInstanceDAO and calling servlets to provide the required operations
  */
@@ -16,7 +18,11 @@ public class BookInstanceService {
     private BookInstanceService(){}
 
     public static synchronized BookInstanceService getInstance() {
-        if (instance == null) instance = new BookInstanceService();
+        if (instance == null) {
+            instance = new BookInstanceService();
+            log.info("BookInstanceService instance created");
+        }
+        log.info("BookInstanceService instance supplied");
         return instance;
     }
 
