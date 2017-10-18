@@ -11,6 +11,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Servlet for cancelling user's order.
+ */
 @WebServlet(name = "UserCancelOrderServlet", urlPatterns = "/usercancel")
 public class UserCancelOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

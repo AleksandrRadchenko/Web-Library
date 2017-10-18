@@ -15,6 +15,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This servlet represents a catalog of books in the library.
+ */
 @WebServlet(name = "BookServlet", urlPatterns = "/catalog")
 public class BookServlet extends HttpServlet {
 

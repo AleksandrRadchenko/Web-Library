@@ -15,6 +15,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Servlet for searching books by author.
+ */
 @WebServlet(name = "SearchByAuthorServlet", urlPatterns = "/authorsearch")
 public class SearchByAuthorServlet extends HttpServlet {
 

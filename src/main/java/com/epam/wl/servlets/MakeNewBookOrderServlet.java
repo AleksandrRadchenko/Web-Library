@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Servlet for making new book order.
+ */
 @WebServlet(name = "MakeNewBookOrderServlet", urlPatterns = "/makeBookOrder")
 public class MakeNewBookOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

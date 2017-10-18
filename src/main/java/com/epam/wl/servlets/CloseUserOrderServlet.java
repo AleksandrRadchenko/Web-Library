@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Servlet for closing user order.
+ */
 @WebServlet(name = "CloseUserOrderServlet", urlPatterns = "/close_user_order")
 public class CloseUserOrderServlet extends HttpServlet {
     private final UserOrderService userOrderService = UserOrderService.getInstance();

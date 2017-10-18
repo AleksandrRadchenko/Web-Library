@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * This servlet represents user's profile in the library.
+ */
 @WebServlet(name = "UserServlet", urlPatterns = "/userprofile")
 public class UserServlet extends HttpServlet {
 

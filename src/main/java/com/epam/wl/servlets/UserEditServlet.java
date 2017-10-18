@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Servlet for editing user's info.
+ */
 @WebServlet(name = "UserEditServlet", urlPatterns = "/useredit")
 public class UserEditServlet extends HttpServlet {
 

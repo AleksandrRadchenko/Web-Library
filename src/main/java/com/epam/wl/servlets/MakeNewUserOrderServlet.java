@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Servlet for making new user order.
+ */
 @WebServlet(name = "MakeNewUserOrderServlet", urlPatterns = "/userorderfromcatalog")
 public class MakeNewUserOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

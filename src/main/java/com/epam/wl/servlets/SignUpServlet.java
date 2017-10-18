@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * This servlet allows user to sign up.
+ */
 @javax.servlet.annotation.WebServlet(name = "SignUpServlet", urlPatterns = "/sign_up")
 public class SignUpServlet extends HttpServlet {
     private final LoginService service = LoginService.getInstance();
