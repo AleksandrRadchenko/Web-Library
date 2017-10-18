@@ -18,13 +18,15 @@ public class MakeNewUserOrderServlet extends HttpServlet {
         try {
             int bookId = Integer.valueOf(request.getParameter("bookId"));
             HttpSession session = request.getSession(false);
-            int userId = ((User) session.getAttribute("currentSessionUser")).getId();
-
-            UserOrderService userOrderService = UserOrderService.getInstance();
-            userOrderService.createNewUserOrder(bookId, userId);
-            request.removeAttribute("bookId");
-
-            response.sendRedirect("/userprofile");
+            User user = (User) session.getAttribute("currentSessionUser");
+            if (user != null) {
+                UserOrderService userOrderService = UserOrderService.getInstance();
+                userOrderService.createNewUserOrder(bookId, user.getId());
+                request.removeAttribute("bookId");
+                response.sendRedirect("/userprofile");
+            } else {
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
         } catch (SQLException | IllegalArgumentException e) {
             request.getRequestDispatcher("errors/error500.html").forward(request, response);
         }

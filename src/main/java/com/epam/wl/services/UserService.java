@@ -2,31 +2,26 @@ package com.epam.wl.services;
 
 import com.epam.wl.dao.UserDAO;
 import com.epam.wl.dao.UserOrderDAO;
-import com.epam.wl.db.JdbcConnector;
 import com.epam.wl.entities.User;
 import com.epam.wl.entities.UserOrder;
-import com.epam.wl.enums.UserRole;
-import com.epam.wl.servlets.UserServlet;
 
-import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class TestUserService {
+public class UserService {
 
-    private static TestUserService instance;
+    private static UserService instance;
     private static User libraryUser = new User();
     private final UserOrderDAO userOrderDAO = UserOrderDAO.getInstance();
     private final UserDAO userDAO = UserDAO.getInstance();
 
-    private TestUserService() {
+    private UserService() {
     }
 
-    public static synchronized TestUserService getInstance() {
+    public static synchronized UserService getInstance() {
         if (instance == null) {
-            instance = new TestUserService();
+            instance = new UserService();
         }
         return instance;
     }
@@ -37,14 +32,13 @@ public class TestUserService {
         return libraryUser;
     }
 
-    public void editUser(String name, String lastName, String email, String passwordHash) throws SQLException {
+    public void editUser(String name, String lastName, String passwordHash) throws SQLException {
         Optional<User> user = Optional.of(libraryUser);
         user.get().setName(name);
         user.get().setLastname(lastName);
-        user.get().setEmail(email);
         user.get().setPasswordHash(passwordHash);
         user.get().setRole(user.get().getRole());
-        userDAO.updateUser(libraryUser.getId(), name, lastName, email, passwordHash, libraryUser.getRole());
+        userDAO.updateUser(libraryUser.getId(), name, lastName, user.get().getEmail(), passwordHash, libraryUser.getRole());
     }
 
     public List<UserOrder> getUserOrderBooks(User loggedUser) throws SQLException {
