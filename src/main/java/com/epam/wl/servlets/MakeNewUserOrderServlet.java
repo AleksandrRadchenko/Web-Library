@@ -12,14 +12,17 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Servlet for making new user order.
+ */
 @WebServlet(name = "MakeNewUserOrderServlet", urlPatterns = "/userorderfromcatalog")
 public class MakeNewUserOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int bookId = Integer.valueOf(request.getParameter("bookId"));
             HttpSession session = request.getSession(false);
-            User user = (User) session.getAttribute("currentSessionUser");
-            if (user != null) {
+            if (session.getAttribute("currentSessionUser") != null) {
+                User user = (User) session.getAttribute("currentSessionUser");
                 UserOrderService userOrderService = UserOrderService.getInstance();
                 userOrderService.createNewUserOrder(bookId, user.getId());
                 request.removeAttribute("bookId");

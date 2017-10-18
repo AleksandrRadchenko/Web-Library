@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * This servlet represents user's profile in the library.
+ */
 @WebServlet(name = "UserServlet", urlPatterns = "/userprofile")
 public class UserServlet extends HttpServlet {
 
@@ -20,8 +23,8 @@ public class UserServlet extends HttpServlet {
             UserService service = UserService.getInstance();
             HttpSession session = request.getSession(false);
 
-            User user = (User) session.getAttribute("currentSessionUser");
-            if (user != null) {
+            if (session.getAttribute("currentSessionUser") != null) {
+                User user = (User) session.getAttribute("currentSessionUser");
                 request.setAttribute("users", service.getUser(user));
                 request.setAttribute("userorders", service.getUserOrderBooks(user));
 

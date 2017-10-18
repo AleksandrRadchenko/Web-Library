@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * UserService is used to interact with UserDAO and UserOrderDAO and calling servlets to provide the required operations
+ */
 @Log4j2
 public class UserService {
 

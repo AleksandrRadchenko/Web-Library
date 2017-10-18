@@ -15,6 +15,10 @@ import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * This servlet represents a list of book orders, allows to search by user
+ * and to close book orders.
+ */
 @WebServlet(name = "BookOrderServlet", urlPatterns = "/book_order")
 public class BookOrderServlet extends HttpServlet {
     private final BookOrderService bookOrderService = BookOrderService.getInstance();
