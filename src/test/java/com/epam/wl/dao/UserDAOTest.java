@@ -1,14 +1,10 @@
 package com.epam.wl.dao;
 
-import com.epam.wl.entities.BookOrder;
 import com.epam.wl.entities.User;
 import com.epam.wl.enums.UserRole;
 import com.epam.wl.executor.Executor;
-import org.hamcrest.core.Is;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,6 +15,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings("ConstantConditions")
 class UserDAOTest implements TestData {
 
     private UserDAO userDAO = UserDAO.getInstance();

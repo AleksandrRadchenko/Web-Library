@@ -1,19 +1,19 @@
 package com.epam.wl.db;
 
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 public class JdbcConnector {
-    private static JdbcConnector instance;
+    private static ComboPooledDataSource instance;
     private static EmbeddedDatabase testInstance;
-    private DataSource dataSource;
 
     private JdbcConnector() {
     }
@@ -21,25 +21,24 @@ public class JdbcConnector {
     public static DataSource getDataSource() {
         if (instance == null) {
             synchronized (JdbcConnector.class) {
-                try {
-                    Class.forName("org.postgresql.Driver");
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
                 final Properties properties = new Properties();
                 try (InputStream resourceAsStream = JdbcConnector.class.getResourceAsStream("/jdbc.properties")) {
                     properties.load(resourceAsStream);
                     final String url = properties.getProperty("url");
                     final String userName = properties.getProperty("userName");
                     final String password = properties.getProperty("password");
-                    instance = new JdbcConnector();
-                    instance.dataSource = new DriverManagerDataSource(url, userName, password);
-                } catch (IOException e) {
+                    instance = new ComboPooledDataSource();
+                    instance.setDriverClass("org.postgresql.Driver");
+                    instance.setJdbcUrl(url);
+                    instance.setUser(userName);
+                    instance.setPassword(password);
+                    instance.setMaxPoolSize(50);
+                } catch (IOException|PropertyVetoException e) {
                     e.printStackTrace();
                 }
             }
         }
-        return instance.dataSource;
+        return instance;
     }
 
     public static EmbeddedDatabase getTestDataSource() {

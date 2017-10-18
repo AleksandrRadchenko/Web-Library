@@ -2,24 +2,24 @@ package com.epam.wl.executor;
 
 import com.epam.wl.db.JdbcConnector;
 import lombok.Getter;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
 public class Executor {
+    public static int connectionCount;
     private static Executor instance;
     private static DataSource dataSource;
     // Selector for prod and test dataSource. Switch in jdbc.properties file.
     @Getter
     static String mode = "production";
     private static final DataSource postgresDataSource = JdbcConnector.getDataSource();
-    private static EmbeddedDatabase testDataSource;
+    private static DataSource testDataSource;
 
     static {
         final Properties properties = new Properties();
@@ -48,7 +48,8 @@ public class Executor {
     }
 
     public void executeUpdate(final String update, Object... args) throws SQLException {
-        try (PreparedStatement stmt = dataSource.getConnection().prepareStatement(update)) {//доходит, ок
+        try (final Connection con = dataSource.getConnection();
+             final PreparedStatement stmt = con.prepareStatement(update)) {//доходит, ок
             for (int i = 0; i < args.length; i++) {
                 if (args[i].getClass() == Integer.class) {
                     stmt.setInt(i + 1, (Integer) args[i]);
@@ -61,7 +62,8 @@ public class Executor {
     }
 
     public <T> T executeQuery(final String query, final ResultHandler<T> handler, Object... args) throws SQLException {
-        try (PreparedStatement stmt = dataSource.getConnection().prepareStatement(query)) {
+        try (final Connection con = dataSource.getConnection();
+             final PreparedStatement stmt = con.prepareStatement(query)) {
             for (int i = 0; i < args.length; i++) {
                 if (args[i].getClass() == Integer.class) {
                     stmt.setInt(i + 1, (Integer) args[i]);
@@ -69,10 +71,7 @@ public class Executor {
                     stmt.setString(i + 1, (String) args[i]);
                 }
             }
-            final ResultSet result = stmt.executeQuery();
-            T value = handler.handle(result);
-            result.close();
-            return value;
+            return handler.handle(stmt.executeQuery());
         }
     }
 }
