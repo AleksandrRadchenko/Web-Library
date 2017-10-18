@@ -21,7 +21,9 @@ public class LoginService {
     public static synchronized LoginService getInstance() {
         if (instance == null) {
             instance = new LoginService();
+            log.info("LoginService instance created");
         }
+        log.info("LoginService instance supplied");
         return instance;
     }
 

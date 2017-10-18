@@ -18,8 +18,11 @@ public class BookOrderService {
     private BookOrderService(){}
 
     public static synchronized BookOrderService getInstance(){
-        if (instance == null)
+        if (instance == null) {
             instance = new BookOrderService();
+            log.info("BookOrderService instance created");
+        }
+        log.info("BookOrderService instance supplied");
         return instance;
     }
 

@@ -2,13 +2,14 @@ package com.epam.wl.services;
 
 import com.epam.wl.dao.BookDAO;
 import com.epam.wl.dao.UserOrderDAO;
-import com.epam.wl.entities.User;
 import com.epam.wl.entities.UserOrder;
 import com.epam.wl.enums.UserOrderStatus;
+import lombok.extern.log4j.Log4j2;
 
 import java.sql.SQLException;
 import java.util.*;
 
+@Log4j2
 public class UserOrderService {
 
     private static UserOrderService instance;
@@ -21,7 +22,9 @@ public class UserOrderService {
     public static synchronized UserOrderService getInstance() {
         if (instance == null) {
             instance = new UserOrderService();
+            log.info("UserOrderService instance created");
         }
+        log.info("UserOrderService instance supplied");
         return instance;
     }
 
