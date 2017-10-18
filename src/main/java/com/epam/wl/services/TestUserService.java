@@ -38,7 +38,7 @@ public class TestUserService {
     }
 
     public void editUser(String name, String lastName, String email, String passwordHash) throws SQLException {
-        Optional<User> user = Optional.of(libraryUser);//users.get(0)
+        Optional<User> user = Optional.of(libraryUser);
         user.get().setName(name);
         user.get().setLastname(lastName);
         user.get().setEmail(email);

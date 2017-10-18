@@ -55,7 +55,7 @@ public class UserOrderService {
         else return oUserOrder.get();
     }
 
-    public void deleteNewUserOrder(int userOrderId) throws SQLException {//int bookId, User currentSessionUser
+    public void deleteNewUserOrder(int userOrderId) throws SQLException {
         userOrderDAO.deleteNewUserOrder(userOrderId);
     }
 }
