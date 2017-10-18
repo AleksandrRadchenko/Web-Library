@@ -41,7 +41,6 @@ public class UserOrderDAO {
 
     public static final String UPDATE_DELETE_BY_BOOK_ID_AND_USER_ID =
             "DELETE FROM user_order WHERE status='NEW' AND user_order.id=?;";
-    //"DELETE FROM user_order WHERE status='NEW' AND bookid=? AND userid=?;";
 
     private UserOrderDAO() {
     }
@@ -76,7 +75,7 @@ public class UserOrderDAO {
         return executor.executeQuery(QUERY_BY_USER_ID_POST, userOrderListHandler, userId);
     }
 
-    public void deleteNewUserOrder(int userOrderId) throws SQLException {//int bookId, User currentSessionUser
-        executor.executeUpdate(UPDATE_DELETE_BY_BOOK_ID_AND_USER_ID, userOrderId);//bookId, currentSessionUser.getId()
+    public void deleteNewUserOrder(int userOrderId) throws SQLException {
+        executor.executeUpdate(UPDATE_DELETE_BY_BOOK_ID_AND_USER_ID, userOrderId);
     }
 }
