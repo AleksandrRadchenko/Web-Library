@@ -1,10 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="users" scope="request" type="java.util.List"/>
+<jsp:useBean id="users" scope="request" type="com.epam.wl.entities.User"/>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>${users.get(0).name}'s profile</title>
+    <title>${users.name}'s profile</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body link=#4483e2 vlink=#09607c alink=#f20e56>
@@ -19,8 +19,8 @@
 </form>
 <div align="center">
     <br>
-    <h1>Welcome to your profile, ${users.get(0).name}!</h1><br><br>
-    <h3>${users.get(0).name} ${users.get(0).lastname} <br>e-mail: ${users.get(0).email}</h3>
+    <h1>Welcome to your profile, ${users.name}!</h1><br><br>
+    <h3>${users.name} ${users.lastname} <br>e-mail: ${users.email}</h3>
     <hr>
     <div align="center">
         <h4>Your current orders</h4>
