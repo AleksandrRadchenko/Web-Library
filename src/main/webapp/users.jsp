@@ -18,8 +18,7 @@
     </div>
 </form>
 <div align="center">
-    <br>
-    <h1>Welcome to your profile, ${users.name}!</h1><br><br>
+    <h1>Welcome to your profile, ${users.name}!</h1><br>
     <h3>${users.name} ${users.lastname} <br>e-mail: ${users.email}</h3>
     <hr>
     <div align="center">

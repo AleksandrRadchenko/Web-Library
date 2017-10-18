@@ -24,8 +24,8 @@ public class SearchByTitleServlet extends HttpServlet {
             BookService service = BookService.getInstance();
 
             HttpSession session = request.getSession(false);
-            User user = (User) session.getAttribute("currentSessionUser");
-            if (user != null) {
+            if (session.getAttribute("currentSessionUser") != null) {
+                User user = (User) session.getAttribute("currentSessionUser");
                 request.setAttribute("identification", user);//list
 
                 List<Book> bookList = service.getBooksByTitle(title);

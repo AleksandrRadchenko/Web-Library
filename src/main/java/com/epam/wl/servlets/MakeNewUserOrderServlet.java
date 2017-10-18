@@ -18,8 +18,8 @@ public class MakeNewUserOrderServlet extends HttpServlet {
         try {
             int bookId = Integer.valueOf(request.getParameter("bookId"));
             HttpSession session = request.getSession(false);
-            User user = (User) session.getAttribute("currentSessionUser");
-            if (user != null) {
+            if (session.getAttribute("currentSessionUser") != null) {
+                User user = (User) session.getAttribute("currentSessionUser");
                 UserOrderService userOrderService = UserOrderService.getInstance();
                 userOrderService.createNewUserOrder(bookId, user.getId());
                 request.removeAttribute("bookId");

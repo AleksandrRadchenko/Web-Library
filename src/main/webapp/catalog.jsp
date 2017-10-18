@@ -12,18 +12,16 @@
     <hr>
 </div>
 
-<center><h2>Search by author</h2>
+<center>
     <form action="${pageContext.request.contextPath}/authorsearch" method='GET'>
         <input type='text' name='author' placeholder='Author'>
         <input type="submit" value="Search">
     </form>
-    <h2>Search by title</h2>
     <form action="${pageContext.request.contextPath}/titlesearch" method='GET'>
         <input type='text' name='title' placeholder='Title'>
         <input type="submit" value="Search">
     </form>
     <br></center>
-
 
 <div align="center">
     <h2>Book catalog</h2>
