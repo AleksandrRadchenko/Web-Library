@@ -62,8 +62,6 @@
         <input name="name" type="text" required>
         <b>Lastname: </b>
         <input name="lastname" type="text" required>
-        <b>Email: </b>
-        <input name="email" type="text" required>
         <b>Password: </b>
         <input name="passwordhash" type="password" minlength="6" required>
         <input type="submit" value="Edit info">

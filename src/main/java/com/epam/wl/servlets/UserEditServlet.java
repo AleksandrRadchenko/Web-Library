@@ -19,11 +19,10 @@ public class UserEditServlet extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
             String name = request.getParameter("name");
             String lastName = request.getParameter("lastname");
-            String email = request.getParameter("email");
             String passwordHash = request.getParameter("passwordhash");
 
             UserService service = UserService.getInstance();
-            service.editUser(name, lastName, email, passwordHash);
+            service.editUser(name, lastName, passwordHash);
             response.sendRedirect("/userprofile");
         } catch (SQLException | IllegalArgumentException e) {
             request.getRequestDispatcher("errors/error500.html").forward(request, response);

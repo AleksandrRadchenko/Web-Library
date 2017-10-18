@@ -32,14 +32,13 @@ public class UserService {
         return libraryUser;
     }
 
-    public void editUser(String name, String lastName, String email, String passwordHash) throws SQLException {
+    public void editUser(String name, String lastName, String passwordHash) throws SQLException {
         Optional<User> user = Optional.of(libraryUser);
         user.get().setName(name);
         user.get().setLastname(lastName);
-        user.get().setEmail(email);
         user.get().setPasswordHash(passwordHash);
         user.get().setRole(user.get().getRole());
-        userDAO.updateUser(libraryUser.getId(), name, lastName, email, passwordHash, libraryUser.getRole());
+        userDAO.updateUser(libraryUser.getId(), name, lastName, user.get().getEmail(), passwordHash, libraryUser.getRole());
     }
 
     public List<UserOrder> getUserOrderBooks(User loggedUser) throws SQLException {
