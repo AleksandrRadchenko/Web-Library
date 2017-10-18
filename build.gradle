@@ -20,10 +20,13 @@ dependencies {
     // Spring
     compile 'org.springframework:spring-jdbc:' + springVersion
 
-    //'org.apache.logging.log4j:log4j-api:+',
-    //'org.apache.logging.log4j:log4j-core:+',
+    // Logging
+    compile 'org.apache.logging.log4j:log4j-api:+',
+            'org.apache.logging.log4j:log4j-core:+'
 
+    // Jstl
     compile 'javax.servlet:jstl:1.2',
+            // DB
             'org.postgresql:postgresql:+',
             'com.mchange:c3p0:+'
 

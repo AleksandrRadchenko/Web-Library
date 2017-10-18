@@ -4,11 +4,16 @@ import com.epam.wl.dao.UserDAO;
 import com.epam.wl.dao.UserOrderDAO;
 import com.epam.wl.entities.User;
 import com.epam.wl.entities.UserOrder;
+import lombok.extern.log4j.Log4j2;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * UserService is used to interact with UserDAO and UserOrderDAO and calling servlets to provide the required operations
+ */
+@Log4j2
 public class UserService {
 
     private static UserService instance;
@@ -22,7 +27,9 @@ public class UserService {
     public static synchronized UserService getInstance() {
         if (instance == null) {
             instance = new UserService();
+            log.info("UserService instance created");
         }
+        log.info("UserService instance supplied");
         return instance;
     }
 
