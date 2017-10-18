@@ -27,7 +27,7 @@ public class SearchByAuthorServlet extends HttpServlet {
             BookService service = BookService.getInstance();
 
             HttpSession session = request.getSession(false);
-            if (session.getAttribute("currentSessionUser") != null) {
+            if (session != null) {
                 User user = (User) session.getAttribute("currentSessionUser");
                 request.setAttribute("identification", user);
 

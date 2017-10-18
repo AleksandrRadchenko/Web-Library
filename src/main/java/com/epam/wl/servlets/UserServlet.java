@@ -23,7 +23,7 @@ public class UserServlet extends HttpServlet {
             UserService service = UserService.getInstance();
             HttpSession session = request.getSession(false);
 
-            if (session.getAttribute("currentSessionUser") != null) {
+            if (session != null) {
                 User user = (User) session.getAttribute("currentSessionUser");
                 request.setAttribute("users", service.getUser(user));
                 request.setAttribute("userorders", service.getUserOrderBooks(user));
